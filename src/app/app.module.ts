@@ -37,6 +37,7 @@ import { HomePageComponent } from './component/home-page/home-page.component';
 import { InventoryService } from './service/inventory.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
