@@ -8,6 +8,7 @@ import { ViewDepartmentComponent } from "./component/view-department/view-depart
 import { ViewCategoryComponent } from "./component/view-category/view-category.component";
 import { ViewSubcategoryComponent } from "./component/view-subcategory/view-subcategory.component";
 import { ViewItemListComponent } from "./component/view-item-list/view-item-list.component";
+import { ViewAcqusitionComponent } from "./component/view-acqusition/view-acqusition.component";
 
 const routes: Routes = [
   { path: 'department/:id/viewCategory/:id/viewSubcategory/:id/itemList', component: ViewItemListComponent },
