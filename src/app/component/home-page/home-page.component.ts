@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
   }
 
   pushDepartment(){
-    this.inventoryService.getDepartments().subscribe(
+    this.inventoryService.getDepartmentByName("Vehicle").subscribe(
       val => console.log(val)      
     );  
   }

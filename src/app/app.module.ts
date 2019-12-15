@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,8 @@ import { ViewSubcategoryComponent } from './component/view-subcategory/view-subc
 import { ViewItemListComponent } from './component/view-item-list/view-item-list.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { InventoryService } from './service/inventory.service';
+import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusition.component';
+
 
 
 @NgModule({
@@ -46,7 +49,8 @@ import { InventoryService } from './service/inventory.service';
     ViewCategoryComponent,
     ViewSubcategoryComponent,
     ViewItemListComponent,
-    HomePageComponent
+    HomePageComponent,
+    ViewAcqusitionComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ import { InventoryService } from './service/inventory.service';
     ScrollPanelModule,
     TableModule,
     TabsModule.forRoot(),
+    MatButtonModule
   ],
   providers: [ InventoryService ],
   bootstrap: [AppComponent]

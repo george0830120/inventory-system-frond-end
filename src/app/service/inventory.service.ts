@@ -20,12 +20,11 @@ export class InventoryService {
     }
 
 
-      getDepartmentByName(name:string){
-          return this.departments.pipe
-          (
-              filter( department => department.name === name)
-          )
-      }
+    getDepartmentByName(name:string){
+        return this.departments.pipe(
+            filter( department => department.name === name)
+        )
+    }
 
 
 }
