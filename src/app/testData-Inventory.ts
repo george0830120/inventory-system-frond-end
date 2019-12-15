@@ -2,7 +2,7 @@ export var dummyTestData =
 {   "Deaprtments": [
         {
             "name": "Vehicle", 
-            "description": "This is Vehicle.",
+            "description": "This is Vehicle.", 
             "POSDepartmentCode": "123",
             "uniqueTag": "VEH",
             "categories": [
@@ -165,7 +165,7 @@ export var dummyTestData =
                     "description": "This is comic category.",
                     "uniqueTag": "COMIC",
                     "items": [], 
-                    "subcategories": [
+                    "subcategories": [ 
                         {
                             "name": "Japanese",
                             "description": "This is Japanese",
@@ -174,6 +174,7 @@ export var dummyTestData =
                                 {
                                     "name": "One Piece",
                                     "id": "1",
+                                    "description": "Hello",
                                     "condition": 2,
                                     "price": 100,
                                     "quantity": 2
@@ -182,6 +183,7 @@ export var dummyTestData =
                                     "name": "Naruto",
                                     "id": "2",
                                     "condition": 2,
+                                    "description": "Hello",
                                     "price": 100,
                                     "quantity": 2
                                 }
@@ -196,6 +198,7 @@ export var dummyTestData =
                                     "name": "Super Man",
                                     "id": "1",
                                     "condition": 2,
+                                    "description": "Hello",
                                     "price": 100,
                                     "quantity": 2
                                 },
@@ -203,6 +206,7 @@ export var dummyTestData =
                                     "name": "Spider Man",
                                     "id": "2",
                                     "condition": 2,
+                                    "description": "Hello",
                                     "price": 100,
                                     "quantity": 2
                                 }
@@ -223,11 +227,19 @@ export var dummyTestData =
                             "items": [
                                 {
                                     "name": "A Game of Thrones",
-                                    "id": "1"
+                                    "id": "1",
+                                    "condition": 2,
+                                    "description": "Hello",
+                                    "price": 100,
+                                    "quantity": 2
                                 },
                                 {
                                     "name": "The Fellowship of the Ring",
-                                    "id": "2"
+                                    "id": "2",
+                                    "condition": 2,
+                                    "description": "Hello",
+                                    "price": 100,
+                                    "quantity": 2
                                 }
                             ]
                         },
@@ -238,11 +250,19 @@ export var dummyTestData =
                             "items": [
                                 {
                                     "name": "Murder on the Orient Express",
-                                    "id": "1"
+                                    "id": "1",
+                                    "condition": 2,
+                                    "description": "Hello",
+                                    "price": 100,
+                                    "quantity": 2
                                 },
                                 {
                                     "name": "A Study in Scarlet",
-                                    "id": "2"
+                                    "id": "2",
+                                    "condition": 2,
+                                    "description": "Hello",
+                                    "price": 100,
+                                    "quantity": 2
                                 }
                             ]
                         }
