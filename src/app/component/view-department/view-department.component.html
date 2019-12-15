@@ -1,1 +1,19 @@
-<p>view-department works!</p>
+<h2><label>Departments</label></h2>
+
+<p-table [value]="departments">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-department>
+        <tr>
+            <td> <a [routerLink]="[department.name,'viewCategory']">{{department.name}}</a></td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+<p-button label="Add Department" styleClass="ui-button-info"></p-button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../service/inventory.service'
+import { Router } from '@angular/router'
 
 
 @Component({

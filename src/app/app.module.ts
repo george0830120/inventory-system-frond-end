@@ -40,6 +40,7 @@ import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusi
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
