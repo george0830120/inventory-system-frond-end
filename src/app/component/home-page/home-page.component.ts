@@ -9,19 +9,9 @@ import { InventoryService } from '../../service/inventory.service'
 })
 export class HomePageComponent implements OnInit {
 
-  private inventoryService: InventoryService;
+
   constructor(inventoryService: InventoryService) { 
-      this.inventoryService = inventoryService;
-  }
 
-  test(){
-    console.log(this.inventoryService.getDepartments());
-  }
-
-  pushDepartment(){
-    this.inventoryService.getDepartmentByName("Vehicle").subscribe(
-      val => console.log(val)      
-    );  
   }
 
   ngOnInit() {

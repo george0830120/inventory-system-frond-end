@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },
   { path: 'department/:id/viewCategory/:id/viewSubcategory', component: ViewSubcategoryComponent },
   { path: 'department/:id/viewCategory', component: ViewCategoryComponent },
-  { path: 'department', component: ViewDepartmentComponent },
+  { path: 'departments', component: ViewDepartmentComponent },
   { path: 'acqusition', component: ViewAcqusitionComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
