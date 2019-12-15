@@ -12,7 +12,7 @@ export class InventoryService {
     private departments: Observable<Department>;
     private departmentsTemp: Department;
     constructor(){
-        this.departments = from(dummyTestData.Deaprtments);
+        // this.departments = from(dummyTestData.Deaprtments);
     }
 
     getDepartments(): any{
