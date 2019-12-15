@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../service/inventory.service'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -10,12 +11,13 @@ import { InventoryService } from '../../service/inventory.service'
 export class HomePageComponent implements OnInit {
 
   private inventoryService: InventoryService;
-  constructor(inventoryService: InventoryService) { 
+  constructor(inventoryService: InventoryService,private router: Router) { 
       this.inventoryService = inventoryService;
   }
 
   test(){
     console.log(this.inventoryService.getDepartments());
+    console.log(this.router)
   }
 
   pushDepartment(){

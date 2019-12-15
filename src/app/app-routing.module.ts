@@ -24,7 +24,6 @@ const routes: Routes = [
   },
   { path: "department/:id/viewCategory", component: ViewCategoryComponent },
   { path: "department", component: ViewDepartmentComponent },
-  { path: "department", component: ViewDepartmentComponent },
   { path: "home", component: HomePageComponent },
   { path: "login", component: LoginComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -35,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
