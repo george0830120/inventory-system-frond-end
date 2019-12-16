@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -51,7 +53,7 @@ import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusi
     ViewSubcategoryComponent,
     ViewItemListComponent,
     HomePageComponent,
-    ViewAcqusitionComponent
+    ViewAcqusitionComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,9 @@ import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusi
     ScrollPanelModule,
     TableModule,
     TabsModule.forRoot(),
-    MatButtonModule
+    MatButtonModule,
+    BreadcrumbModule,
+    MatGridListModule
   ],
   providers: [ InventoryService ],
   bootstrap: [AppComponent]

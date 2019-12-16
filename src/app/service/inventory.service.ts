@@ -18,9 +18,18 @@ export class InventoryService {
     return this.departments;
   }
 
-  getDepartmentByName(name: string) {
+  getDepartmentByName(DepName: string) {
     return this.departments.pipe(
-      filter(department => department.name === name)
+      filter(department => department.name === DepName)
     );
+  }
+
+  getCategoryByName(DepName: string, CatName:string){
+    var dep = this.getDepartmentByName(DepName)
+    var cat: Observable<Category>;
+    dep.subscribe(val=>{
+        cat = from(val.categories.filter(category=>category.name===CatName));
+    })
+    return cat;
   }
 }

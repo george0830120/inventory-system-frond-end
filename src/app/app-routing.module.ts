@@ -11,10 +11,10 @@ import { ViewItemListComponent } from "./component/view-item-list/view-item-list
 import { ViewAcqusitionComponent } from "./component/view-acqusition/view-acqusition.component";
 
 const routes: Routes = [
-  { path: 'department/:id/viewCategory/:id/viewSubcategory/:id/itemList', component: ViewItemListComponent },
-  { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },
-  { path: 'department/:id/viewCategory/:id/viewSubcategory', component: ViewSubcategoryComponent },
-  { path: 'department/:id/viewCategory', component: ViewCategoryComponent },
+  { path: 'department/:id/:id/:id', component: ViewItemListComponent },
+ // { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },
+  { path: 'department/:id/:id', component: ViewSubcategoryComponent },
+  { path: 'department/:id', component: ViewCategoryComponent },
   { path: 'departments', component: ViewDepartmentComponent },
   { path: 'acqusition', component: ViewAcqusitionComponent },
   { path: 'home', component: HomePageComponent },
