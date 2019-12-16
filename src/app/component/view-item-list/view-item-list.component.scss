@@ -1,0 +1,15 @@
+.input-label {
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.search-button {
+  padding-left: 180px;
+  padding-border: 80px;
+}
+
+form {
+  display: flex; /* 2. display flex to the rescue */
+  flex-direction: row;
+}
+
