@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, NavigationEnd, NavigationStart } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { Category, Subcategory, Item, Department } from '../../model/index'
-import { take, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
@@ -13,14 +12,21 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  private department: Observable<Department>;
+  private department: Department[];
   private departments: Department[];
   private categories: Category[];
   private breadcrumbArray: MenuItem[];
+  navigationSubscription;  
   constructor(private route: ActivatedRoute,
     private router: Router,
     private service: InventoryService) { 
-    
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationStart) {
+          console.log(e);
+          this.ngOnInit();
+        }
+      });
     }
 
   ngOnInit() {
@@ -33,7 +39,7 @@ export class ViewCategoryComponent implements OnInit {
     this.department = this.service.getDepartmentByName(departmentName);
     this.departments = [];
     this.service.getDepartments().subscribe(val=>this.departments.push(val))
-    this.department.subscribe(val=>this.categories = val.categories);
+    this.department.forEach(val=>this.categories = val.categories);
     console.log(this.categories);
 
     this.addBreadcrumb(departmentName);
@@ -44,10 +50,6 @@ export class ViewCategoryComponent implements OnInit {
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
   }
-/*
-  routeToDepartment(Dep: string){
-    this.router.navigate(['./department',Dep]);
-  }*/
 
 
 }
