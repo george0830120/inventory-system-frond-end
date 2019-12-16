@@ -12,10 +12,11 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewSubcategoryComponent implements OnInit {
 
-  private category: Observable<Category>;
+  private category: Category[];
   private departments: Department[];
   private subcategories: Subcategory[];
   private breadcrumbArray: MenuItem[];
+  private item
   constructor(private route: ActivatedRoute,
     private router: Router,
     private service: InventoryService) { 
@@ -34,11 +35,11 @@ export class ViewSubcategoryComponent implements OnInit {
       } 
     )
     this.category = this.service.getCategoryByName(departmentName, categoryName);
-    this.category.subscribe(val=>console.log(val));
+    this.category.forEach(val=>console.log(val));
 
     this.departments = [];
-    this.service.getDepartments().subscribe(val=>this.departments.push(val))
-    this.category.subscribe(val=>this.subcategories = val.subcategories);
+    this.service.getDepartments().subscribe(val=>this.departments.push(val));
+    this.category.forEach(val=>this.subcategories = val.subcategories);
     console.log(this.subcategories);
     this.addBreadcrumb(departmentName, categoryName);
   }

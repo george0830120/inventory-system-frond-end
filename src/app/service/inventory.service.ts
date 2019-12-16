@@ -19,17 +19,19 @@ export class InventoryService {
   }
 
   getDepartmentByName(DepName: string) {
-    return this.departments.pipe(
-      filter(department => department.name === DepName)
-    );
+    var dep: Department[];
+    dep = [];
+    this.departments.pipe(
+      filter(department => department.name === DepName),
+    ).subscribe(val=>dep.push(val));
+    return dep;
   }
 
   getCategoryByName(DepName: string, CatName:string){
-    var dep = this.getDepartmentByName(DepName)
-    var cat: Observable<Category>;
-    dep.subscribe(val=>{
-        cat = from(val.categories.filter(category=>category.name===CatName));
-    })
+    var dep = this.getDepartmentByName(DepName);
+    var cat: Category[];
+    dep = dep.filter(dep => dep.name===DepName);
+    dep.forEach(dep => cat = dep.categories.filter(cat => cat.name===CatName))
     return cat;
   }
 }
