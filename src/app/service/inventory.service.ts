@@ -14,7 +14,7 @@ export class InventoryService {
     this.departments = from(dummyTestData.Deaprtments);
   }
 
-  getDepartments(): any {
+  getDepartments() {
     return this.departments;
   }
 
