@@ -16,13 +16,13 @@ export class ViewCategoryComponent implements OnInit {
   private departments: Department[];
   private categories: Category[];
   private breadcrumbArray: MenuItem[];
-  navigationSubscription;  
+  navigationSubscription;
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private service: InventoryService) { 
+    private service: InventoryService) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
-        if (e instanceof NavigationStart) {
+        if (e instanceof NavigationEnd) {
           console.log(e);
           this.ngOnInit();
         }
@@ -30,11 +30,11 @@ export class ViewCategoryComponent implements OnInit {
     }
 
   ngOnInit() {
-    var currentURL = this.route.url; 
+    var currentURL = this.route.url;
     var departmentName:string;
     console.log(currentURL);
     const subscribe = currentURL.subscribe({
-      next: val => departmentName = val[1].path 
+      next: val => departmentName = val[1].path
     })
     this.department = this.service.getDepartmentByName(departmentName);
     this.departments = [];
@@ -43,7 +43,7 @@ export class ViewCategoryComponent implements OnInit {
     console.log(this.categories);
 
     this.addBreadcrumb(departmentName);
-    
+
   }
 
   addBreadcrumb(departmentName:string){
