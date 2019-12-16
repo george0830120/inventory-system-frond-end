@@ -4,6 +4,7 @@ import { Department } from '../../model/deaprtment.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { dummyTestData } from '../../testData-Inventory';
 import { Observable } from 'rxjs';
+import { InventoryService } from '../../service/inventory.service';
 
 @Component({
   selector: 'app-view-department',
@@ -14,13 +15,14 @@ export class ViewDepartmentComponent implements OnInit {
   private departments: Department[];
   private currentUrl: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,private service: InventoryService) {
     this.departments = dummyTestData.Deaprtments;
     console.log(this.departments);
   }
 
   ngOnInit() {
-    
+    this.departments = [];
+    this.service.getDepartments().subscribe(val => this.departments.push(val));
   }
 
 }

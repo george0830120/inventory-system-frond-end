@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    
- }
+    this.service.getCurrentUserName().next('');
+  }
 
   login(userInfo) {
     let name = userInfo.username;
@@ -44,9 +44,12 @@ export class LoginComponent implements OnInit {
           return false;
       }),
     ).subscribe(val => user = val);
-    if(user)
-      this.router.navigate(['/department']);
-
+    if(user) {
+      localStorage['currentUser'] = user['name'];
+      this.service.setCurrentUsername(user['name']);
+      this.router.navigate(['/home']);
+    }
+  
   }
 
 }

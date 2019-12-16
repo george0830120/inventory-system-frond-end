@@ -12,6 +12,9 @@
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
     </li>
+    <li *ngIf="isLogin()" class="nav-item px-3">
+      Hello {{userName}}
+    </li> 
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
