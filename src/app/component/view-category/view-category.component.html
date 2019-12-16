@@ -6,21 +6,21 @@
             </div>
             <div *ngFor = "let department of departments">
                 <a
-                [routerLink] = "['/department', department.name] " 
-                routerLinkActive="on"  
+                [routerLink] = "['/department', department.name] "
+                routerLinkActive="on"
                 style="font-size: 16px"
                 >
                 {{department.name}}</a
                 >
-            </div> 
+            </div>
         </div>
         <div class="col-6">
             <div style="padding-bottom: 15px">
                 <p-breadcrumb [model]="breadcrumbArray"></p-breadcrumb>
             </div>
             <mat-grid-list cols="4" rowHeight="1:1">
-                <mat-grid-tile 
-                *ngFor = "let category of categories" 
+                <mat-grid-tile
+                *ngFor = "let category of categories"
                 [routerLink] = "[category.name]"
                 [style.background]="'#BDBDBD'"
                 style="font-size: 18px"
@@ -30,24 +30,23 @@
             </mat-grid-list>
         </div>
         <div class="col">
-            <div class="row" 
+            <div class="row"
             style="position: absolute; top: 50%; left: 50%;">
-                <p-button label ="Edit Category"></p-button>
+                <p-button label ="Edit Category" routerLink="edit-category"></p-button>
             </div>
-            <div class="row" 
-            style="position: absolute; top: 85%; left: 55%;">
+            <div class="row"
+            style="position: absolute; top: 85%; left: 55%;" routerLink="add-category">
                 <label>Add Category</label>
             </div>
-            <div class="row" 
+            <div class="row"
             style="position: absolute; top: 100%; left: 50%;">
-                <p-button label ="Unique Item"></p-button>
+                <p-button label ="Unique Item" routerLink="add-unique-item"></p-button>
             </div>
-            <div class="row" 
+            <div class="row"
             style="position: absolute; top: 125%; left: 50%;">
-                <p-button label ="Move Category"></p-button>
+                <p-button label ="Move Category" routerLink="move-category"></p-button>
             </div>
         </div>
 
     </div>
 </div>
- 
