@@ -44,6 +44,10 @@ export class ViewCategoryComponent implements OnInit {
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
   }
+/*
+  routeToDepartment(Dep: string){
+    this.router.navigate(['./department',Dep]);
+  }*/
 
 
 }

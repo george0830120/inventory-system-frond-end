@@ -5,7 +5,13 @@
                 <a routerLink="/department" style="font-size: 28px">Department</a>
             </div>
             <div *ngFor = "let department of departments">
-                <a [routerLink] = "['/department', department.name] " style="font-size: 16px">{{department.name}}</a>
+                <a
+                [routerLink] = "['/department', department.name] " 
+                routerLinkActive="on"  
+                style="font-size: 16px"
+                >
+                {{department.name}}</a
+                >
             </div> 
         </div>
         <div class="col-6">
@@ -16,12 +22,30 @@
                 <mat-grid-tile 
                 *ngFor = "let category of categories" 
                 [routerLink] = "[category.name]"
-                [style.background]="lightblue">
-                {{category.name}}</mat-grid-tile>
+                [style.background]="'#BDBDBD'"
+                style="font-size: 18px"
+                >
+                {{category.name}}
+                </mat-grid-tile>
             </mat-grid-list>
         </div>
         <div class="col">
-            <p>Hello</p>
+            <div class="row" 
+            style="position: absolute; top: 50%; left: 50%;">
+                <p-button label ="Edit Category"></p-button>
+            </div>
+            <div class="row" 
+            style="position: absolute; top: 85%; left: 55%;">
+                <label>Add Category</label>
+            </div>
+            <div class="row" 
+            style="position: absolute; top: 100%; left: 50%;">
+                <p-button label ="Unique Item"></p-button>
+            </div>
+            <div class="row" 
+            style="position: absolute; top: 125%; left: 50%;">
+                <p-button label ="Move Category"></p-button>
+            </div>
         </div>
 
     </div>
