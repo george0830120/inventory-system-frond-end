@@ -19,7 +19,7 @@ export class ViewCategoryComponent implements OnInit {
   private navigationSubscription;  
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private service: InventoryService) { 
+    private service: InventoryService) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
@@ -33,7 +33,7 @@ export class ViewCategoryComponent implements OnInit {
     var departmentName: string;
     console.log(currentURL);
     const subscribe = currentURL.subscribe({
-      next: val => departmentName = val[1].path 
+      next: val => departmentName = val[1].path
     })
     this.departmentSelected = this.service.getDepartmentByName(departmentName);
     this.departmentSelected.forEach(val=>this.categories = val.categories);
