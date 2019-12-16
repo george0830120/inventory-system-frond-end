@@ -1,1 +1,26 @@
-<p>view-item-list works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <p-breadcrumb [model]="breadcrumbArray"></p-breadcrumb>
+            </div>
+        </div>
+        <div class="col-6">
+            <h2>View Inventory Items</h2>
+        </div>
+    </div>
+    <br *ngFor="let number of breadcrumbArray"/>
+    <div class="row">
+        <div class="col4">
+            <div>
+                <input type="text" pInputText placeholder="Keyword">
+            </div>
+        </div>
+        <div class="col4">
+                <input type="text" pInputText placeholder="Keyword">
+        </div>
+        <div class="col4">
+                <button pButton type="button" label="Search"></button>
+        </div>
+    </div>
+</div>

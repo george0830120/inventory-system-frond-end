@@ -16,7 +16,6 @@ export class ViewDepartmentComponent implements OnInit {
   private currentUrl: string;
 
   constructor(private route: ActivatedRoute,private service: InventoryService) {
-    this.departments = dummyTestData.Deaprtments;
     console.log(this.departments);
   }
 
