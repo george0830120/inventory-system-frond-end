@@ -38,6 +38,7 @@ import { ViewSubcategoryComponent } from './component/view-subcategory/view-subc
 import { ViewItemListComponent } from './component/view-item-list/view-item-list.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { InventoryService } from './service/inventory.service';
+import { LoginService } from './service/login.service';
 import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusition.component';
 
 
