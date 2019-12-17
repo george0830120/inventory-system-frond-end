@@ -8,7 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
+import { DropdownModule} from 'primeng/dropdown';
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
@@ -85,7 +85,8 @@ import { ReceiveAcquisitionComponent } from './component/receive-acquisition/rec
     TabsModule.forRoot(),
     MatButtonModule,
     BreadcrumbModule,
-    MatGridListModule
+    MatGridListModule,
+    DropdownModule
   ],
   providers: [ InventoryService ],
   bootstrap: [AppComponent]

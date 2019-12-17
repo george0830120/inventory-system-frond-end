@@ -1,1 +1,31 @@
-<p>add-item works!</p>
+<div class="container" style="text-align:center; width: 50%;" >  
+        <div style=" border-radius: 20px; text-align:center; background-color:#bdbdbd; margin:auto; padding: 20px;">
+            <div class="contact2-form-title">
+                <label style="font-size: 28px;">Add Item</label>
+			</div>
+            <div style="width: 50%;">
+                <p-breadcrumb [model]="breadcrumbArray" ></p-breadcrumb>
+            </div>
+            <form [formGroup]="profileForm">
+                <div> 
+                    <input pInputText type="text" formControlName="Name" placeholder="Name">
+                </div>
+                <div>
+                    <input pInputText type="text" formControlName="Description" placeholder="Description">
+                </div>
+                <div>
+                    <input pInputText type="number" formControlName="Quantity" placeholder="Quantity">
+                </div>
+                <div>
+                    <input pInputText type="number" formControlName="Price" placeholder="Price">
+                </div>
+                <div style="margin: 20px 0px 20px 0px;">
+                    <p-dropdown [options]="condition" formControlName="Condition" ></p-dropdown>
+                </div>
+                <div style="margin: 20px 0px 20px 0px;">
+                    <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" >Save</button>
+                    <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" >Cancel</button>
+                </div>
+            </form>
+        </div>
+</div>
