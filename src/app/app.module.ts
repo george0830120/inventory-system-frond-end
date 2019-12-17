@@ -41,6 +41,7 @@ import { InventoryService } from './service/inventory.service';
 import { LoginService } from './service/login.service';
 import { ViewAcquisitionComponent } from './component/view-acquisition/view-acquisition.component';
 import { AddItemComponent } from './component/add-item/add-item.component';
+import { AddDepartmentComponent } from './component/add-department/add-department.component';
 import { UpdateItemComponent } from './component/update-item/update-item.component';
 import { ReceiveAcquisitionComponent } from './component/receive-acquisition/receive-acquisition.component';
 
@@ -60,6 +61,7 @@ import { ReceiveAcquisitionComponent } from './component/receive-acquisition/rec
     AddItemComponent,
     UpdateItemComponent,
     ReceiveAcquisitionComponent,
+    AddDepartmentComponent
   ],
   imports: [
     BrowserModule,
