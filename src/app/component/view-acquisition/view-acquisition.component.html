@@ -1,1 +1,63 @@
-<p>view-acqusition works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <h2>Acquisition</h2>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="checkSearchForm" (ngSubmit)="search(checkSearchForm.value)">
+        <div class="row">
+            <div class="col-3">
+                <label>Acquisition#:</label>
+                <input type="text" formControlName="acquisition">
+            </div>
+            <div class="col-3">
+                <label>Name:</label>
+                <input type="text" formControlName="name">
+            </div>
+            <div class="col-3">
+                <label>Type:</label>
+                <p-dropdown formControlName="type" [options]="acquisitionTypes"></p-dropdown>
+            </div>
+            <div class="col-3">
+                <label>Phone:</label>
+                <input type="text" formControlName="phone">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <label>Status:</label>
+                <p-dropdown formControlName="status" [options]="acquisitionStatus"></p-dropdown>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-2">
+                <p-button type="submit" label="Search"></p-button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+    <p-table>
+        <ng-template pTemplate="header">
+            <tr style="text-align: center">
+                <th>Acq#</th>
+                <th>Type</th>
+                <th>Donor</th>
+                <th>Primary Contact</th>
+                <th>Phone</th>
+                <th>Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body">
+
+        </ng-template>
+    </p-table>
+</div>
