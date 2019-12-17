@@ -42,7 +42,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "Mitsubishi Canter",
-                  id: "1",
+                  id: "10",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -65,7 +65,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "YAMAHA CygnusX 125",
-                  id: "1",
+                  id: "15",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -73,7 +73,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "SUZUKI GSR125",
-                  id: "2",
+                  id: "25",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -88,7 +88,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "YAMAHA MT-09",
-                  id: "1",
+                  id: "17",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -96,7 +96,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "SUZUKI GSX-R1000",
-                  id: "2",
+                  id: "27",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -119,7 +119,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "GIANT SCR 1",
-                  id: "1",
+                  id: "18",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -134,7 +134,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "B’Twin Hoptown 120",
-                  id: "1",
+                  id: "19",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -142,7 +142,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "Brompton M6L",
-                  id: "2",
+                  id: "28",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -173,7 +173,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "One Piece",
-                  id: "1",
+                  id: "12",
                   description: "Hello",
                   condition: 2,
                   price: 100,
@@ -181,7 +181,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "Naruto",
-                  id: "2",
+                  id: "22",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -196,7 +196,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "Super Man",
-                  id: "1",
+                  id: "13",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -204,7 +204,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "Spider Man",
-                  id: "2",
+                  id: "23",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -227,7 +227,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "A Game of Thrones",
-                  id: "1",
+                  id: "14",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -235,7 +235,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "The Fellowship of the Ring",
-                  id: "2",
+                  id: "24",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -250,7 +250,7 @@ export var dummyTestData = {
               items: [
                 {
                   name: "Murder on the Orient Express",
-                  id: "1",
+                  id: "100",
                   condition: 2,
                   description: "Hello",
                   price: 100,
@@ -258,7 +258,7 @@ export var dummyTestData = {
                 },
                 {
                   name: "A Study in Scarlet",
-                  id: "2",
+                  id: "200",
                   condition: 2,
                   description: "Hello",
                   price: 100,
