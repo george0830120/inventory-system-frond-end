@@ -39,9 +39,10 @@ import { ViewItemListComponent } from './component/view-item-list/view-item-list
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { InventoryService } from './service/inventory.service';
 import { LoginService } from './service/login.service';
-import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusition.component';
+import { ViewAcquisitionComponent } from './component/view-acquisition/view-acquisition.component';
 import { AddItemComponent } from './component/add-item/add-item.component';
 import { UpdateItemComponent } from './component/update-item/update-item.component';
+import { ReceiveAcquisitionComponent } from './component/receive-acquisition/receive-acquisition.component';
 
 
 
@@ -56,9 +57,10 @@ import { UpdateItemComponent } from './component/update-item/update-item.compone
     ViewSubcategoryComponent,
     ViewItemListComponent,
     HomePageComponent,
-    ViewAcqusitionComponent,
+    ViewAcquisitionComponent,
     AddItemComponent,
     UpdateItemComponent,
+    ReceiveAcquisitionComponent,
   ],
   imports: [
     BrowserModule,
