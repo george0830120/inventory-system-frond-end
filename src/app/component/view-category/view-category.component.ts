@@ -17,6 +17,7 @@ export class ViewCategoryComponent implements OnInit {
   private categories: Category[];
   private breadcrumbArray: MenuItem[];
   private navigationSubscription;  
+  private matrixDefaultArray: number[];
   constructor(private route: ActivatedRoute,
     private router: Router,
     private service: InventoryService) {
@@ -29,24 +30,37 @@ export class ViewCategoryComponent implements OnInit {
     }
 
   ngOnInit() {
+    let departmentName = this.parseURL();
+    this.getDepartmentCategories(departmentName);
+    this.getAllDepartment();
+    this.addBreadcrumb(departmentName);
+    this.setMatrixNumber(16);
+  }
+
+  addBreadcrumb(departmentName:string){
+    this.breadcrumbArray = [];
+    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
+  }
+
+  parseURL(){
     var currentURL = this.route.url; 
     var departmentName: string;
     console.log(currentURL);
     const subscribe = currentURL.subscribe({
       next: val => departmentName = val[1].path
     })
+    return departmentName
+  }
+  getDepartmentCategories(departmentName: string){
     this.departmentSelected = this.service.getDepartmentByName(departmentName);
     this.departmentSelected.forEach(val=>this.categories = val.categories);
-
-    this.departments = [];
-    this.service.getDepartments().subscribe(val=>this.departments.push(val));
-    console.log(this.categories);
-    this.addBreadcrumb(departmentName);
   }
-
-  addBreadcrumb(departmentName:string){
-    this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
+  getAllDepartment(){
+    this.departments = [];
+    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
+  }
+  setMatrixNumber(totalMatrix: number){
+    this.matrixDefaultArray = Array.from(Array(totalMatrix -this.categories.length).keys());
   }
 
 

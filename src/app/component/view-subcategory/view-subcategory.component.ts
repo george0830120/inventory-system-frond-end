@@ -38,7 +38,7 @@ export class ViewSubcategoryComponent implements OnInit {
     this.category.forEach(val=>console.log(val));
 
     this.departments = [];
-    this.service.getDepartments().subscribe(val=>this.departments.push(val));
+    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
     this.category.forEach(val=>this.subcategories = val.subcategories);
     console.log(this.subcategories);
     this.addBreadcrumb(departmentName, categoryName);

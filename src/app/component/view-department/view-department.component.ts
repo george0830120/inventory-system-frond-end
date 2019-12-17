@@ -21,7 +21,8 @@ export class ViewDepartmentComponent implements OnInit {
 
   ngOnInit() {
     this.departments = [];
-    this.service.getDepartments().subscribe(val => this.departments.push(val));
+    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
+    console.log()
   }
 
 }

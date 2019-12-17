@@ -3,15 +3,20 @@ import { dummyTestData } from "../testData-Inventory";
 import { of, from, Observable, pipe } from "rxjs";
 import { filter } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-
+import { Subject, BehaviorSubject } from "rxjs"; 
+ 
 @Injectable({
   providedIn: "root"
 })
 export class InventoryService {
-  private departments: Observable<Department>;
+  private departments: BehaviorSubject<Department[]>;
   constructor() {
-    this.departments = from(dummyTestData.Deaprtments);
+    this.departments = new BehaviorSubject<Department[]>(null);
+    var departmentsArray: Department[];
+    departmentsArray = [];
+    (dummyTestData.Deaprtments).forEach(dep => departmentsArray.push(dep));
+    this.departments.next(departmentsArray);
+    console.log(this.departments) 
   }
 
   getDepartments() {
@@ -21,9 +26,7 @@ export class InventoryService {
   getDepartmentByName(DepName: string) {
     var dep: Department[];
     dep = [];
-    this.departments.pipe(
-      filter(department => department.name === DepName),
-    ).subscribe(val=>dep.push(val));
+    this.departments.subscribe(val=>val.filter(d=>d.name===DepName).forEach(d=>dep.push(d)));
     return dep;
   }
 
