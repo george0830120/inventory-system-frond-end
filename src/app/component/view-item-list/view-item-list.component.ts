@@ -68,14 +68,14 @@ export class ViewItemListComponent implements OnInit {
     if(info.itemname!=""){
       console.log(info.itemname);
       this.showItems = [];
-      this.showItems = this.items.filter(item=>item.name===info.itemname)
+      this.showItems = this.items.filter(item=>item.name.includes(info.itemname))
       this.IfSearch = true;
     }
     else if (info.keyword!=""){
       console.log(info.keyword);
       this.showItems = [];
-      this.items.filter(item=>item.name===info.keyword).forEach(val => this.showItems.push(val))
-      this.items.filter(item=>item.description===info.keyword).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.name.includes(info.keyword)).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.description.includes(info.keyword)).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.condition===info.keyword).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.quantity===Number(info.keyword)).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.price===Number(info.keyword)).forEach(val => this.showItems.push(val))

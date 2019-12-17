@@ -23,31 +23,48 @@ export class ViewSubcategoryComponent implements OnInit {
     }
 
   ngOnInit() {
+
+    var categoryName: string; 
+    var departmentName: string;
+
+    departmentName = (this.parseURL())[0];
+    categoryName = (this.parseURL())[1];
+    this.getSubcategories(departmentName, categoryName);
+    this.getAllDepartment();
+
+    console.log(this.subcategories);
+    this.addBreadcrumb(departmentName, categoryName);
+  }
+
+  parseURL(){
     var currentURL = this.route.url;
     var categoryName: string; 
     var departmentName: string;
-    console.log(currentURL);
-
+    console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
         categoryName = val[2].path;
         departmentName = val[1].path; 
       } 
     )
+     return [departmentName, categoryName]; 
+  }
+
+  getSubcategories(departmentName: string, categoryName: string){
     this.category = this.service.getCategoryByName(departmentName, categoryName);
     this.category.forEach(val=>console.log(val));
-
-    this.departments = [];
-    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
     this.category.forEach(val=>this.subcategories = val.subcategories);
-    console.log(this.subcategories);
-    this.addBreadcrumb(departmentName, categoryName);
   }
 
   addBreadcrumb(departmentName:string, categoryName:string){
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
     this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentName+'/'+categoryName});
+  }
+
+  getAllDepartment(){
+    this.departments = [];
+    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
   }
 
 }
