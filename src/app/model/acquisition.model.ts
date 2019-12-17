@@ -1,7 +1,7 @@
 import { Item } from './item.model';
 export class Acquisition  {
     id : string;
-    typt: number;
+    type: number;
     donor: string;
     contact: string;
     phone: string;
