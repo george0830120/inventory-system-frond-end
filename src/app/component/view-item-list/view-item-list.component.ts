@@ -68,7 +68,7 @@ export class ViewItemListComponent implements OnInit {
     if(info.itemname!=""){
       console.log(info.itemname);
       this.showItems = [];
-      this.showItems = this.items.filter(item=>item.name.includes(info.itemname))
+      this.showItems = this.items.filter(item=>item.id===info.itemname);
       this.IfSearch = true;
     }
     else if (info.keyword!=""){

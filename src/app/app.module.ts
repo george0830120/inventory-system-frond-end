@@ -40,6 +40,8 @@ import { HomePageComponent } from './component/home-page/home-page.component';
 import { InventoryService } from './service/inventory.service';
 import { LoginService } from './service/login.service';
 import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusition.component';
+import { AddItemComponent } from './component/add-item/add-item.component';
+import { UpdateItemComponent } from './component/update-item/update-item.component';
 
 
 
@@ -55,6 +57,8 @@ import { ViewAcqusitionComponent } from './component/view-acqusition/view-acqusi
     ViewItemListComponent,
     HomePageComponent,
     ViewAcqusitionComponent,
+    AddItemComponent,
+    UpdateItemComponent,
   ],
   imports: [
     BrowserModule,
