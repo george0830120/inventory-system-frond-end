@@ -1,4 +1,4 @@
-export var fakeAcuisitions = {
+export var fakeAcquisitions = {
   acquisitions: [
     {
       id: "0",
@@ -6,7 +6,7 @@ export var fakeAcuisitions = {
       donor: "Westbrook",
       contact: "Paul George",
       phone: "0933557",
-      date: new Date("1508330494000"),
+      date: new Date(2014, 1, 1),
       status: 2,
       items: [
         {
@@ -33,7 +33,7 @@ export var fakeAcuisitions = {
         donor: "Kevin Durant",
         contact: "James Harden",
         phone: "095833212",
-        date: new Date("1204121454323"),
+        date: new Date(1997,3,25),
         status: 3,
         items: [
           {
