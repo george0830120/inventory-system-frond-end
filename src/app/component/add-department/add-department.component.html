@@ -3,36 +3,43 @@
   <div class="col-2 addDep">Add/Edit Department</div>
 </div>
 
+<br>
+<br>
+<br>
 
 
-<form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Name: </label>
-    <input type="text"  id="formGroupExampleInput" placeholder="">
-    <label class="func">Delete Department</label>
+
+<form [formGroup]="addDepartmentForm" (ngSubmit)="save(addDepartmentForm.value)">
+  <div class="form-group row">
+    <label for="addDepartmentformGroupInput1">Name: </label>
+    <input type="text" id="addDepartmentformGroupInput1" formControlName="name" placeholder="">
+    <!-- <label class="func">Delete Department</label> -->
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Description: </label>
-    <input type="text"  id="formGroupExampleInput2" placeholder="">
+  <div class="form-group row">
+    <label for="addDepartmentformGroupInput2">Description: </label>
+    <input type="text" id="addDepartmentformGroupInput2" formControlName="description" placeholder="">
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput3">POS DepartmentCode: </label>
-    <input type="text"  id="formGroupExampleInput3" placeholder="">
+  <div class="form-group row">
+    <label for="addDepartmentformGroupInput3">POS DepartmentCode: </label>
+    <input type="text" id="addDepartmentformGroupInput3" formControlName="posDepartmentCode" placeholder="">
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput4">Unique Tag: </label>
-    <input type="text"  id="formGroupExampleInput4" placeholder="">
+  <div class="form-group row">
+    <label for="addDepartmentformGroupInput4">Unique Tag: </label>
+    <input type="text" id="addDepartmentformGroupInput4" formControlName="uniqueTag" placeholder="">
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-1">
+      <p-button type="button" (click)="cancel()"label="Cancel"></p-button>
+    </div>
+
+    <div class="col-md-1">
+      <p-button type="submit" class="ui-button-success" label="Save"></p-button>
+    </div>
   </div>
 </form>
-
-
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-1">
-    <p-button class="cancel-button" label="Cancel"></p-button>
-  </div>
-
-  <div class="col-md-1">
-    <p-button class="save-button" label="Save"></p-button>
-  </div>
-</div>

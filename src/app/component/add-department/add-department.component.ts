@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { InventoryService } from '../../service/inventory.service';
 
 @Component({
   selector: 'app-add-department',
@@ -6,8 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-department.component.scss']
 })
 export class AddDepartmentComponent implements OnInit {
+  private addDepartmentForm: any;
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: InventoryService
+  ) {
+    this.addDepartmentForm = this.formBuilder.group({
+      name: '',
+      description: '',
+      posDepartmentCode: '',
+      uniqueTag: '',
+    })
+  }
 
-  constructor() { }
+  save(data) {
+    console.log(data);
+  }
+
+  cancel() {
+    console.log("cancel");
+  }
 
   ngOnInit() {
   }
