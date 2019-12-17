@@ -12,8 +12,14 @@ import { ViewAcquisitionComponent } from "./component/view-acquisition/view-acqu
 import { AddItemComponent } from "./component/add-item/add-item.component";
 import { UpdateItemComponent } from './component/update-item/update-item.component'
 import { AddDepartmentComponent } from "./component/add-department/add-department.component";
+import {EditCategoryComponent} from './component/edit-category/edit-category.component';
+import {MoveCategoryComponent} from './component/move-category/move-category.component';
+import {AddUniqueItemComponent} from './component/add-unique-item/add-unique-item.component';
 
 const routes: Routes = [
+  { path: 'department/:id/addUniqueItem', component: AddUniqueItemComponent },
+  { path: 'department/:id/moveCategory', component: MoveCategoryComponent },
+  { path: 'department/:id/editCategory', component: EditCategoryComponent },
   { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
