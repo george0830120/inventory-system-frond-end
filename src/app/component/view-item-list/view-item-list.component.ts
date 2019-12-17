@@ -19,6 +19,8 @@ export class ViewItemListComponent implements OnInit {
   private showItems: Item[];
   private departmentName: string;
   private categoryName: string;
+  private IfSearch: boolean;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,6 +49,7 @@ export class ViewItemListComponent implements OnInit {
     this.addBreadcrumb(this.departmentName,this.categoryName,subCategoryName);
     this.subCategories = this.service.getSubCategoryByName(this.departmentName,this.categoryName,subCategoryName);
     this.items = this.subCategories[0].items;
+    this.IfSearch = false;
     console.log("subcategories");
     console.log(this.subCategories);
     console.log(this.items);
@@ -60,7 +63,28 @@ export class ViewItemListComponent implements OnInit {
   }
 
   search(info) {
+    console.log("press search");
     console.log(info);
+    if(info.itemname!=""){
+      console.log(info.itemname);
+      this.showItems = [];
+      this.showItems = this.items.filter(item=>item.name===info.itemname)
+      this.IfSearch = true;
+    }
+    else if (info.keyword!=""){
+      console.log(info.keyword);
+      this.showItems = [];
+      this.items.filter(item=>item.name===info.keyword).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.description===info.keyword).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.condition===info.keyword).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.quantity===Number(info.keyword)).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.price===Number(info.keyword)).forEach(val => this.showItems.push(val))
+      this.IfSearch = true;
+    }else{
+      this.IfSearch = false;
+    }
+    console.log(this.IfSearch);
+    console.log(this.showItems);
   }
   addItem() {
     console.log("add item")

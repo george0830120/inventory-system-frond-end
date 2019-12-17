@@ -27,7 +27,7 @@
     </div>
     <br *ngFor="let number of breadcrumbArray" />
     <div class="row">
-        <p-table [value]="items">
+        <p-table [value]="items" *ngIf="!IfSearch">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Item#</th>
@@ -63,6 +63,45 @@
                     </td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.price }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-table [value]="showItems" *ngIf="IfSearch">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Item#</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Condition</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-showItems>
+                <tr>
+                    <td>{{ showItems.id }}</td>
+                    <td>{{ showItems.name }}</td>
+                    <td>{{ departmentName }}</td>
+                    <td>{{ categoryName }}</td>
+                    <td>{{ showItems.description }}</td>
+                    <td>
+                        <label *ngIf="showItems.condition === 1">
+                            New
+                        </label>
+                        <label *ngIf="showItems.condition === 2">
+                            Good
+                        </label>
+                        <label *ngIf="showItems.condition === 3">
+                            Average
+                        </label>
+                        <label *ngIf="showItems.condition === 4">
+                            Bad
+                        </label>
+                    </td>
+                    <td>{{ showItems.quantity }}</td>
+                    <td>{{ showItems.price }}</td>
                 </tr>
             </ng-template>
         </p-table>
