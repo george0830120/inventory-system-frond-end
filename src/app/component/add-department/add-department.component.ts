@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { InventoryService } from '../../service/inventory.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-department',
@@ -11,7 +12,8 @@ export class AddDepartmentComponent implements OnInit {
   private addDepartmentForm: any;
   constructor(
     private formBuilder: FormBuilder,
-    private service: InventoryService
+    private service: InventoryService,
+    private location: Location
   ) {
     this.addDepartmentForm = this.formBuilder.group({
       name: '',
@@ -26,7 +28,7 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   cancel() {
-    console.log("cancel");
+    this.location.back();
   }
 
   ngOnInit() {
