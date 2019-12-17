@@ -46,7 +46,6 @@ import { ReceiveAcquisitionComponent } from './component/receive-acquisition/rec
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

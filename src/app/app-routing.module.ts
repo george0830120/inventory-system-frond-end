@@ -11,8 +11,10 @@ import { ViewItemListComponent } from "./component/view-item-list/view-item-list
 import { ViewAcquisitionComponent } from "./component/view-acquisition/view-acquisition.component";
 import { AddItemComponent } from "./component/add-item/add-item.component";
 import { UpdateItemComponent } from './component/update-item/update-item.component'
+import { AddDepartmentComponent } from "./component/add-department/add-department.component";
 
 const routes: Routes = [
+  { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
   { path: 'department/:id/:id/:id', component: ViewItemListComponent },
@@ -23,7 +25,7 @@ const routes: Routes = [
   { path: 'acqusition', component: ViewAcquisitionComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', 
+  { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
