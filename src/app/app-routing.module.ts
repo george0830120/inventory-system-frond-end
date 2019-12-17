@@ -9,11 +9,18 @@ import { ViewCategoryComponent } from "./component/view-category/view-category.c
 import { ViewSubcategoryComponent } from "./component/view-subcategory/view-subcategory.component";
 import { ViewItemListComponent } from "./component/view-item-list/view-item-list.component";
 import { ViewAcquisitionComponent } from "./component/view-acquisition/view-acquisition.component";
+import { ReceiveAcquisitionComponent } from "./component/receive-acquisition/receive-acquisition.component";
 import { AddItemComponent } from "./component/add-item/add-item.component";
 import { UpdateItemComponent } from './component/update-item/update-item.component'
 import { AddDepartmentComponent } from "./component/add-department/add-department.component";
+import {EditCategoryComponent} from './component/edit-category/edit-category.component';
+import {MoveCategoryComponent} from './component/move-category/move-category.component';
+import {AddUniqueItemComponent} from './component/add-unique-item/add-unique-item.component';
 
 const routes: Routes = [
+  { path: 'department/:id/addUniqueItem', component: AddUniqueItemComponent },
+  { path: 'department/:id/moveCategory', component: MoveCategoryComponent },
+  { path: 'department/:id/editCategory', component: EditCategoryComponent },
   { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
@@ -22,9 +29,10 @@ const routes: Routes = [
   { path: 'department/:id/:id', component: ViewSubcategoryComponent },
   { path: 'department/:id', component: ViewCategoryComponent },
   { path: 'departments', component: ViewDepartmentComponent },
-  { path: 'acqusition', component: ViewAcquisitionComponent },
+  { path: 'acquisition', component: ViewAcquisitionComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'acquisition/:id', component: ReceiveAcquisitionComponent},
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
