@@ -5,22 +5,69 @@
                 <p-breadcrumb [model]="breadcrumbArray"></p-breadcrumb>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-8">
             <h2>View Inventory Items</h2>
         </div>
     </div>
-    <br *ngFor="let number of breadcrumbArray"/>
+    <br *ngFor="let number of breadcrumbArray" />
     <div class="row">
-        <div class="col4">
-            <div>
-                <input type="text" pInputText placeholder="Keyword">
+        <form [formGroup]="checkSearchForm" (ngSubmit)="search(checkSearchForm.value)">
+            <div class="col2">
+                <label class="input-label">Item #:</label>
+                <input formControlName="itemname" type="text" pInputText placeholder="">
             </div>
-        </div>
-        <div class="col4">
-                <input type="text" pInputText placeholder="Keyword">
-        </div>
-        <div class="col4">
-                <button pButton type="button" label="Search"></button>
-        </div>
+            <div class="col2">
+                <label class="input-label">Keyword #:</label>
+                <input formControlName="keyword" type="text" pInputText placeholder="">
+            </div>
+            <div class="col8">
+                <p-button class="search-button" label="Search"></p-button>
+            </div>
+        </form>
+    </div>
+    <br *ngFor="let number of breadcrumbArray" />
+    <div class="row">
+        <p-table [value]="items">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Item#</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Condition</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ departmentName }}</td>
+                    <td>{{ categoryName }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>
+                        <label *ngIf="item.condition === 1">
+                            New
+                        </label>
+                        <label *ngIf="item.condition === 2">
+                            Good
+                        </label>
+                        <label *ngIf="item.condition === 3">
+                            Average
+                        </label>
+                        <label *ngIf="item.condition === 4">
+                            Bad
+                        </label>
+                    </td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="footer-copyright text-center py-3">
+        <p-button (click)="addItem()" label="Add Item"></p-button>
     </div>
 </div>

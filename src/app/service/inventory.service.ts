@@ -37,4 +37,12 @@ export class InventoryService {
     dep.forEach(dep => cat = dep.categories.filter(cat => cat.name===CatName))
     return cat;
   }
+
+  getSubCategoryByName(departmentName: string, categoryName:string, subcategoryName:string) {
+    let category = this.getCategoryByName(departmentName,categoryName);
+    let subCategories : Subcategory[];
+    console.log(categoryName);
+    category.forEach(category =>  subCategories = category.subcategories.filter(sub => sub.name === subcategoryName));
+    return subCategories;
+  }
 }
