@@ -23,6 +23,7 @@ import { ScrollPanelModule } from "primeng/primeng";
 import { TableModule } from 'primeng/table';
 import { TabsModule } from "ngx-bootstrap";
 
+
 import {
   AppAsideModule,
   AppBreadcrumbModule,
