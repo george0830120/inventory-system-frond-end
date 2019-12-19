@@ -12,7 +12,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewSubcategoryComponent implements OnInit {
 
-  private category: Category[];
+  private category: Category;
   private departments: Department[];
   private subcategories: Subcategory[];
   private breadcrumbArray: MenuItem[];
@@ -52,8 +52,7 @@ export class ViewSubcategoryComponent implements OnInit {
 
   getSubcategories(departmentName: string, categoryName: string){
     this.category = this.service.getCategoryByName(departmentName, categoryName);
-    this.category.forEach(val=>console.log(val));
-    this.category.forEach(val=>this.subcategories = val.subcategories);
+    this.subcategories = this.category.subcategories;
   }
 
   addBreadcrumb(departmentName:string, categoryName:string){

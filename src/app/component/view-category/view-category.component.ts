@@ -12,7 +12,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  private departmentSelected: Department[];
+  private departmentSelected: Department;
   private departments: Department[];
   private categories: Category[];
   private breadcrumbArray: MenuItem[];
@@ -53,7 +53,7 @@ export class ViewCategoryComponent implements OnInit {
   }
   getDepartmentCategories(departmentName: string){
     this.departmentSelected = this.service.getDepartmentByName(departmentName);
-    this.departmentSelected.forEach(val=>this.categories = val.categories);
+    this.categories = this.departmentSelected.categories;
   }
   getAllDepartment(){
     this.departments = [];

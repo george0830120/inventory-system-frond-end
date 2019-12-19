@@ -14,7 +14,7 @@ import { Item } from 'src/app/model/item.model'
 export class ViewItemListComponent implements OnInit {
   private breadcrumbArray: MenuItem[];
   private checkSearchForm: any;
-  private subCategories: Subcategory[];
+  private subCategory: Subcategory;
   private items: Item[];
   private showItems: Item[];
   private departmentName: string;
@@ -47,11 +47,12 @@ export class ViewItemListComponent implements OnInit {
       }
     });
     this.addBreadcrumb(this.departmentName,this.categoryName,subCategoryName);
-    this.subCategories = this.service.getSubCategoryByName(this.departmentName,this.categoryName,subCategoryName);
-    this.items = this.subCategories[0].items;
+    this.subCategory = this.service.getSubCategoryByName(this.departmentName,this.categoryName,subCategoryName);
+    console.log("subCategory");
+    console.log(this.subCategory);
+    this.items = this.subCategory.items;
     this.IfSearch = false;
-    console.log("subcategories");
-    console.log(this.subCategories);
+
     console.log(this.items);
   }
 

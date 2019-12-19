@@ -24,25 +24,24 @@ export class InventoryService {
   }
 
   getDepartmentByName(DepName: string) {
-    var dep: Department[];
-    dep = [];
-    this.departments.subscribe(val=>val.filter(d=>d.name===DepName).forEach(d=>dep.push(d)));
+    var dep: Department;
+
+    this.departments.subscribe(val=>dep = val.find(d=>d.name===DepName));
     return dep;
   }
 
   getCategoryByName(DepName: string, CatName:string){
     var dep = this.getDepartmentByName(DepName);
-    var cat: Category[];
-    dep = dep.filter(dep => dep.name===DepName);
-    dep.forEach(dep => cat = dep.categories.filter(cat => cat.name===CatName))
+    var cat: Category;
+    cat = dep.categories.find(cat => cat.name===CatName); 
     return cat;
   }
 
   getSubCategoryByName(departmentName: string, categoryName:string, subcategoryName:string) {
     let category = this.getCategoryByName(departmentName,categoryName);
-    let subCategories : Subcategory[];
+    let subCategory : Subcategory;
     console.log(categoryName);
-    category.forEach(category =>  subCategories = category.subcategories.filter(sub => sub.name === subcategoryName));
-    return subCategories;
+    subCategory = category.subcategories.find(sub => sub.name === subcategoryName);
+    return subCategory;
   }
 }
