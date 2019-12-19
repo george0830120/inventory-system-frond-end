@@ -15,6 +15,8 @@ export class ViewAcquisitionComponent implements OnInit {
   private acquisitionStatus: SelectItem[];
   private checkSearchForm: any;
   private acquisitions: Acquisition[];
+  private showAcquisitions: Acquisition[];
+  private isSearch: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,17 +35,32 @@ export class ViewAcquisitionComponent implements OnInit {
     ];
 
     this.checkSearchForm = this.formBuilder.group({
-      acquisition: "",
+      acquisitionID: "",
       name: "",
       type: 0,
       phone: "",
       status: 0
     });
+    this.isSearch = false;
   }
 
   search(data) {
     console.log(data);
     console.log(JSON.stringify(data))
+    if(data.acquisitionID != "" || data.name != "" || data.phone != "") {
+      console.log("success");
+      this.showAcquisitions = [];
+      this.acquisitions.filter(acquisition => acquisition.id === data.acquisitionID 
+        || acquisition.donor === data.name 
+        || acquisition.phone === data.phone
+        || acquisition.type === data.type
+        || acquisition.status === data.status 
+        ).forEach((acq) => this.showAcquisitions.push(acq));
+      this.isSearch = true;
+    }
+    else {
+      this.isSearch = false;
+    }
   }
 
   ngOnInit() {

@@ -1,1 +1,52 @@
-<p>update-item works!</p>
+<div class="container" style="text-align:center; width: 50%; margin-top: 10%; margin-bottom: 10%;" >  
+    <div style=" border-radius: 20px; text-align:center; background-color:#bdbdbd; margin:auto; padding: 20px;">
+        <div class="contact2-form-title">
+            <label style="font-size: 28px;">View/Update Item</label>
+        </div>
+        <div style="width: 70%; margin: 10px 15% 10px 15%;">
+            <p-breadcrumb class="ui-breadcrumbui-menuitem" [model]="breadcrumbArray" ></p-breadcrumb>
+        </div>
+
+            <form [formGroup]="profileForm">
+                <div class="row">
+                    <div class="col-md-2" style="margin: 15px 0px;"> 
+                        <label id="id1">Item#: </label>
+                        <label id="id1">Name: </label>
+                        <label id="id1">Description: </label>
+                        <label id="id1">Quantity: </label>
+                        <label id="id1">Price: </label>
+                    </div>
+                    <div class="col-md-10"> 
+                        <div style="margin: 15px 0px 0px 0px"> 
+                            <Label >{{item.id}}</Label>
+                        </div>
+                        <div> 
+                            <input pInputText type="text" formControlName="Name" placeholder="{{item.name}}">
+                        </div>
+                        <div>
+                            <input pInputText type="text" formControlName="Description" placeholder="{{item.description}}">
+                        </div>
+                        <div>
+                    
+                            <input pInputText type="number" formControlName="Quantity" placeholder="{{item.quantity}}">
+                        </div>
+                        <div>
+                            <input pInputText type="number" formControlName="Price" placeholder="{{item.price}}">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div style="margin: 20px 0px 20px 0px; text-align:center;">
+                            <div style="margin: 20px 0px 20px 0px;">
+                                <p-dropdown [options]="condition" formControlName="Condition" ></p-dropdown>
+                            </div>
+                            <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" >Save</button>
+                            <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" (click) = "backToItemList()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+</div>
