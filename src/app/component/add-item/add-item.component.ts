@@ -4,7 +4,7 @@ import { SelectItem } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
-
+ 
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -20,7 +20,10 @@ export class AddItemComponent implements OnInit {
   });
   condition: SelectItem[];
   private breadcrumbArray: MenuItem[];
-  
+  private departmentName: string;
+  private categoryName: string;
+  private subcategoryName: string;
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private service: InventoryService) { 
@@ -35,11 +38,9 @@ export class AddItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    var departmentName = (this.parseURL())[0];
-    var categoryName = (this.parseURL())[1];
-    var subcategoryName = (this.parseURL())[2];
-    console.log(departmentName+categoryName+subcategoryName);
-    this.addBreadcrumb(departmentName, categoryName, subcategoryName);
+    this.parseURL();
+
+    this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
   }
 
   addBreadcrumb(departmentName:string, categoryName:string, subcategoryName:string){
@@ -51,18 +52,16 @@ export class AddItemComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url;
-    var categoryName: string; 
-    var departmentName: string;
-    var subcategoryName: string
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        categoryName = val[2].path;
-        departmentName = val[1].path; 
-        subcategoryName = val[3].path;
+        this.categoryName = val[2].path;
+        this.departmentName = val[1].path; 
+        this.subcategoryName = val[3].path;
       } 
     )
-     return [departmentName, categoryName, subcategoryName]; 
   }
-
+  backToItemList(){
+    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+  }
 }

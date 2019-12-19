@@ -9,13 +9,17 @@
 
             <form [formGroup]="profileForm">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="margin: 15px 0px;"> 
+                        <label id="id1">Item#: </label>
                         <label id="id1">Name: </label>
                         <label id="id1">Description: </label>
                         <label id="id1">Quantity: </label>
                         <label id="id1">Price: </label>
                     </div>
                     <div class="col-md-10"> 
+                        <div style="margin: 15px 0px 0px 0px"> 
+                            <Label >{{item.id}}</Label>
+                        </div>
                         <div> 
                             <input pInputText type="text" formControlName="Name" placeholder="{{item.name}}">
                         </div>
@@ -39,7 +43,7 @@
                                 <p-dropdown [options]="condition" formControlName="Condition" ></p-dropdown>
                             </div>
                             <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" >Save</button>
-                            <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" >Cancel</button>
+                            <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" (click) = "backToItemList()">Cancel</button>
                         </div>
                     </div>
                 </div>

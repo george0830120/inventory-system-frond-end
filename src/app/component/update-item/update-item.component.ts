@@ -22,6 +22,9 @@ export class UpdateItemComponent implements OnInit {
   condition: SelectItem[];
   private breadcrumbArray: MenuItem[];
   private item: Item;
+  private departmentName: string;
+  private categoryName: string;
+  private subcategoryName: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -37,13 +40,10 @@ export class UpdateItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    var departmentName = (this.parseURL())[0];
-    var categoryName = (this.parseURL())[1];
-    var subcategoryName = (this.parseURL())[2];
-    var itemId = (this.parseURL())[3];
-    console.log(departmentName+categoryName+subcategoryName);
-    this.addBreadcrumb(departmentName, categoryName, subcategoryName);
-    this.item = this.service.getSubCategoryByName(departmentName, categoryName, subcategoryName).items.find(i=>i.id===itemId);
+    this.parseURL();
+    console.log(this.departmentName+this.categoryName+this.subcategoryName);
+    this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
+    
   }
 
   addBreadcrumb(departmentName:string, categoryName:string, subcategoryName:string){
@@ -62,13 +62,17 @@ export class UpdateItemComponent implements OnInit {
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        categoryName = val[2].path;
-        departmentName = val[1].path; 
-        subcategoryName = val[3].path;
+        this.categoryName = val[2].path;
+        this.departmentName = val[1].path; 
+        this.subcategoryName = val[3].path;
         itemId = val[4].path;
       } 
     )
-     return [departmentName, categoryName, subcategoryName, itemId]; 
+    this.item = this.service.getSubCategoryByName(this.departmentName, this.categoryName, this.subcategoryName).items.find(i=>i.id===itemId);
+  }
+
+  backToItemList(){
+    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
 
 }
