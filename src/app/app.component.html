@@ -14,7 +14,7 @@
     </li>
     <li *ngIf="getIsLogin()" class="nav-item px-3">
       Hello {{userName}}
-    </li> 
+    </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
@@ -96,5 +96,8 @@
 
 <app-footer>
   <span> Composite UI &copy; 2019 SElab.</span>
+  <p-button type="button" styleClass=" ui-button-info ui-button-danger ui-button-md" label="Home"
+            routerLink="/home" routerLinkActive="active"></p-button>
   <span class="ml-auto">Powered by <a href="https://www.csie.ntu.edu.tw/~jlee/">NTU CSIE SELab</a></span>
+
 </app-footer>

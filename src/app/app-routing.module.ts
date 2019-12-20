@@ -28,7 +28,7 @@ const routes: Routes = [
  // { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },
   { path: 'department/:id/:id', component: ViewSubcategoryComponent },
   { path: 'department/:id', component: ViewCategoryComponent },
-  { path: 'departments', component: ViewDepartmentComponent },
+  { path: 'department', component: ViewDepartmentComponent },
   { path: 'acquisition', component: ViewAcquisitionComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
@@ -38,7 +38,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: "department/:id/viewCategory", component: ViewCategoryComponent },
-  { path: "department", component: ViewDepartmentComponent },
   { path: "home", component: HomePageComponent },
   { path: "login", component: LoginComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" },
