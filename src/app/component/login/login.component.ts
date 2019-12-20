@@ -27,29 +27,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCurrentUserName().next('');
+  //  this.service.getCurrentUserName().next('');
+    this.service.setLogout();
   }
 
   login(userInfo) {
-    let name = userInfo.username;
-    let password = userInfo.password;
-    let user;
-    this.checkoutForm.reset();
-    this.service.getUsers().pipe(
-      filter(user => {
-        if(user['name'] === name && user['password'] === password) {
-          return true;
-        }
-        else 
-          return false;
-      }),
-    ).subscribe(val => user = val);
-    if(user) {
-      localStorage['currentUser'] = user['name'];
-      this.service.setCurrentUsername(user['name']);
-      this.router.navigate(['/home']);
+
+    this.service.login(userInfo);
+
+    if(this.service.getIsLogin()){
+      this.router.navigateByUrl("\home");
+      
+    }else{
+      this.checkoutForm.reset();
     }
-  
   }
 
 }

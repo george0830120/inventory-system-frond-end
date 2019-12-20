@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, from } from "rxjs";
+import { Observable, from, of, BehaviorSubject } from "rxjs";
 import { Subject } from "rxjs/Subject";
-import { filter } from "rxjs/operators";
+import { filter, first } from "rxjs/operators";
 import { fakeUsers } from "../fakeUserData";
 import { User } from "../model/user.model";
 
@@ -10,11 +10,15 @@ import { User } from "../model/user.model";
 })
 export class LoginService {
   private users: Observable<User>;
-  private currentUsername: Subject<string>;
+ // private currentUsername: BehaviorSubject<string>;
+  private currentUser: BehaviorSubject<User>;
+  public isLogin: boolean;
 
   constructor() {
-    this.users = from(fakeUsers.users);
-    this.currentUsername = new Subject<string>();
+    this.users = from(fakeUsers.users); 
+  //  this.currentUsername = new BehaviorSubject<string>('0');
+    this.currentUser = new BehaviorSubject<User>(null);
+    this.isLogin = false;
   }
 
   getUsers(): any {
@@ -29,12 +33,37 @@ export class LoginService {
     return user;
   }
 
-  setCurrentUsername(name: string) {
-    this.currentUsername.next(name);
+ // setCurrentUsername(name: string) {
+ //   this.currentUsername.next(name);
+ // }
+
+  getCurrentUser() {
+    return this.currentUser;
   }
 
-  getCurrentUserName() {
-    return this.currentUsername;
+  setLogout(){
+    this.isLogin===false;
+  }
+  getIsLogin(){
+    return this.isLogin;
+  }
+
+  login(userInfo){
+
+      this.users.pipe(
+        filter( user => user.name===userInfo.username )
+        
+      ).subscribe( user => {
+          this.currentUser.next(user);
+          localStorage['currentUser'] = user['name'];
+          this.isLogin = true;
+      });
+    console.log(this.isLogin)
+  }
+
+  logout(){
+    this.currentUser.next(null);
+    this.isLogin = false;
   }
 
 }

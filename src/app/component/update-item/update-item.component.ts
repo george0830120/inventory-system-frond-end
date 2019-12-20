@@ -13,6 +13,7 @@ import { Item } from 'src/app/model';
 })
 export class UpdateItemComponent implements OnInit {
   profileForm = new FormGroup({
+    ID: new FormControl(),
     Name: new FormControl(''),
     Description: new FormControl(''),
     Quantity: new FormControl(''),
@@ -42,6 +43,7 @@ export class UpdateItemComponent implements OnInit {
   ngOnInit() {
     this.parseURL();
     console.log(this.departmentName+this.categoryName+this.subcategoryName);
+    this.profileForm.patchValue({ID: this.item.id})
     this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
     
   }
@@ -72,6 +74,13 @@ export class UpdateItemComponent implements OnInit {
   }
 
   backToItemList(){
+    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+  }
+
+  submit(x:FormGroup){
+    console.log(x);
+    // TODO: update item
+
     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
 

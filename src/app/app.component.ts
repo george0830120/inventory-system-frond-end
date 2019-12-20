@@ -10,21 +10,27 @@ import { LoginService } from './service/login.service';
 export class AppComponent {
   title = 'inventory-app-v2';
   userName: string;
+  private isLogin: boolean;
 
-  constructor(private service: LoginService) {
+  constructor(private service: LoginService, private router: Router) {
     this.userName = '';
   }
 
-  isLogin() {
-    if(this.userName === '')
-      return false;
-    else 
-      return true;
+  getIsLogin() {
+    return this.isLogin;
+  }
+  logout(){
+    this.service.logout();
+    this.router.navigateByUrl("/login");
+    this.isLogin = false;
   }
   
   ngOnInit() {
-    this.service.getCurrentUserName().subscribe(username => {
-      this.userName = username;
+    this.service.getCurrentUser().subscribe(user=>{
+        if(user!=null){
+          this.userName= user.name;
+          this.isLogin = true;
+        }
     })
   }
 }

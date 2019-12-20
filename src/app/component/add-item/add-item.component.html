@@ -6,7 +6,8 @@
             <div style="width: 70%; margin: 10px 15% 10px 15%;">
                 <p-breadcrumb class="ui-breadcrumbui-menuitem" [model]="breadcrumbArray" ></p-breadcrumb>
             </div>
-            <form [formGroup]="profileForm">
+            <form [formGroup]="profileForm" (ngSubmit)="submit(profileForm.value)">
+
                 <div> 
                     <input pInputText type="text" formControlName="Name" placeholder="Name">
                 </div>

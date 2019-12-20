@@ -64,4 +64,10 @@ export class AddItemComponent implements OnInit {
   backToItemList(){
     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
+
+  submit(x: FormControl){
+    console.log(x)
+    //TODO: Add item
+    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+  }
 }
