@@ -63,6 +63,11 @@ export class ViewAcquisitionComponent implements OnInit {
     }
   }
 
+  addAcquisition() {
+    console.log("add Acquisition");
+    window.open('http://localhost/CRM/Main.php','_blank');
+  }
+
   ngOnInit() {
     this.acquisitions = [];
     this.service.getAcquisitions().subscribe( (acqs) => {
