@@ -5,7 +5,7 @@ import { Category, Subcategory, Item, Department } from '../../model/index'
 import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { HttpClientService } from 'src/app/service/http-client.service';
-import { ConsoleReporter } from 'jasmine';
+//import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-view-category',
@@ -14,7 +14,6 @@ import { ConsoleReporter } from 'jasmine';
 })
 export class ViewCategoryComponent implements OnInit {
 
-<<<<<<< HEAD
   public departmentSelected: Department;
   public departments: Department[];
   public categories: Category[];
@@ -23,19 +22,9 @@ export class ViewCategoryComponent implements OnInit {
   public matrixDefaultArray: number[];
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public service: InventoryService) {
-=======
-  private departmentSelected: Department;
-  private departments: Department[];
-  private categories: Category[];
-  private breadcrumbArray: MenuItem[];
-  private navigationSubscription;  
-  private matrixDefaultArray: number[];
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService,
-    private httpClientService: HttpClientService) {
->>>>>>> e335d4846ac9fef4cf788dec0bab8285e1aaaa72
+    public service: InventoryService,
+    public httpClientService: HttpClientService
+    ) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
