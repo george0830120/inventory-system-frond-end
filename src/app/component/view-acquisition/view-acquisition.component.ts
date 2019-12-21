@@ -42,6 +42,15 @@ export class ViewAcquisitionComponent implements OnInit {
       status: 0
     });
     this.isSearch = false;
+    this.service.getAcquisitionFromCRM().subscribe(acq => {
+      console.log("component get from service");
+      console.log(acq);
+      if(acq) {
+        setTimeout(() => {
+          this.acquisitions.push(acq);
+        },5000)
+      }
+    })
   }
 
   search(data) {

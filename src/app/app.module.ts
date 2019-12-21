@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { DropdownModule} from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
@@ -94,7 +95,8 @@ import { AddUniqueItemComponent } from './component/add-unique-item/add-unique-i
     MatButtonModule,
     BreadcrumbModule,
     MatGridListModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule
   ],
   providers: [ InventoryService ],
   bootstrap: [AppComponent]

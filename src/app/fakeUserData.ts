@@ -3,7 +3,7 @@ export var fakeUsers = {
         {
             id:"0",
             name: "Tim",
-            password: "0000",
+            password: "1111",
             // type 0 : user 
             // type 1 : super user
             priviledge: 0
@@ -16,5 +16,17 @@ export var fakeUsers = {
             // type 1 : super user
             priviledge: 1
         },
+        {
+            id:"2",
+            name: "Kevin",
+            password: "1111",
+            priviledge: 2,
+        },
+        {
+            id:"3",
+            name: "Harden",
+            password: "1111",
+            priviledge: 3,
+        }
     ]
 }

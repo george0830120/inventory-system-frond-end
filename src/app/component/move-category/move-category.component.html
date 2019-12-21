@@ -1,1 +1,42 @@
-<p>move-category works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">
+            <h2>Move Categories</h2>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <form [formGroup]="moveCategoryForm" (ngSubmit)="move(moveCategoryForm.value)">
+        <div class="row">
+            <div class="col-4">
+                <p-multiSelect [options]="categoriesToMove" formControlName="categoriesToMove" defaultLabel="Categories to move">
+
+                </p-multiSelect>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-4">
+                <br>
+                <div class="row">Move to exsiting department or category</div>
+                <br>
+                <div class="row"><p-dropdown [options]="departmentsSelected" formControlName="selectedDepartment"></p-dropdown></div>
+                <br>
+                <div class="row"><p-dropdown [options]="categoriesSelected" fromControlName="selectedCategory"></p-dropdown></div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-1">
+                <p-button (click)="cancel()" type="button" label="Cancel"></p-button>
+            </div>
+            <div class="col-1">
+                <p-button  label="Save"></p-button>
+            </div>
+        </div>
+    </form>
+</div>

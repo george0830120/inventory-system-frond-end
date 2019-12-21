@@ -9,11 +9,13 @@ import { WebSocketService } from './web-socket.service';
 })
 export class AcquisitionService {
   private acquisitions: BehaviorSubject<Acquisition[]>;
+  private acquisitonFromCRM: BehaviorSubject<Acquisition>;
 
   constructor(
     private webSocketService: WebSocketService
   ) {
     this.acquisitions = new BehaviorSubject<Acquisition[]>(null);
+    this.acquisitonFromCRM = new BehaviorSubject<Acquisition>(null);
     let acquisitionsArray = [];
     fakeAcquisitions.acquisitions.forEach(element => {
       acquisitionsArray.push(element);
@@ -21,11 +23,25 @@ export class AcquisitionService {
     this.acquisitions.next(acquisitionsArray);
     this.webSocketService.getSubject().subscribe(data => {
       console.log("receive data from subject");
+      this.acquisitonFromCRM.next({
+        id:'as',
+        type:1,
+        donor:'dd',
+        contact:'asd',
+        phone:'add',
+        date: new Date(12,13),
+        status: 5,
+        itmes: []
+      })
       console.log(data);
     })
   }
   getAcquisitions() {
     return this.acquisitions;
+  }
+
+  getAcquisitionFromCRM() {
+    return this.acquisitonFromCRM;
   }
 
   getAcqusitionById(id: string) {
