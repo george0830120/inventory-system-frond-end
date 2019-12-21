@@ -47,7 +47,7 @@ export class ViewItemListComponent implements OnInit {
       }
     });
     this.addBreadcrumb(this.departmentName,this.categoryName,subCategoryName);
-    this.subCategory = this.service.getSubCategoryByName(this.departmentName,this.categoryName,subCategoryName);
+    this.subCategory = this.service.getSubCategoryByName(this.departmentName,this.categoryName, subCategoryName);
     console.log("subCategory");
     console.log(this.subCategory);
     this.items = this.subCategory.items;

@@ -16,6 +16,7 @@ import { AddDepartmentComponent } from "./component/add-department/add-departmen
 import {EditCategoryComponent} from './component/edit-category/edit-category.component';
 import {MoveCategoryComponent} from './component/move-category/move-category.component';
 import {AddUniqueItemComponent} from './component/add-unique-item/add-unique-item.component';
+import { AuthGuard }                from './service/auth-gaurd.service';
 
 const routes: Routes = [
   { path: 'department/:id/addUniqueItem', component: AddUniqueItemComponent },
@@ -30,7 +31,7 @@ const routes: Routes = [
   { path: 'department/:id', component: ViewCategoryComponent },
   { path: 'department', component: ViewDepartmentComponent },
   { path: 'acquisition', component: ViewAcquisitionComponent },
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: HomePageComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'acquisition/:id', component: ReceiveAcquisitionComponent},
   { path: '',
