@@ -9,10 +9,10 @@ import { Acquisition } from '../../model/acquisition.model';
   styleUrls: ['./receive-acquisition.component.scss']
 })
 export class ReceiveAcquisitionComponent implements OnInit {
-  private acquisitionId: string;
-  private acquisition: Acquisition;
+  public acquisitionId: string;
+  public acquisition: Acquisition;
 
-  constructor(private route: ActivatedRoute,private service: AcquisitionService) { }
+  constructor(public route: ActivatedRoute,public service: AcquisitionService) { }
 
   ngOnInit() {
     let currentUrl = this.route.url;

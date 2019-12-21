@@ -12,14 +12,14 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewSubcategoryComponent implements OnInit {
 
-  private category: Category;
-  private departments: Department[];
-  private subcategories: Subcategory[];
-  private breadcrumbArray: MenuItem[];
-  private item
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService) { 
+  public category: Category;
+  public departments: Department[];
+  public subcategories: Subcategory[];
+  public breadcrumbArray: MenuItem[];
+  public item
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService) { 
     }
 
   ngOnInit() {

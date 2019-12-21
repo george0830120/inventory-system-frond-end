@@ -9,11 +9,11 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-department.component.scss']
 })
 export class AddDepartmentComponent implements OnInit {
-  private addDepartmentForm: any;
+  public addDepartmentForm: any;
   constructor(
-    private formBuilder: FormBuilder,
-    private service: InventoryService,
-    private location: Location
+    public formBuilder: FormBuilder,
+    public service: InventoryService,
+    public location: Location
   ) {
     this.addDepartmentForm = this.formBuilder.group({
       name: '',

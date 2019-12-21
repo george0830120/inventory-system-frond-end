@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   checkoutForm: any;
 
   constructor(
-    private service: LoginService,
-    private formBuilder: FormBuilder,
-    private router: Router  
+    public service: LoginService,
+    public formBuilder: FormBuilder,
+    public router: Router  
   ) {
     this.checkoutForm = this.formBuilder.group({
       username: '',

@@ -11,17 +11,17 @@ import { Router } from "@angular/router";
   styleUrls: ["./view-acquisition.component.scss"]
 })
 export class ViewAcquisitionComponent implements OnInit {
-  private acquisitionTypes: SelectItem[];
-  private acquisitionStatus: SelectItem[];
-  private checkSearchForm: any;
-  private acquisitions: Acquisition[];
-  private showAcquisitions: Acquisition[];
-  private isSearch: boolean;
+  public acquisitionTypes: SelectItem[];
+  public acquisitionStatus: SelectItem[];
+  public checkSearchForm: any;
+  public acquisitions: Acquisition[];
+  public showAcquisitions: Acquisition[];
+  public isSearch: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private service: AcquisitionService,
-    private router: Router
+    public formBuilder: FormBuilder,
+    public service: AcquisitionService,
+    public router: Router
   ) {
     this.acquisitionTypes = [
       { label: "Drop off", value: { type: "Drop off", value: 1 } },

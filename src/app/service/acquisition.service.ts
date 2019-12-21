@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Acquisition } from '../model/acquisition.model';
 import { fakeAcquisitions } from '../testAcquisitionData';
 import { WebSocketService } from './web-socket.service';
+import { Item } from '../model/item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AcquisitionService {
   private acquisitonFromCRM: BehaviorSubject<Acquisition>;
 
   constructor(
-    private webSocketService: WebSocketService
+    public webSocketService: WebSocketService
   ) {
     this.acquisitions = new BehaviorSubject<Acquisition[]>(null);
     this.acquisitonFromCRM = new BehaviorSubject<Acquisition>(null);

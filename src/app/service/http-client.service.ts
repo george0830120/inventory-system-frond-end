@@ -13,12 +13,16 @@ export interface IDepartment {
 export class HttpClientService {
 
   constructor(
-    private httpClient: HttpClient
+    public httpClient: HttpClient
   ) {
   }
 
   getDepartments() {
     return this.httpClient.get('http://localhost:8080/department', {responseType: 'json'} );
+  }
+
+  getCategories(category: string) {
+    return this.httpClient.get('http://localhost:8080/department/' + category  , {responseType: 'json'} );
   }
 
   addItem(departmentname: string,

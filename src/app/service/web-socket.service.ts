@@ -19,7 +19,7 @@ export class WebSocketService {
     this.connectionID = null;
   }
 
-  private createObservableSocket(): Observable<any> {
+  public createObservableSocket(): Observable<any> {
     return new Observable(observer => {
       this.ws.onmessage = event => {
         console.log("[WebSocketService] Received:", event.data);

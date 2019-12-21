@@ -12,20 +12,20 @@ import { Item } from 'src/app/model/item.model'
   styleUrls: ["./view-item-list.component.scss"]
 })
 export class ViewItemListComponent implements OnInit {
-  private breadcrumbArray: MenuItem[];
-  private checkSearchForm: any;
-  private subCategory: Subcategory;
-  private items: Item[];
-  private showItems: Item[];
-  private departmentName: string;
-  private categoryName: string;
-  private IfSearch: boolean;
+  public breadcrumbArray: MenuItem[];
+  public checkSearchForm: any;
+  public subCategory: Subcategory;
+  public items: Item[];
+  public showItems: Item[];
+  public departmentName: string;
+  public categoryName: string;
+  public IfSearch: boolean;
 
 
   constructor(
-    private route: ActivatedRoute,
-    private service: InventoryService,
-    private formBuilder: FormBuilder
+    public route: ActivatedRoute,
+    public service: InventoryService,
+    public formBuilder: FormBuilder
   ) {
     this.checkSearchForm = this.formBuilder.group({
       itemname: '',
