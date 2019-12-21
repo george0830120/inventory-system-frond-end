@@ -4,13 +4,13 @@
   [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <a (click)="logout()" class="nav-link">Logout</a>
-    </li>
-    <li class="nav-item px-3">
       <a class="nav-link" href="#">Users</a>
     </li>
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
+    </li>
+    <li class="nav-item px-3">
+      <a *ngIf = "getIsLogin()" (click)="logout()" class="nav-link" style=" cursor: pointer;">Logout</a>
     </li>
     <li *ngIf="getIsLogin()" class="nav-item px-3">
       Hello {{userName}}
@@ -68,11 +68,11 @@
       <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
           <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a *ngIf = "isLogin" routerLink="/home" routerLinkActive="active" style="margin: 0px 15px ">Home</a>
           <a class="btn" [routerLink]="['/']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
           <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
         </div>
     </cui-breadcrumb>
-
 
     <div class="container-fluid">
       <router-outlet></router-outlet>
@@ -83,9 +83,7 @@
     <tabset>
       <tab>
         <ng-template tabHeading><i class="icon-speech"></i></ng-template>
-
         <!-- <router-outlet name="outputPort"></router-outlet> -->
-
       </tab>
 
     </tabset>
@@ -96,8 +94,6 @@
 
 <app-footer>
   <span> Composite UI &copy; 2019 SElab.</span>
-  <p-button type="button" styleClass=" ui-button-info ui-button-danger ui-button-md" label="Home"
-            routerLink="/home" routerLinkActive="active"></p-button>
   <span class="ml-auto">Powered by <a href="https://www.csie.ntu.edu.tw/~jlee/">NTU CSIE SELab</a></span>
 
 </app-footer>
