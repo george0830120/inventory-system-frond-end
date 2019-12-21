@@ -21,6 +21,10 @@ export class HttpClientService {
     return this.httpClient.get('http://localhost:8080/department', {responseType: 'json'} );
   }
 
+  getCategories(category: string) {
+    return this.httpClient.get('http://localhost:8080/department/' + category  , {responseType: 'json'} );
+  }
+
   addItem(departmentname: string,
       categoryName: string,
       subCategoryName: string,
