@@ -13,7 +13,7 @@ export interface IDepartment {
 export class HttpClientService {
 
   constructor(
-    private httpClient: HttpClient
+    public httpClient: HttpClient
   ) {
   }
 

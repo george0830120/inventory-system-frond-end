@@ -20,14 +20,14 @@ export class EditCategoryComponent implements OnInit {
     Description: new FormControl(''),
   });
 
-  private breadcrumbArray: MenuItem[];
-  private category: Category;
-  private departmentName: string;
-  private categoryName: string;
+  public breadcrumbArray: MenuItem[];
+  public category: Category;
+  public departmentName: string;
+  public categoryName: string;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService) { 
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService) { 
 
   }
 

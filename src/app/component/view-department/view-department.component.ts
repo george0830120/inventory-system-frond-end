@@ -21,7 +21,7 @@ export class IDepartment {
 export class ViewDepartmentComponent implements OnInit {
   public departments: JSON;
   public i = 0;
-  constructor(private route: ActivatedRoute, private service: InventoryService, private httpClientService: HttpClientService) {
+  constructor(public route: ActivatedRoute, public service: InventoryService, public httpClientService: HttpClientService) {
   }
 
   ngOnInit() {

@@ -20,14 +20,14 @@ export class EditDepartmentComponent implements OnInit {
     POSDepartmentCode: new FormControl('')
   });
 
-  private breadcrumbArray: MenuItem[];
-  private department: Department;
-  private departmentName: string;
-  private categoryName: string;
+  public breadcrumbArray: MenuItem[];
+  public department: Department;
+  public departmentName: string;
+  public categoryName: string;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService) { 
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService) { 
 
   }
 

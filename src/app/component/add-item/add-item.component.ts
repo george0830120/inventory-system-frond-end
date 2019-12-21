@@ -20,15 +20,15 @@ export class AddItemComponent implements OnInit {
     Condition: new FormControl(''),
   });
   condition: SelectItem[];
-  private breadcrumbArray: MenuItem[];
-  private departmentName: string;
-  private categoryName: string;
-  private subcategoryName: string;
+  public breadcrumbArray: MenuItem[];
+  public departmentName: string;
+  public categoryName: string;
+  public subcategoryName: string;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService,
-    private httpService: HttpClientService,
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService,
+    public httpService: HttpClientService,
     ) { 
     this.condition = [
       {label:'Condition', value:null},

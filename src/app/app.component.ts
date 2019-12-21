@@ -10,9 +10,9 @@ import { LoginService } from './service/login.service';
 export class AppComponent {
   title = 'inventory-app-v2';
   userName: string;
-  private isLogin: boolean;
+  public isLogin: boolean;
 
-  constructor(private service: LoginService, private router: Router) {
+  constructor(public service: LoginService, public router: Router) {
     this.userName = '';
   }
 

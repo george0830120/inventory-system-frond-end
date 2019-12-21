@@ -8,10 +8,10 @@ import { WebSocketService } from './web-socket.service';
   providedIn: 'root'
 })
 export class AcquisitionService {
-  private acquisitions: BehaviorSubject<Acquisition[]>;
+  public acquisitions: BehaviorSubject<Acquisition[]>;
 
   constructor(
-    private webSocketService: WebSocketService
+    public webSocketService: WebSocketService
   ) {
     this.acquisitions = new BehaviorSubject<Acquisition[]>(null);
     let acquisitionsArray = [];

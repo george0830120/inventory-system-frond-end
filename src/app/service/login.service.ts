@@ -9,9 +9,9 @@ import { User } from "../model/user.model";
   providedIn: "root"
 })
 export class LoginService {
-  private users: Observable<User>;
- // private currentUsername: BehaviorSubject<string>;
-  private currentUser: BehaviorSubject<User>;
+  public users: Observable<User>;
+ // public currentUsername: BehaviorSubject<string>;
+  public currentUser: BehaviorSubject<User>;
   public isLogin: boolean;
 
   constructor() {

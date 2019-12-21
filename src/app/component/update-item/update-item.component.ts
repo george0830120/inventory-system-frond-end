@@ -21,15 +21,15 @@ export class UpdateItemComponent implements OnInit {
     Condition: new FormControl(''),
   });
   condition: SelectItem[];
-  private breadcrumbArray: MenuItem[];
-  private item: Item;
-  private departmentName: string;
-  private categoryName: string;
-  private subcategoryName: string;
+  public breadcrumbArray: MenuItem[];
+  public item: Item;
+  public departmentName: string;
+  public categoryName: string;
+  public subcategoryName: string;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService) { 
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService) { 
     this.condition = [
       {label:'Condition', value:null},
       {label:"Broken", value: 0},

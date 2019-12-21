@@ -9,7 +9,7 @@ import { Subject, BehaviorSubject } from "rxjs";
   providedIn: "root"
 })
 export class InventoryService {
-  private departments: BehaviorSubject<Department[]>;
+  public departments: BehaviorSubject<Department[]>;
   constructor() {
     this.departments = new BehaviorSubject<Department[]>(null);
     var departmentsArray: Department[];

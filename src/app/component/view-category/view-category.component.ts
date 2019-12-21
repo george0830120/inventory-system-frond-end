@@ -12,15 +12,15 @@ import { MenuItem } from 'primeng/api';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  private departmentSelected: Department;
-  private departments: Department[];
-  private categories: Category[];
-  private breadcrumbArray: MenuItem[];
-  private navigationSubscription;  
-  private matrixDefaultArray: number[];
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: InventoryService) {
+  public departmentSelected: Department;
+  public departments: Department[];
+  public categories: Category[];
+  public breadcrumbArray: MenuItem[];
+  public navigationSubscription;  
+  public matrixDefaultArray: number[];
+  constructor(public route: ActivatedRoute,
+    public router: Router,
+    public service: InventoryService) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {

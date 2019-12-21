@@ -7,5 +7,5 @@ export class Acquisition  {
     phone: string;
     date: Date;
     status: number;
-    itmes: Item[];
+    items: Item[];
 }
