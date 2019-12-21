@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Acquisition } from '../model/acquisition.model';
 import { fakeAcquisitions } from '../testAcquisitionData';
+import { WebSocketService } from './web-socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,19 @@ import { fakeAcquisitions } from '../testAcquisitionData';
 export class AcquisitionService {
   private acquisitions: BehaviorSubject<Acquisition[]>;
 
-  constructor() {
+  constructor(
+    private webSocketService: WebSocketService
+  ) {
     this.acquisitions = new BehaviorSubject<Acquisition[]>(null);
     let acquisitionsArray = [];
     fakeAcquisitions.acquisitions.forEach(element => {
       acquisitionsArray.push(element);
     });
     this.acquisitions.next(acquisitionsArray);
+    this.webSocketService.getSubject().subscribe(data => {
+      console.log("receive data from subject");
+      console.log(data);
+    })
   }
   getAcquisitions() {
     return this.acquisitions;
@@ -29,5 +36,9 @@ export class AcquisitionService {
       .forEach(e => acq.push(e))
     );
     return acq[0];
+  }
+
+  sendMessage(message: string) {
+    this.webSocketService.sendMessage(message);
   }
 }

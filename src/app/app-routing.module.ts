@@ -17,11 +17,13 @@ import {EditCategoryComponent} from './component/edit-category/edit-category.com
 import {MoveCategoryComponent} from './component/move-category/move-category.component';
 import {AddUniqueItemComponent} from './component/add-unique-item/add-unique-item.component';
 import { AuthGuard }                from './service/auth-gaurd.service';
+import { EditDepartmentComponent } from './component/edit-department/edit-department.component'
 
 const routes: Routes = [
   { path: 'department/:id/addUniqueItem', component: AddUniqueItemComponent },
-  { path: 'department/:id/moveCategory', component: MoveCategoryComponent },
-  { path: 'department/:id/editCategory', component: EditCategoryComponent },
+  { path: 'department/:id/:id/moveCategory', component: MoveCategoryComponent },
+  { path: 'department/:id/:id/editCategory', component: EditCategoryComponent },
+  { path: 'department/:id/editDepartment', component: EditDepartmentComponent },
   { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
