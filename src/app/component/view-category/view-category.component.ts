@@ -5,6 +5,7 @@ import { Category, Subcategory, Item, Department } from '../../model/index'
 import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { HttpClientService } from 'src/app/service/http-client.service';
+import { LoginService } from '../../service/login.service';
 //import { ConsoleReporter } from 'jasmine';
 
 @Component({
@@ -23,7 +24,8 @@ export class ViewCategoryComponent implements OnInit {
   constructor(public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
-    public httpClientService: HttpClientService
+    public httpClientService: HttpClientService,
+    public loginService: LoginService
     ) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component

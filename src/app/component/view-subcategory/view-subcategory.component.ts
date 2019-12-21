@@ -4,7 +4,7 @@ import { InventoryService } from '../../service/inventory.service'
 import { Category, Subcategory, Item, Department } from '../../model/index'
 import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
-
+import { LoginService } from '../../service/login.service';
 @Component({
   selector: 'app-view-subcategory',
   templateUrl: './view-subcategory.component.html',
@@ -19,7 +19,9 @@ export class ViewSubcategoryComponent implements OnInit {
   public item
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public service: InventoryService) { 
+    public service: InventoryService,
+    public loginService: LoginService 
+    ) { 
     }
 
   ngOnInit() {

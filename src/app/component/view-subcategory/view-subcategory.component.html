@@ -29,7 +29,7 @@
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
-        <div class="col" style=" text-align:center ">
+        <div *ngIf="loginService.getPriviledge() === 1 else elseTemplate" class="col" style=" text-align:center ">
             <div
             style="margin: 50% 20% 10% 20%">
                 <p-button [routerLink]="['editCategory']" label ="Edit Category"></p-button>
@@ -44,6 +44,10 @@
                 <p-button label ="Move Category"></p-button>
             </div>
         </div>
+        <ng-template #elseTemplate>
+            <div class="col"></div>
+        </ng-template>
+        
     </div>
 </div>
  

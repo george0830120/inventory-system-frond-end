@@ -32,7 +32,7 @@ export class AcquisitionService {
         phone:'add',
         date: new Date(12,13),
         status: 5,
-        itmes: []
+        items: []
       })
       console.log(data);
     })

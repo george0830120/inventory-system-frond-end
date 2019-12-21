@@ -13,12 +13,16 @@ export class LoginService {
  // public currentUsername: BehaviorSubject<string>;
   public currentUser: BehaviorSubject<User>;
   public isLogin: boolean;
+  // 1 for all CRUD
+  // 4 least power
+  public privilege: number;
 
   constructor() {
     this.users = from(fakeUsers.users); 
   //  this.currentUsername = new BehaviorSubject<string>('0');
     this.currentUser = new BehaviorSubject<User>(null);
     this.isLogin = false;
+    this.privilege = -1;
   }
 
   getUsers(): any {
@@ -55,8 +59,8 @@ export class LoginService {
         
       ).subscribe( user => {
           this.currentUser.next(user);
-          localStorage['currentUser'] = user['name'];
           this.isLogin = true;
+          this.privilege = user.priviledge;
       });
     console.log(this.isLogin)
   }
@@ -64,6 +68,10 @@ export class LoginService {
   logout(){
     this.currentUser.next(null);
     this.isLogin = false;
+  }
+
+  getPriviledge() {
+    return this.privilege;
   }
 
 }

@@ -4,6 +4,7 @@ import { FormBuilder } from "@angular/forms";
 import { Acquisition } from "../../model/acquisition.model";
 import { AcquisitionService } from "../../service/acquisition.service";
 import { Router } from "@angular/router";
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: "app-view-acquisition",
@@ -21,7 +22,8 @@ export class ViewAcquisitionComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public service: AcquisitionService,
-    public router: Router
+    public router: Router,
+    private loginService: LoginService
   ) {
     this.acquisitionTypes = [
       { label: "Drop off", value: { type: "Drop off", value: 1 } },

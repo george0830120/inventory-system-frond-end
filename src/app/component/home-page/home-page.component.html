@@ -1,24 +1,31 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-      <p-button type="button"
-                styleClass="ui-button-raised "
-                label="View Departments"
-                routerLink="/department"
-                routerLinkActive="active"
-      ></p-button>
+    <div
+     *ngIf="loginService.getPriviledge() != 4"
+     class="col-sm">
+      <p-button 
+        type="button" 
+        styleClass="ui-button-raised " 
+        label="View Departments" 
+        routerLink="/department"
+        routerLinkActive="active"></p-button>
     </div>
-    <div class="col-sm">
-      <p-button type="button" styleClass="ui-button-raised ui-button-success" label="View Acqusitions"
-                routerLink="/acquisition" routerLinkActive="active"></p-button>
+    <div 
+      *ngIf="loginService.getPriviledge() != 4"
+      class="col-sm">
+      <p-button 
+        type="button" 
+        styleClass="ui-button-raised ui-button-success" 
+        label="View Acqusitions"
+        routerLink="/acquisition" routerLinkActive="active"></p-button>
 
     </div>
     <div class="col-sm">
-      <p-button type="button"
-                styleClass="ui-button-raised ui-button-secondary"
-                label="View Report"
-                routerLink="/report"
-                routerLinkActive="active"
-      ></p-button>
+      <p-button 
+        type="button" 
+        styleClass="ui-button-raised ui-button-secondary" 
+        label="View Report" 
+        routerLink="/report"
+        routerLinkActive="active"></p-button>
     </div>
   </div>

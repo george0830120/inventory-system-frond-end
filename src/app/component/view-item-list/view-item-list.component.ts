@@ -5,6 +5,7 @@ import { MenuItem } from "primeng/api";
 import { FormBuilder } from '@angular/forms';
 import { Subcategory } from 'src/app/model/subcategory.model';
 import { Item } from 'src/app/model/item.model'
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: "app-view-item-list",
@@ -25,7 +26,8 @@ export class ViewItemListComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public service: InventoryService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public loginService: LoginService
   ) {
     this.checkSearchForm = this.formBuilder.group({
       itemname: '',

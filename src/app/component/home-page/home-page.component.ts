@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
+import { LoginService } from'../../service/login.service';
 
 
 @Component({
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 export class HomePageComponent implements OnInit {
 
 
-  constructor(inventoryService: InventoryService) {
+  constructor(
+    private inventoryService: InventoryService,
+    private loginService: LoginService) {
 
   }
 
