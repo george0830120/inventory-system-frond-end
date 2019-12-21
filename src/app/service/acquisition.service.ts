@@ -20,6 +20,7 @@ export class AcquisitionService {
     });
     this.acquisitions.next(acquisitionsArray);
     this.webSocketService.getSubject().subscribe(data => {
+      console.log("receive data from subject");
       console.log(data);
     })
   }

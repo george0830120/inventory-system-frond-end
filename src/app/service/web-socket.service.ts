@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,7 @@ export class WebSocketService {
   connectionID: number;
 
   constructor() {
-    this.ws = new WebSocket("");
+    this.ws = new WebSocket("ws://localhost:3000");
     this.observable = this.createObservableSocket();
     this.subject = new Subject<any>();
     this.observable.subscribe(this.subject);
@@ -29,9 +30,13 @@ export class WebSocketService {
           jsonObj["notification"] === "CONNECTIONREADY"
         ) {
           this.connectionID = jsonObj["cid"];
+          console.log("connection ready");
+          this.ws.send("testing");
         }
         // after connection
         else {
+          console.log("gogogo");
+          console.log(jsonObj);
           observer.next(jsonObj);
         }
       };
@@ -43,7 +48,10 @@ export class WebSocketService {
         observer.complete();
         console.log("[WebSocketService] ws closed");
       };
-      this.ws.onopen = () => console.log("[WebSocketService]ws opened");
+      this.ws.onopen = () => {
+        console.log("[WebSocketService]ws opened");
+        this.ws.send("Hello");
+      } 
     });
   }
 
