@@ -4,6 +4,8 @@ import { InventoryService } from '../../service/inventory.service'
 import { Category, Subcategory, Item, Department } from '../../model/index'
 import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
+import { HttpClientService } from 'src/app/service/http-client.service';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-view-category',
@@ -20,7 +22,8 @@ export class ViewCategoryComponent implements OnInit {
   private matrixDefaultArray: number[];
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private service: InventoryService) {
+    private service: InventoryService,
+    private httpClientService: HttpClientService) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
@@ -31,10 +34,17 @@ export class ViewCategoryComponent implements OnInit {
 
   ngOnInit() {
     let departmentName = this.parseURL();
+    console.log("get categories");
+    this.httpClientService.getCategories(departmentName).subscribe(response => this.handle(response));
     this.getDepartmentCategories(departmentName);
     this.getAllDepartment();
     this.addBreadcrumb(departmentName);
-    this.setMatrixNumber(16);
+    //this.setMatrixNumber(16); cause error of length undefined
+  }
+
+  handle(response) {
+    console.log("handling...")
+    this.categories = response;
   }
 
   addBreadcrumb(departmentName:string){
@@ -53,11 +63,17 @@ export class ViewCategoryComponent implements OnInit {
   }
   getDepartmentCategories(departmentName: string){
     this.departmentSelected = this.service.getDepartmentByName(departmentName);
-    this.categories = this.departmentSelected.categories;
+    //this.categories = this.departmentSelected.categories;
   }
   getAllDepartment(){
-    this.departments = [];
-    this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
+    this.httpClientService.getDepartments().subscribe(response => this.handleDepartment(response));
+    //this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
+  }
+
+  handleDepartment(response){
+    console.log("start handle departments");
+    console.log(response);
+    this.departments = response;
   }
   setMatrixNumber(totalMatrix: number){
     this.matrixDefaultArray = Array.from(Array(totalMatrix -this.categories.length).keys());
