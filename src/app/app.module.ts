@@ -48,6 +48,8 @@ import { ReceiveAcquisitionComponent } from './component/receive-acquisition/rec
 import { EditCategoryComponent } from './component/edit-category/edit-category.component';
 import { MoveCategoryComponent } from './component/move-category/move-category.component';
 import { AddUniqueItemComponent } from './component/add-unique-item/add-unique-item.component';
+import { EditDepartmentComponent } from './component/edit-department/edit-department.component';
+import { AddCategoryComponent } from './component/add-category/add-category.component'
 
 
 
@@ -69,6 +71,8 @@ import { AddUniqueItemComponent } from './component/add-unique-item/add-unique-i
     EditCategoryComponent,
     MoveCategoryComponent,
     AddUniqueItemComponent,
+    EditDepartmentComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

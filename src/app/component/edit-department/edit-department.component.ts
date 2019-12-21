@@ -4,24 +4,24 @@ import { SelectItem } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
-import { Item, Category } from 'src/app/model';
-
+import { Category, Department } from 'src/app/model';
 
 @Component({
-  selector: 'app-edit-category',
-  templateUrl: './edit-category.component.html',
-  styleUrls: ['./edit-category.component.scss']
+  selector: 'app-edit-department',
+  templateUrl: './edit-department.component.html',
+  styleUrls: ['./edit-department.component.scss']
 })
-export class EditCategoryComponent implements OnInit {
+export class EditDepartmentComponent implements OnInit {
 
   profileForm = new FormGroup({
-    uniqueTag: new FormControl(''),
+    UniqueTag: new FormControl(''),
     Name: new FormControl(''),
     Description: new FormControl(''),
+    POSDepartmentCode: new FormControl('')
   });
 
   private breadcrumbArray: MenuItem[];
-  private category: Category;
+  private department: Department;
   private departmentName: string;
   private categoryName: string;
 
@@ -36,17 +36,15 @@ export class EditCategoryComponent implements OnInit {
     console.log(this.departmentName+this.categoryName);
 
     this.addBreadcrumb(this.departmentName, this.categoryName);
-    this.category = this.service.getCategoryByName(this.departmentName, this.categoryName);
-    this.profileForm.patchValue({uniqueTag: this.category.uniqueTag});
-    console.log(this.category.uniqueTag)
-    console.log(this.category)
+    this.department = this.service.getDepartmentByName(this.departmentName);
+    this.profileForm.patchValue({UniqueTag: this.department.uniqueTag});
+    console.log(this.department)
     
   }
 
   addBreadcrumb(departmentName:string, categoryName:string){
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
-    this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentName+'/'+categoryName});
   }
 
   parseURL(){
@@ -55,22 +53,20 @@ export class EditCategoryComponent implements OnInit {
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        this.categoryName = val[2].path;
         this.departmentName = val[1].path; 
       } 
     )
   }
 
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
+    this.router.navigateByUrl('/department/'+this.departmentName);
   }
 
   submit(x:FormGroup){
     console.log(x);
     // TODO: update item
 
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
+    this.router.navigateByUrl('/department/'+this.departmentName);
   }
-
 
 }

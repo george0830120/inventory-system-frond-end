@@ -6,7 +6,7 @@
         <div style="width: 70%; margin: 10px 15% 10px 15%;">
             <p-breadcrumb class="ui-breadcrumbui-menuitem" [model]="breadcrumbArray" ></p-breadcrumb>
         </div>
-
+ 
             <form [formGroup]="profileForm" (ngSubmit)="submit(profileForm.value)">
                 <div class="row">
                     <div class="col-md-2" style="margin: 20px 0px;"> 
@@ -42,7 +42,7 @@
                                 <p-dropdown [options]="condition" formControlName="Condition" ></p-dropdown>
                             </div>
                             <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;">Save</button>
-                            <button mat-flat-button color="primary" style="width: 34%; margin: 0px 2% 0px 2%;" (click) = "backToItemList()">Cancel</button>
+                            <button mat-flat-button color="Basic" style="width: 34%; margin: 0px 2% 0px 2%;" (click) = "backToItemList()">Cancel</button>
                         </div>
                     </div>
                 </div>
