@@ -20,4 +20,28 @@ export class HttpClientService {
   getDepartments() {
     return this.httpClient.get('http://localhost:8080/department', {responseType: 'json'} );
   }
+
+  addItem(departmentname: string,
+      categoryName: string,
+      subCategoryName: string,
+      name: string,
+      description: string,
+      quantity: number,
+      condition: number,
+      price: number
+    ) {
+      let postBody = {
+        'departmentName' : departmentname,
+        'categoryName' : categoryName,
+        'subCategoryName' : subCategoryName,
+        'name' : name,
+        'description' : description,
+        'quantity' : quantity,
+        'condition' : condition,
+        'price' : price
+      }
+      console.log("postBody");
+      console.log(postBody);
+      // return this.httpClient.post('http://localhost:8080/addItem',postBody);
+  }
 }

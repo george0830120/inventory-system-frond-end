@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InventoryService } from '../../service/inventory.service'
+import { InventoryService } from '../../service/inventory.service';
+import { HttpClientService } from '../../service/http-client.service';
 import { MenuItem } from 'primeng/api';
  
 @Component({
@@ -26,7 +27,9 @@ export class AddItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private service: InventoryService) { 
+    private service: InventoryService,
+    private httpService: HttpClientService,
+    ) { 
     this.condition = [
       {label:'Condition', value:null},
       {label:"Broken", value: 0},
@@ -65,9 +68,18 @@ export class AddItemComponent implements OnInit {
     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
 
-  submit(x: FormControl){
-    console.log(x)
+  submit(data){
+    console.log(data);
+    this.httpService.addItem(this.departmentName,
+      this.categoryName,
+      this.subcategoryName,
+      data.Name,
+      data.Description,
+      data.Quantity,
+      data.Condition,
+      data.Price
+    )
     //TODO: Add item
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+    // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
 }
