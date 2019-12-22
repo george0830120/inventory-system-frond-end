@@ -27,6 +27,8 @@ export class AppComponent {
   
   ngOnInit() {
     this.service.getCurrentUser().subscribe(user=>{
+        console.log("Hello2")
+        console.log(user)
         if(user!=null){
           this.userName= user.name;
           this.isLogin = true;

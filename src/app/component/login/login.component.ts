@@ -34,13 +34,14 @@ export class LoginComponent implements OnInit {
   login(userInfo) {
 
     this.service.login(userInfo);
-
-    if(this.service.getIsLogin()){
-      this.router.navigateByUrl("\home");
-      
-    }else{
-      this.checkoutForm.reset();
-    }
+    this.service.getIsLogin().subscribe(isLogin => {
+      if(isLogin){
+        this.router.navigateByUrl("/home");
+      }else{
+        this.checkoutForm.reset();
+      }
+    })
+    
   }
 
 }

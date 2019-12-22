@@ -1,7 +1,10 @@
 export class User {
-    id: string;
+    //id: string;
+    constructor(name:string, priviledge: number){
+        this.name = name;
+        this.priviledge = priviledge;
+    }
     name: string;
-    password: string;
     priviledge: number;
 }
 

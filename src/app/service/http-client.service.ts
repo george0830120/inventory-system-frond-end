@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface IDepartment {
   name: string;
@@ -12,6 +12,7 @@ export interface IDepartment {
 
 export class HttpClientService {
 
+  
   constructor(
     public httpClient: HttpClient
   ) {
@@ -54,5 +55,17 @@ export class HttpClientService {
       console.log("postBody");
       console.log(postBody);
       // return this.httpClient.post('http://localhost:8080/addItem',postBody);
+  }
+
+  auth(userName:string, password:string){
+      let postBody = JSON.stringify({
+        "username": userName,
+        "password": password
+      })
+
+      console.log(postBody)
+      return this.httpClient.post('http://localhost:3000/auth/login',postBody, 
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response' }
+      );
   }
 }

@@ -4,6 +4,7 @@ import { Subject } from "rxjs/Subject";
 import { filter, first } from "rxjs/operators";
 import { fakeUsers } from "../fakeUserData";
 import { User } from "../model/user.model";
+import { HttpClientService } from './http-client.service'
 
 @Injectable({
   providedIn: "root"
@@ -12,16 +13,17 @@ export class LoginService {
   public users: Observable<User>;
  // public currentUsername: BehaviorSubject<string>;
   public currentUser: BehaviorSubject<User>;
-  public isLogin: boolean;
+  public isLogin: Subject<boolean>;
   // 1 for all CRUD
   // 4 least power
   public privilege: number;
 
-  constructor() {
+  constructor(private httpService: HttpClientService) {
     this.users = from(fakeUsers.users); 
   //  this.currentUsername = new BehaviorSubject<string>('0');
     this.currentUser = new BehaviorSubject<User>(null);
-    this.isLogin = false;
+    this.isLogin = new Subject<boolean>();
+    //this.isLogin.next(false);
     this.privilege = 1;
   }
 
@@ -46,28 +48,31 @@ export class LoginService {
   }
 
   setLogout(){
-    this.isLogin===false;
+    this.isLogin.next(false);
   }
   getIsLogin(){
     return this.isLogin;
   }
 
   login(userInfo){
+    
+    this.httpService.auth(userInfo.username, userInfo.password).subscribe(
+      respond => {
 
-      this.users.pipe(
-        filter( user => user.name===userInfo.username )
-        
-      ).subscribe( user => {
-          this.currentUser.next(user);
-          this.isLogin = true;
-          this.privilege = user.priviledge;
-      });
+        this.isLogin.next(true);
+        this.privilege = Number(respond.body)
+        var currentUser = new User(userInfo.name, this.privilege)
+       // console.log(currentUser.name)
+        this.currentUser.next(new User(userInfo.name, this.privilege));
+      }
+    )
+
     console.log(this.isLogin)
   }
 
   logout(){
     this.currentUser.next(null);
-    this.isLogin = false;
+    this.isLogin.next(false);
   }
 
   getPriviledge() {
