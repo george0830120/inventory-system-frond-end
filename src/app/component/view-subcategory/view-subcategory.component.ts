@@ -14,7 +14,7 @@ import { HttpClientService } from '../../service/http-client.service'
 export class ViewSubcategoryComponent implements OnInit {
 
   public category: Category;
-  public departments: Department[];
+  public departments: { name:string, id:string }[];
   public subcategories: { name:string, id:string }[];
   public breadcrumbArray: MenuItem[];
   public item
@@ -66,10 +66,6 @@ export class ViewSubcategoryComponent implements OnInit {
      return [departmentID, categoryID]; 
   }
 
-  getSubcategories(departmentName: string, categoryName: string){
-    this.category = this.service.getCategoryByName(departmentName, categoryName);
-    this.subcategories = this.category.subcategories;
-  }
 
   addBreadcrumb(departmentName:string, categoryName:string){
     this.breadcrumbArray = [];
