@@ -17,7 +17,7 @@ export class ViewCategoryComponent implements OnInit {
 
   public departmentSelected: Department;
   public departments: Department[];
-  public categories: Category[];
+  public categories: { name:string, id:string }[];
   public breadcrumbArray: MenuItem[];
   public navigationSubscription;  
   public matrixDefaultArray: number[];
@@ -36,12 +36,21 @@ export class ViewCategoryComponent implements OnInit {
     }
 
   ngOnInit() {
-    let departmentName = this.parseURL();
+    let departmentID = this.parseURL();
     console.log("get categories");
-    this.httpClientService.getCategories(departmentName).subscribe(response => this.handle(response));
-    this.getDepartmentCategories(departmentName);
+    this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
+      
+      response => {
+        console.log(response.body)
+        for(var x in response.body){
+          this.categories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
+        }
+        console.log(this.categories)
+      }
+    );
+    this.getDepartmentCategories(departmentID);
     this.getAllDepartment();
-    this.addBreadcrumb(departmentName);
+    this.addBreadcrumb(departmentID);
     //this.setMatrixNumber(16); cause error of length undefined
   }
 
@@ -57,12 +66,12 @@ export class ViewCategoryComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url; 
-    var departmentName: string;
+    var departmentID: string;
     console.log(currentURL);
     const subscribe = currentURL.subscribe({
-      next: val => departmentName = val[1].path
+      next: val => departmentID = val[1].path
     })
-    return departmentName
+    return departmentID
   }
   getDepartmentCategories(departmentName: string){
     this.departmentSelected = this.service.getDepartmentByName(departmentName);

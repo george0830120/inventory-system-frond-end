@@ -20,7 +20,7 @@ export class IDepartment {
 })
 export class ViewDepartmentComponent implements OnInit {
   // public departments: JSON;
-  public departments: Department[];
+  public departments: {name:string, id:string}[];
   public i = 0;
   constructor(
     public route: ActivatedRoute,
@@ -31,7 +31,14 @@ export class ViewDepartmentComponent implements OnInit {
 
   ngOnInit() {
     this.departments = [];
-    this.httpClientService.getDepartments().subscribe(response => this.handle(response));
+    this.httpClientService.getDepartments().subscribe(response => {
+      console.log(response.body);
+      for(var x in response.body){
+        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]})
+      }
+ 
+    });
+    console.log(this.departments);
   /*
     this.service.getDepartments().subscribe(dep => {
       console.log(dep);
@@ -43,9 +50,7 @@ export class ViewDepartmentComponent implements OnInit {
 
    */
   }
-  handle(response) {
-    this.i = this.i + 1;
-    this.departments = response;
-    console.log(this.departments);
+  handle(response) { 
+    response.foreach(depObject=>this.departments.push(depObject))
   }
 }

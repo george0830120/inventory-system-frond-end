@@ -7,7 +7,7 @@
                 <mat-grid-tile
                     class="mat-grid"
                     *ngFor = "let department of departments"
-                    routerLink = "{{department.name}}">
+                    routerLink = "{{department.id}}">
                   {{department["name"]}}
                 </mat-grid-tile>
             </mat-grid-list>
@@ -19,7 +19,7 @@
         <div class="col-8"></div>
         <div class="col-4">
             <p-button
-                label="Add Department"
+                label="Add Department" 
                 styleClass="ui-button-info"
                 routerLink="/department/addDepartment"
                 ></p-button>

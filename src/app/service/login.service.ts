@@ -22,7 +22,7 @@ export class LoginService {
     this.users = from(fakeUsers.users); 
   //  this.currentUsername = new BehaviorSubject<string>('0');
     this.currentUser = new BehaviorSubject<User>(null);
-    this.isLogin = new Subject<boolean>();
+    this.isLogin = new BehaviorSubject<boolean>(false);
     //this.isLogin.next(false);
     this.privilege = 1;
   }
@@ -60,14 +60,15 @@ export class LoginService {
       respond => {
 
         this.isLogin.next(true);
-        this.privilege = Number(respond.body)
-        var currentUser = new User(userInfo.name, this.privilege)
-       // console.log(currentUser.name)
-        this.currentUser.next(new User(userInfo.name, this.privilege));
+
+        this.privilege = Number(respond.body["privilege"])
+
+        var currentUser = new User(userInfo.username, this.privilege)
+
+        this.currentUser.next(currentUser);
       }
     )
 
-    console.log(this.isLogin)
   }
 
   logout(){

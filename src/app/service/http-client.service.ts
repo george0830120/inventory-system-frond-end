@@ -12,18 +12,23 @@ export interface IDepartment {
 
 export class HttpClientService {
 
-  
+  option = { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response' }
   constructor(
     public httpClient: HttpClient
   ) {
   }
 
   getDepartments() {
-    return this.httpClient.get('http://localhost:8080/department', {responseType: 'json'} );
+    return this.httpClient.get('http://localhost:3000/hierarchy/departments',
+    { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+    
   }
 
-  getCategories(category: string) {
-    return this.httpClient.get('http://localhost:8080/department/' + category  , {responseType: 'json'} );
+  getCategoriesbyDepartmentID(departmentID: string) {
+    return this.httpClient.get('http://localhost:3000/hierarchy/departments/'+ departmentID+'/categories',
+    { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
   }
   getsubcategories(subcategory: string) {
     return this.httpClient.get('http://localhost:8080/department/' + subcategory  , {responseType: 'json'} );
@@ -32,6 +37,8 @@ export class HttpClientService {
   addDepartment(data) {
     return this.httpClient.post('http://localhost:8080/department/addDepartment', data  , {responseType: 'json'} );
   }
+
+  
 
   addItem(departmentname: string,
       categoryName: string,
@@ -65,7 +72,7 @@ export class HttpClientService {
 
       console.log(postBody)
       return this.httpClient.post('http://localhost:3000/auth/login',postBody, 
-      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response' }
+      { headers: new HttpHeaders({'Access-Control-Allow-Origin':'*'}).set('Content-Type', 'application/json'), observe: 'response', withCredentials:true}
       );
   }
 }
