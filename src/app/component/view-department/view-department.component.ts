@@ -30,15 +30,18 @@ export class ViewDepartmentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.httpClientService.getDepartments().subscribe(response => this.handle(response));
     this.departments = [];
-    // this.service.getDepartments().subscribe(dep => {
-    //   console.log(dep);
-    //   dep.forEach(d => {
-    //     console.log(d);
-    //     this.departments.push(d);
-    //   });
-    // });
+    this.httpClientService.getDepartments().subscribe(response => this.handle(response));
+  /*
+    this.service.getDepartments().subscribe(dep => {
+      console.log(dep);
+      dep.forEach(d => {
+        console.log(d);
+        this.departments.push(d);
+      });
+    });
+
+   */
   }
   handle(response) {
     this.i = this.i + 1;

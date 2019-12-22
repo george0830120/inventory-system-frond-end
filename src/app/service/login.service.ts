@@ -22,7 +22,7 @@ export class LoginService {
   //  this.currentUsername = new BehaviorSubject<string>('0');
     this.currentUser = new BehaviorSubject<User>(null);
     this.isLogin = false;
-    this.privilege = -1;
+    this.privilege = 1;
   }
 
   getUsers(): any {

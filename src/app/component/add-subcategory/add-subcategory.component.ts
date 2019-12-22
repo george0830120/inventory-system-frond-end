@@ -5,25 +5,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
 import { HttpClientService } from '../../service/http-client.service';
 import { MenuItem } from 'primeng/api';
-
- 
-
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.scss']
-})
-export class AddCategoryComponent implements OnInit {
+  selector: 'app-add-subcategory',
+  templateUrl: './add-subcategory.component.html',
+  styleUrls: ['./add-subcategory.component.scss']
+}) 
+export class AddSubcategoryComponent implements OnInit {
   profileForm = new FormGroup({
     Name: new FormControl(''),
     Description: new FormControl(''),
     UniqueTag: new FormControl(''),
 
   });
-  condition: SelectItem[];
+
   public breadcrumbArray: MenuItem[];
   public departmentName: string;
-
+  public categoryName: string;
 
   constructor(public route: ActivatedRoute,
     public router: Router,
@@ -36,13 +33,13 @@ export class AddCategoryComponent implements OnInit {
   ngOnInit() {
     this.parseURL();
 
-    this.addBreadcrumb(this.departmentName);
+    this.addBreadcrumb(this.departmentName, this.categoryName);
   }
 
-  addBreadcrumb(departmentName:string){
+  addBreadcrumb(departmentName:string, categoryName:string){
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
-
+    this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentName+'/'+categoryName});
   }
 
   parseURL(){
@@ -50,25 +47,28 @@ export class AddCategoryComponent implements OnInit {
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
+        this.categoryName = val[2].path;
         this.departmentName = val[1].path; 
+
       } 
     )
   }
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName);
+    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
   }
 
   submit(data){
-    // console.log(data);
+    console.log(data);
     // this.httpService.addItem(this.departmentName,
-
-
+    //   this.categoryName,
     //   data.Name,
     //   data.Description,
-    //   data.UniqueTag
+    //   data.Quantity,
+    //   data.Condition,
+    //   data.Price
     // )
-    //TODO: Add Category
-     this.router.navigateByUrl('/department/'+this.departmentName);
+    //TODO: Add item
+     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
   }
 
 }

@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <label> Orig. Item #: {{item.id}}</label>
+        </div>
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+
+            <label>
+                Orig. Qty: {{ originQuantity }}
+            </label>
+        </div>
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label>
+                Orig. Condition: {{condition}}
+            </label>
+
+
+        </div>
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            <h2>Split Item</h2>
+        </div>
+        <div class="col-4"> 
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <p-table [value]="items">
+        <ng-template pTemplate="header">
+            <tr style="text-align: center">
+                <th></th>
+                <th>Item #</th>
+                <th>Category</th>
+                <th>Orig. QTY</th>
+                <th>NEW QTY</th>
+                <th>Condition</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-items let-i="rowIndex">
+            <tr style="text-align: center">
+                <td><button mat-stroked-button color="primary" (click) = "cloneItem(i)">Clone</button></td>
+                <td>{{items.id}}</td>
+                <td >{{categoryPath}}</td>
+                <td>{{items.quantity}}</td>
+                <td><input #input type="number"
+                    style="text-align:center; width:90%"   
+                    placeholder="{{items.quantity}}"
+                    (keyup.enter)="adjustQuantity(i, input.value)"
+                    ></td>
+                <td>
+                    <mat-form-field style="width: 90%; text-align: center;">
+                        <mat-select [(value)]="items.condition" >
+                            <mat-option value="0">Broken</mat-option>
+                            <mat-option value="1">Bad</mat-option>
+                            <mat-option value="2">Average</mat-option>
+                            <mat-option value="3">Good</mat-option>
+                            <mat-option value="4">New</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-2">
+            <p-button label="Add ITEM"></p-button>
+        </div>
+        <div class="col-2">
+            <p-button label="SAVE"></p-button>
+        </div>
+    </div>
+</div>
