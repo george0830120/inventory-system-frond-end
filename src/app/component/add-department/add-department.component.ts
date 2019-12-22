@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { InventoryService } from '../../service/inventory.service';
 import { Location } from '@angular/common';
+import {HttpClientService} from '../../service/http-client.service';
 
 @Component({
   selector: 'app-add-department',
@@ -13,20 +14,25 @@ export class AddDepartmentComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public service: InventoryService,
-    public location: Location
+    public location: Location,
+    public httpClientService: HttpClientService
   ) {
     this.addDepartmentForm = this.formBuilder.group({
       name: '',
       description: '',
       posDepartmentCode: '',
       uniqueTag: '',
-    })
+    });
   }
 
   save(data) {
     console.log(data);
+    this.httpClientService.addDepartment(data).subscribe(response => this.handle(response));
   }
 
+  handle(response){
+    console.log("start to add departments...");
+  }
   cancel() {
     this.location.back();
   }
