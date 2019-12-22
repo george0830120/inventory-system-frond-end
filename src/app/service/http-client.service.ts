@@ -25,6 +25,11 @@ export class HttpClientService {
     
   }
 
+  getSubcategoriesbyCategoryID(categoryID: string) {
+    return this.httpClient.get('http://localhost:3000/hierarchy/categories/'+ categoryID+'/subcategories',
+    { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
   getCategoriesbyDepartmentID(departmentID: string) {
     return this.httpClient.get('http://localhost:3000/hierarchy/departments/'+ departmentID+'/categories',
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
