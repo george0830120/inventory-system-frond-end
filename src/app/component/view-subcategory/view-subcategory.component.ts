@@ -13,7 +13,7 @@ import { HttpClientService } from '../../service/http-client.service'
 })
 export class ViewSubcategoryComponent implements OnInit {
 
-  public category: Category;
+  public category: { name:string, id:string };
   public departments: { name:string, id:string }[];
   public subcategories: { name:string, id:string }[];
   public breadcrumbArray: MenuItem[];
@@ -21,15 +21,17 @@ export class ViewSubcategoryComponent implements OnInit {
   constructor(public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
-    public httpClientService: HttpClientService, 
-    public loginService: LoginService 
-    ) { 
+    public httpClientService: HttpClientService,
+    public loginService: LoginService
+    ) {
     }
 
   ngOnInit() {
 
-    var categoryID: string; 
+    var categoryID: string;
     var departmentID: string;
+    var categoryName: string;
+    var departmentName: string;
 
     departmentID = (this.parseURL())[0];
     categoryID = (this.parseURL())[1];
@@ -37,49 +39,68 @@ export class ViewSubcategoryComponent implements OnInit {
     this.httpClientService.getSubcategoriesbyCategoryID(categoryID).subscribe(
       response => {
         this.subcategories = []
-        console.log(response.body)
+
         for(var x in response.body){
           this.subcategories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
         }
-        console.log("bug")
-        console.log(this.subcategories)
+
       });
 
 
+    this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
 
-    this.getAllDepartment();
+      response => {
+        for(var x in response.body){
+          if(response.body[x]["id"]==categoryID){
+            categoryName = response.body[x]["name"];
+          }
 
-    this.addBreadcrumb(departmentID, categoryID);
+        }
+      });
+
+    this.httpClientService.getDepartments().subscribe(response => {
+      this.departments = [];
+      for(var x in response.body){
+        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]});
+        if(response.body[x]["id"]==departmentID){
+          console.log(response.body[x]["name"]);
+          departmentName = response.body[x]["name"];
+          this.addBreadcrumb(departmentName, categoryName,departmentID, categoryID);
+        }
+      }
+    });
+
+    //this.getAllDepartment("1");
+
+
+    //this.addBreadcrumb(departmentID, categoryID);
   }
 
   parseURL(){
     var currentURL = this.route.url;
-    var categoryID: string; 
+    var categoryID: string;
     var departmentID: string;
-    console.log(currentURL); 
+    console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
         categoryID = val[2].path;
-        departmentID = val[1].path; 
-      } 
+        departmentID = val[1].path;
+      }
     )
-     return [departmentID, categoryID]; 
+     return [departmentID, categoryID];
   }
 
 
-  addBreadcrumb(departmentName:string, categoryName:string){
+  addBreadcrumb(departmentName:string, categoryName:string,departmentID:string, categoryID:string){
     this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
-    this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentName+'/'+categoryName});
+    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentID});
+    this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentID+'/'+categoryID});
   }
 
-  getAllDepartment(){
+  getAllDepartment(id){
     this.httpClientService.getDepartments().subscribe(response => {
       this.departments = [];
-      for(var x in response.body){
-        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]})
-      }
+
     });
-    console.log(this.departments);
   }
 }
