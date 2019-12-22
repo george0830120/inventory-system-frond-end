@@ -22,7 +22,6 @@ export class HttpClientService {
     return this.httpClient.get('http://localhost:3000/hierarchy/departments',
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
-    
   }
 
   getSubcategoriesbyCategoryID(categoryID: string) {
@@ -43,7 +42,7 @@ export class HttpClientService {
     return this.httpClient.post('http://localhost:8080/department/addDepartment', data  , {responseType: 'json'} );
   }
 
-  
+
 
   addItem(departmentname: string,
       categoryName: string,
@@ -76,7 +75,7 @@ export class HttpClientService {
       })
 
       console.log(postBody)
-      return this.httpClient.post('http://localhost:3000/auth/login',postBody, 
+      return this.httpClient.post('http://localhost:3000/auth/login',postBody,
       { headers: new HttpHeaders({'Access-Control-Allow-Origin':'*'}).set('Content-Type', 'application/json'), observe: 'response', withCredentials:true}
       );
   }

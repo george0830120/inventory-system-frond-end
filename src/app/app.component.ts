@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router" ;
 import { LoginService } from './service/login.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,7 +25,7 @@ export class AppComponent {
     this.router.navigateByUrl("/login");
     this.isLogin = false;
   }
-  
+
   ngOnInit() {
     this.service.getCurrentUser().subscribe(user=>{
         console.log("Hello2")

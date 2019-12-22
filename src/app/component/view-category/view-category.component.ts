@@ -19,7 +19,7 @@ export class ViewCategoryComponent implements OnInit {
   public departments: {name:string, id:string}[];
   public categories: { name:string, id:string }[];
   public breadcrumbArray: MenuItem[];
-  public navigationSubscription;  
+  public navigationSubscription;
   public matrixDefaultArray: number[];
   constructor(public route: ActivatedRoute,
     public router: Router,
@@ -39,19 +39,18 @@ export class ViewCategoryComponent implements OnInit {
     let departmentID = this.parseURL();
     console.log("get categories");
     this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
-      
+
       response => {
         this.categories = []
-        console.log(response.body)
         for(var x in response.body){
           this.categories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
-        
+
         }
       }
     );
-    this.getAllDepartment();
+    this.getAllDepartment(departmentID);
 
-    this.addBreadcrumb(departmentID);
+    //this.addBreadcrumb(departmentID);
     //this.setMatrixNumber(16); cause error of length undefined
   }
 
@@ -60,30 +59,38 @@ export class ViewCategoryComponent implements OnInit {
   //   this.categories = response;
   // }
 
-  addBreadcrumb(departmentName:string){
+  addBreadcrumb(departmentName:string, departmentID:string){
     this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
+    this.breadcrumbArray.push({label: departmentName, url: '/department/'+departmentID});
+    console.log("push breadcomb ");
   }
 
+  getDepartment(id: string) {
+
+
+  }
   parseURL(){
-    var currentURL = this.route.url; 
+    var currentURL = this.route.url;
     var departmentID: string;
     console.log(currentURL);
     const subscribe = currentURL.subscribe({
       next: val => departmentID = val[1].path
     })
-    return departmentID
+    return departmentID;
   }
 
-  getAllDepartment(){
-    
+  getAllDepartment(id){
+
     this.httpClientService.getDepartments().subscribe(response => {
       this.departments = [];
       for(var x in response.body){
-        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]})
+        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]});
+        if(response.body[x]["id"]==id){
+          console.log(response.body[x]["name"]);
+          this.addBreadcrumb(response.body[x]["name"], id);
+        }
       }
     });
-    console.log(this.departments);
   }
 
 
