@@ -13,19 +13,24 @@ import { ReceiveAcquisitionComponent } from "./component/receive-acquisition/rec
 import { AddItemComponent } from "./component/add-item/add-item.component";
 import { UpdateItemComponent } from './component/update-item/update-item.component'
 import { AddDepartmentComponent } from "./component/add-department/add-department.component";
-import {EditCategoryComponent} from './component/edit-category/edit-category.component';
-import {MoveCategoryComponent} from './component/move-category/move-category.component';
-import {AddUniqueItemComponent} from './component/add-unique-item/add-unique-item.component';
+import { EditCategoryComponent } from './component/edit-category/edit-category.component';
+import { MoveCategoryComponent } from './component/move-category/move-category.component';
+import { AddCategoryComponent } from './component/add-category/add-category.component';
 import { AuthGuard }                from './service/auth-gaurd.service';
 import { EditDepartmentComponent } from './component/edit-department/edit-department.component'
+import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component'
+import { SplitItemComponent } from './component/split-item/split-item.component';
 
 const routes: Routes = [
-  { path: 'department/:id/addUniqueItem', component: AddUniqueItemComponent },
+  { path: 'department/:id/addCategory', component: AddCategoryComponent },
   { path: 'department/:id/:id/moveCategory', component: MoveCategoryComponent },
   { path: 'department/:id/:id/editCategory', component: EditCategoryComponent },
+  { path: 'department/:id/:id/addSubcategory', component: AddSubcategoryComponent },
+  { path: 'department/:id/moveCategory', component: MoveCategoryComponent },
   { path: 'department/:id/editDepartment', component: EditDepartmentComponent },
   { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
+  { path: 'department/:id/:id/:id/:id/splitItem', component: SplitItemComponent},
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
   { path: 'department/:id/:id/:id', component: ViewItemListComponent },
  // { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },

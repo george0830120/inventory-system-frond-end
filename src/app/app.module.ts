@@ -50,7 +50,10 @@ import { EditCategoryComponent } from './component/edit-category/edit-category.c
 import { MoveCategoryComponent } from './component/move-category/move-category.component';
 import { AddUniqueItemComponent } from './component/add-unique-item/add-unique-item.component';
 import { EditDepartmentComponent } from './component/edit-department/edit-department.component';
-import { AddCategoryComponent } from './component/add-category/add-category.component'
+import { AddCategoryComponent } from './component/add-category/add-category.component';
+import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component';
+import { SplitItemComponent } from './component/split-item/split-item.component'
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -73,7 +76,9 @@ import { AddCategoryComponent } from './component/add-category/add-category.comp
     MoveCategoryComponent,
     AddUniqueItemComponent,
     EditDepartmentComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    AddSubcategoryComponent,
+    SplitItemComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +105,8 @@ import { AddCategoryComponent } from './component/add-category/add-category.comp
     BreadcrumbModule,
     MatGridListModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
+    MatSelectModule
   ],
   providers: [ InventoryService ],
   bootstrap: [AppComponent]

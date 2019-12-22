@@ -23,7 +23,7 @@ export var dummyTestData = {
                   description: "Hello",
                   condition: 2,
                   price: 100,
-                  quantity: 2
+                  quantity: 10
                 },
                 {
                   name: "Mercedes-Benz S-Class",

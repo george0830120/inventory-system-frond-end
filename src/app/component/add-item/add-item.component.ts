@@ -11,7 +11,7 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.scss']
 })
-export class AddItemComponent implements OnInit {
+export class AddItemComponent implements OnInit { 
   profileForm = new FormGroup({
     Name: new FormControl(''),
     Description: new FormControl(''),
@@ -80,6 +80,6 @@ export class AddItemComponent implements OnInit {
       data.Price
     )
     //TODO: Add item
-    // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }
 }
