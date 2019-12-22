@@ -6,7 +6,7 @@
             </div>
             <div *ngFor = "let department of departments">
                 <a
-                [routerLink] = "['/department', department.name] "
+                [routerLink] = "['/department', department.id] "
                 routerLinkActive="on"
                 style="font-size: 16px"
                 >

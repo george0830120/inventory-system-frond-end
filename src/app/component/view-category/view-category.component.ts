@@ -16,7 +16,7 @@ import { LoginService } from '../../service/login.service';
 export class ViewCategoryComponent implements OnInit {
 
   public departmentSelected: Department;
-  public departments: Department[];
+  public departments: {name:string, id:string}[];
   public categories: { name:string, id:string }[];
   public breadcrumbArray: MenuItem[];
   public navigationSubscription;  
@@ -41,23 +41,24 @@ export class ViewCategoryComponent implements OnInit {
     this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
       
       response => {
+        this.categories = []
         console.log(response.body)
         for(var x in response.body){
           this.categories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
+        
         }
-        console.log(this.categories)
       }
     );
-    this.getDepartmentCategories(departmentID);
     this.getAllDepartment();
+
     this.addBreadcrumb(departmentID);
     //this.setMatrixNumber(16); cause error of length undefined
   }
 
-  handle(response) {
-    console.log("handling...")
-    this.categories = response;
-  }
+  // handle(response) {
+  //   console.log("handling...")
+  //   this.categories = response;
+  // }
 
   addBreadcrumb(departmentName:string){
     this.breadcrumbArray = [];
@@ -73,20 +74,19 @@ export class ViewCategoryComponent implements OnInit {
     })
     return departmentID
   }
-  getDepartmentCategories(departmentName: string){
-    this.departmentSelected = this.service.getDepartmentByName(departmentName);
-    //this.categories = this.departmentSelected.categories;
-  }
+
   getAllDepartment(){
-    this.httpClientService.getDepartments().subscribe(response => this.handleDepartment(response));
-    //this.service.getDepartments().subscribe(val => val.forEach(dep=>this.departments.push(dep)));
+    
+    this.httpClientService.getDepartments().subscribe(response => {
+      this.departments = [];
+      for(var x in response.body){
+        this.departments.push({name: response.body[x]["name"], id:response.body[x]["id"]})
+      }
+    });
+    console.log(this.departments);
   }
 
-  handleDepartment(response){
-    console.log("start handle departments");
-    console.log(response);
-    this.departments = response;
-  }
+
   setMatrixNumber(totalMatrix: number){
     this.matrixDefaultArray = Array.from(Array(totalMatrix -this.categories.length).keys());
   }
