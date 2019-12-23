@@ -54,21 +54,23 @@ export class AddItemComponent implements OnInit {
     this.parseURL();
     this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
       this.departmentName=response.body["name"];
+      this.httpClientService.getCategory(this.categoryID).subscribe(response=>{
+        this.categoryName=response.body["name"];
+        this.httpClientService.getSubCategories(this.categoryID).subscribe(response=>{
+          for(var x in response.body){
+            if(response.body[x]["id"]==this.subcategoryID){
+              this.subcategoryName = response.body[x]["name"];
+            }
+          }
+    
+          this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
+        });
+      });
     });
 
-    this.httpClientService.getCategory(this.categoryID).subscribe(response=>{
-      this.categoryName=response.body["name"];
-    });
 
-    this.httpClientService.getSubCategories(this.categoryID).subscribe(response=>{
-      for(var x in response.body){
-        if(response.body[x]["id"]==this.subcategoryID){
-          this.subcategoryName = response.body[x]["name"];
-        }
-      }
 
-      this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
-    });
+
   }
 
   addBreadcrumb(departmentName:string, categoryName:string, subcategoryName:string){

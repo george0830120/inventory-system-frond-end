@@ -13,9 +13,12 @@
                         <label id="id1">Item#: </label>
                         <!-- <label id="id1">Name: </label> -->
                         <label id="id1">Description: </label>
-                        <label id="id1">Quantity: </label>
+
                         <label id="id1">Price: </label>
+                        <label id="id1">Quantity: </label>
+                        <!-- <label *ngIf="qChanged"  id="id1">Reason: </label> -->
                     </div>
+
                     <div class="col-md-10">  
                         <div> 
                             <input pInputText disabled="true" type="text" placeholder="{{item.id}}">
@@ -27,11 +30,19 @@
                             <input pInputText type="text" formControlName="Description"  placeholder="{{item.description}}" ngModel>
                         </div>
                         <div>
-                    
-                            <input pInputText type="number" formControlName="Quantity" placeholder="{{item.quantity}}">
+                            <input pInputText type="number" formControlName="Price" placeholder="{{item.price}}">
                         </div>
                         <div>
-                            <input pInputText type="number" formControlName="Price" placeholder="{{item.price}}">
+                    
+                            <input pInputText type="number" 
+                            formControlName="Quantity" 
+                            placeholder="{{item.quantity}}"  
+                            (ngModelChange)="quantityChanged()">
+                        </div>
+                        <div *ngIf="qChanged" style="margin-bottom: 30px;">
+                            <div style="margin: 10px 21% 40px 0px;">
+                                <p-dropdown [options]="reason" formControlName="Reason" ></p-dropdown>
+                            </div>
                         </div>
                     </div>
                 </div>

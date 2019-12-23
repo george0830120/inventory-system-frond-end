@@ -89,7 +89,7 @@ export class ViewItemListComponent implements OnInit {
         item.quantity = data.body[x]["quantity"];
         item.category = this.categoryName;
         item.department = this.departmentName;
-        console.log(item);
+
         this.items.push(item);
       }
 

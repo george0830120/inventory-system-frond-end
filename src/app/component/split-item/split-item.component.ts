@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
 import { Item } from 'src/app/model';
+import { HttpClientService } from '../../service/http-client.service'
 
 @Component({
   selector: 'app-split-item',
@@ -16,54 +17,71 @@ export class SplitItemComponent implements OnInit {
   public breadcrumbArray: MenuItem[];
   public item: Item;
   public items: Item[];
-  public departmentName: string;
-  public categoryName: string;
-  public subcategoryName: string;
+
   condition: string;
-  originQuantity : Number;
+  originQuantity : Number; 
   categoryPath: string;
+  public itemId: string;
+  public departmentID: string;
+  public categoryID: string;
+  public subcategoryID: string;
 
 
   constructor(public route: ActivatedRoute,
     public router: Router,
+    public httpClientService : HttpClientService, 
     public service: InventoryService) { 
   }
 
   ngOnInit() {
+    var departmentName: string;
+    var categoryName: string;
+    var subcategoryName: string;
     this.parseURL();
-    
-    switch(this.item.condition) {
-      case 0: this.condition="Broken"; break;
-      case 1: this.condition="Bad"; break;
-      case 2: this.condition="Average"; break;
-      case 3: this.condition="Good"; break;
-      case 4: this.condition="New"; break;
-      default: this.condition="empty"; break;
+    this.item = new Item();
 
-    }
-    console.log(this.item);
-    this.items = [];
-    this.items.push(this.item);
-    this.originQuantity = new Number(this.item.quantity);
-    this.categoryPath = this.departmentName+' > '+this.categoryName+' > '+this.subcategoryName;
+    this.httpClientService.getDepartment(this.departmentID).subscribe(
+      response =>{
+        departmentName = response.body["name"];
+        this.httpClientService.getSpecificCategory(this.categoryID).subscribe(
+          response => { 
+            categoryName = response.body["name"];
+            this.httpClientService.getSpecificCategory(this.subcategoryID).subscribe(
+              response =>{
+                subcategoryName = response.body["name"];
+                
+                this.httpClientService.getItemByID(this.itemId).subscribe(
+                  response => {
+                    
+                    this.item.id = response.body["id"]
+                    this.item.description = response.body["description"]
+                    this.item.quantity = response.body["quantity"]
+                    this.item.price = response.body["price"]
+                    this.item.condition = response.body["condition"]["id"]
+                    this.condition = response.body["condition"]["condition"]
+                    this.originQuantity = this.item.quantity
+                    this.categoryPath = departmentName +' > '+categoryName+' > '+subcategoryName;
+                    this.items = []
+                    this.items.push(this.item)
+                    console.log(this.item)
+                  })
+              })   
+          })
+      })
+    
   }
 
   parseURL(){
     var currentURL = this.route.url;
-
-    var itemId: string;
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        this.categoryName = val[2].path;
-        this.departmentName = val[1].path; 
-        this.subcategoryName = val[3].path;
-        itemId = val[4].path;
+        this.categoryID = val[2].path;
+        this.departmentID = val[1].path; 
+        this.subcategoryID = val[3].path;
+        this.itemId = val[4].path;
       } 
-    )
-    this.item = this.service.getSubCategoryByName(this.departmentName, this.categoryName, this.subcategoryName).items.find(i=>i.id===itemId);
-
-  }
+  )}
 
   cloneItem(i){
     if(this.items[i].quantity > 1){
@@ -75,12 +93,71 @@ export class SplitItemComponent implements OnInit {
     }
   }
   adjustQuantity(i, newQuantity:number){
-    if(Number(this.items[i-1].quantity) + Number(this.items[i].quantity) - newQuantity > 0){
+    
+    if((Number(this.items[i-1].quantity) + Number(this.items[i].quantity) - newQuantity > 0)&& i!=0){
       this.items[i-1].quantity = Number(this.items[i-1].quantity) + Number(this.items[i].quantity) - newQuantity;
       console.log(this.items[i-1].quantity)
       console.log("end")
       this.items[i].quantity = newQuantity;
     }
   }
-  
+
+  backToItemList(){
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID+'/');
+  }
+
+  sendSplitItemToBackEnd(){
+    for(var i in this.items){
+      if(i==="0"){
+
+        let postBody = {
+          description: this.items[i].description,
+          quantity : this.items[i].quantity,
+          price : this.items[i].price,
+          condition : this.conditionNumberToString(Number(this.items[i].condition)),
+          reason: "Other",
+        //  comment: "Split Item"
+        };
+        console.log(this.items[i].condition)
+        console.log(this.conditionNumberToString(Number(this.items[i].condition)))
+        console.log("postBody")
+        console.log(postBody)
+        this.httpClientService.editItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
+          console.log(response.body);
+        });
+      }else{
+        let postBody = {
+          description: this.items[i].description,
+          quantity: this.items[i].quantity,
+          condition: this.conditionNumberToString(Number(this.items[i].condition)),
+          price: this.items[i].price,
+          did: this.departmentID,
+          cid: this.categoryID,
+          scid: this.subcategoryID,
+        };
+    
+        console.log(postBody);
+        this.httpClientService.addItem(JSON.stringify(postBody)).subscribe(response => {
+          console.log(response);
+        })
+      }
+
+    }
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID+'/');
+  }
+
+  private conditionNumberToString(conditionNumber: number){
+    var temp:string
+    console.log(conditionNumber)
+    switch(conditionNumber){
+      case 0: temp = "Broken"; break;
+      case 1: temp = "Bad"; break;
+      case 2: temp = "Average"; break;
+      case 3: temp = "Good"; break;
+      case 4: temp = "New"; break;
+    }
+    console.log(temp)
+    return temp
+  }
+   
 }
