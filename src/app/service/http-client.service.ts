@@ -153,7 +153,7 @@ export class HttpClientService {
   }
 
   getAcquisitions(){
-    return this.httpClient.post('http://localhost:3000/acquisitions/',
+    return this.httpClient.post('http://localhost:3000/acquisitions',
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
   );
   }

@@ -5,6 +5,7 @@ import { Acquisition } from "../../model/acquisition.model";
 import { AcquisitionService } from "../../service/acquisition.service";
 import { Router } from "@angular/router";
 import { LoginService } from '../../service/login.service';
+import { HttpClientService } from '../../service/http-client.service';
 
 @Component({
   selector: "app-view-acquisition",
@@ -23,7 +24,8 @@ export class ViewAcquisitionComponent implements OnInit {
     public formBuilder: FormBuilder,
     public service: AcquisitionService,
     public router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private httpService: HttpClientService
   ) {
     this.acquisitionTypes = [
       { label: "Drop off", value: { type: "Drop off", value: 1 } },
@@ -81,9 +83,12 @@ export class ViewAcquisitionComponent implements OnInit {
 
   ngOnInit() {
     this.acquisitions = [];
-    this.service.getAcquisitions().subscribe( (acqs) => {
-      this.acquisitions = acqs;
-      // this.acquisitions.push(acq);
+    // this.service.getAcquisitions().subscribe( (acqs) => {
+    //   this.acquisitions = acqs;
+    //   // this.acquisitions.push(acq);
+    // 
+    this.httpService.getAcquisitions().subscribe((acqs) => {
+      console.log(acqs);
     })
     console.log(this.acquisitions);
   }
