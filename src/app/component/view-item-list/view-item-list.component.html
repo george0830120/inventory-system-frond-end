@@ -57,7 +57,6 @@
             <ng-template pTemplate="header">
                 <tr style=" text-align:center">
                     <th>Item#</th>
-                    <th>Name</th>
                     <th>Department</th>
                     <th>Category</th>
                     <th>Description</th>
@@ -69,24 +68,10 @@
             <ng-template pTemplate="body" let-showItems>
                 <tr style=" text-align:center">
                     <td [routerLink] = "[showItems.id]" style="color:blue; text-decoration: underline;">{{ showItems.id }}</td>
-                    <td>{{ showItems.name }}</td>
                     <td>{{ departmentName }}</td>
                     <td>{{ categoryName }}</td>
                     <td>{{ showItems.description }}</td>
-                    <td>
-                        <label *ngIf="showItems.condition === 1">
-                            New
-                        </label>
-                        <label *ngIf="showItems.condition === 2">
-                            Good
-                        </label>
-                        <label *ngIf="showItems.condition === 3">
-                            Average
-                        </label>
-                        <label *ngIf="showItems.condition === 4">
-                            Bad
-                        </label>
-                    </td>
+                    <td>{{ showItems.condition }}</td>
                     <td>{{ showItems.quantity }}</td>
                     <td>{{ showItems.price }}</td>
                 </tr>

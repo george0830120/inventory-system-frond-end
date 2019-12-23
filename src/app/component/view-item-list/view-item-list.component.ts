@@ -70,7 +70,7 @@ export class ViewItemListComponent implements OnInit {
         this.subCategoryName = res["category"].split(',')[1];
         this.departmentName = res["department"];
       }
-      this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryName);
+      this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryID);
 
       for(var x in data.body){
         let item = new Item();
@@ -99,8 +99,7 @@ export class ViewItemListComponent implements OnInit {
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName,url:'/department/' + this.departmentID});
     this.breadcrumbArray.push({label:categoryName,url: '/department/'+this.departmentID+'/'+this.categoryID});
-    this.breadcrumbArray.push({label:subCategoryName,url: '/department/'+this.departmentID+'/'+this.categoryID+'/'+subCategoryID
-    });
+    this.breadcrumbArray.push({label:subCategoryName,url: '/department/'+this.departmentID+'/'+this.categoryID+'/'+subCategoryID});
   }
 
   search(info) {
@@ -109,15 +108,16 @@ export class ViewItemListComponent implements OnInit {
     if(info.itemname!=""){
       console.log(info.itemname);
       this.showItems = [];
-      this.showItems = this.items.filter(item=>item.id===info.itemname);
+      this.showItems = this.items.filter(item=>item.id.toString()==info.itemname);
       this.IfSearch = true;
     }
     else if (info.keyword!=""){
       console.log(info.keyword);
       this.showItems = [];
-      this.items.filter(item=>item.name.includes(info.keyword)).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.department.includes(info.keyword)).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.category==info.keyword).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.description.includes(info.keyword)).forEach(val => this.showItems.push(val))
-      this.items.filter(item=>item.condition===info.keyword).forEach(val => this.showItems.push(val))
+      this.items.filter(item=>item.condition==info.keyword).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.quantity===Number(info.keyword)).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.price===Number(info.keyword)).forEach(val => this.showItems.push(val))
       this.IfSearch = true;
