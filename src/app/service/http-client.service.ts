@@ -153,13 +153,13 @@ export class HttpClientService {
   }
 
   getAcquisitions(){
-    return this.httpClient.post('http://localhost:3000/acquisitions',
+    return this.httpClient.get('http://localhost:3000/acquisitions/',
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
   );
   }
 
   getAcquisition(id:string){
-    return this.httpClient.post('http://localhost:3000/acquisitions/' + id,
+    return this.httpClient.get('http://localhost:3000/acquisitions/' + id,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
