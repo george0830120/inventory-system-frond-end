@@ -36,7 +36,7 @@ export class AddSubcategoryComponent implements OnInit {
   ngOnInit() {
     this.parseURL();
     this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
-      this.departmentName = response.body.name;
+      this.departmentName = response.body["name"];
     })
 
     this.httpClientService.getCategory(this.categoryID).subscribe(response=>{
