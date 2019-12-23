@@ -22,7 +22,7 @@ export class ViewAcquisitionComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public service: AcquisitionService,
+    // public service: AcquisitionService,
     public router: Router,
     private loginService: LoginService,
     private httpService: HttpClientService
@@ -46,15 +46,15 @@ export class ViewAcquisitionComponent implements OnInit {
       status: 0
     });
     this.isSearch = false;
-    this.service.getAcquisitionFromCRM().subscribe(acq => {
-      console.log("component get from service");
-      console.log(acq);
-      if(acq) {
-        setTimeout(() => {
-          this.acquisitions.push(acq);
-        },5000)
-      }
-    })
+    // this.service.getAcquisitionFromCRM().subscribe(acq => {
+    //   console.log("component get from service");
+    //   console.log(acq);
+    //   if(acq) {
+    //     setTimeout(() => {
+    //       this.acquisitions.push(acq);
+    //     },5000)
+    //   }
+    // })
   }
 
   search(data) {
