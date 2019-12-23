@@ -53,7 +53,7 @@ export class HttpClientService {
   }
 
   deleteDepartment(departmentID: string) {
-    return this.httpClient.patch('http://localhost:3000/hierarchy/departments/' + departmentID,
+    return this.httpClient.delete('http://localhost:3000/hierarchy/departments/' + departmentID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
