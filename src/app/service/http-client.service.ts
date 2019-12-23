@@ -37,8 +37,8 @@ export class HttpClientService {
     );
   }
 
-  editDepartment(departmentID: string, data: JSON) {
-    return this.httpClient.patch('http://localhost:3000/hierarchy/departments' + departmentID, data,
+  editDepartment(departmentID: string, data: string) {
+    return this.httpClient.patch('http://localhost:3000/hierarchy/departments' + '/' + departmentID, data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
