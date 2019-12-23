@@ -99,4 +99,10 @@ export class EditDepartmentComponent implements OnInit {
     // this.router.navigateByUrl('/department/'+this.departmentName);
   }
 
+  delete(){
+    this.httpService.deleteDepartment(this.departmentName
+      ).subscribe((res) => {
+        console.log(res)
+      })
+  }
 }
