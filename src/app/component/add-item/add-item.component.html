@@ -1,4 +1,4 @@
-<div class="container" style="text-align:center; width: 50%; margin-top: 10%; margin-bottom: 10%;" >  
+<div class="container" style="text-align:center; width: 50%; margin-top: 10%; margin-bottom: 10%;" >
         <div style=" border-radius: 20px; text-align:center; background-color:#bdbdbd; margin:auto; padding: 20px;">
             <div class="contact2-form-title">
                 <label style="font-size: 28px;">Add Item</label>
@@ -8,17 +8,17 @@
             </div>
             <form [formGroup]="profileForm" (ngSubmit)="submit(profileForm.value)">
 
-                <div> 
-                    <input pInputText type="text" formControlName="Name" placeholder="Name">
+                <div>
+                    <input pInputText type="text" formControlName="ID" placeholder="ID">
                 </div>
-                <div> 
+                <div>
                     <input pInputText type="text" formControlName="Description" placeholder="Description">
                 </div>
                 <div>
-                    <input pInputText type="number" formControlName="Quantity" placeholder="Quantity">
+                    <input pInputText type="text" formControlName="Quantity" placeholder="Quantity">
                 </div>
                 <div>
-                    <input pInputText type="number" formControlName="Price" placeholder="Price">
+                    <input pInputText type="text" formControlName="Price" placeholder="Price">
                 </div>
                 <div style="margin: 20px 0px 20px 0px;">
                     <p-dropdown [options]="condition" formControlName="Condition" ></p-dropdown>

@@ -13,7 +13,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class AddItemComponent implements OnInit {
   profileForm = new FormGroup({
-    Name: new FormControl(''),
+    ID: new FormControl(''),
     Description: new FormControl(''),
     Quantity: new FormControl(''),
     Price: new FormControl(''),
@@ -25,10 +25,14 @@ export class AddItemComponent implements OnInit {
   public categoryName: string;
   public subcategoryName: string;
 
+  public departmentID: string;
+  public categoryID: string;
+  public subcategoryID: string;
+
   constructor(public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
-    public httpService: HttpClientService,
+    public httpClientService: HttpClientService,
     ) {
     this.condition = [
       {label:'Condition', value:null},
@@ -41,16 +45,37 @@ export class AddItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subcategoryName;
+    this.subcategoryID;
+    this.departmentName;
+    this.departmentName;
+    this.categoryID;
+    this.categoryName;
     this.parseURL();
+    this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
+      this.departmentName=response.body["name"];
+    });
 
-    this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
+    this.httpClientService.getCategory(this.categoryID).subscribe(response=>{
+      this.categoryName=response.body["name"];
+    });
+
+    this.httpClientService.getSubCategories(this.categoryID).subscribe(response=>{
+      for(var x in response.body){
+        if(response.body[x]["id"]==this.subcategoryID){
+          this.subcategoryName = response.body[x]["name"];
+        }
+      }
+
+      this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
+    });
   }
 
   addBreadcrumb(departmentName:string, categoryName:string, subcategoryName:string){
     this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
-    this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentName+'/'+categoryName});
-    this.breadcrumbArray.push({label:subcategoryName, url: '/department/'+departmentName+'/'+categoryName+'/'+subcategoryName});
+    this.breadcrumbArray.push({label: this.departmentName, url: '/department/'+ this.departmentID});
+    this.breadcrumbArray.push({label: this.categoryName, url: '/department/'+ this.departmentID+'/'+ this.categoryID});
+    this.breadcrumbArray.push({label: this.subcategoryName, url: '/department/'+ this.departmentID+'/'+ this.categoryID+'/'+ this.subcategoryID});
   }
 
   parseURL(){
@@ -58,20 +83,44 @@ export class AddItemComponent implements OnInit {
     console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
-        this.categoryName = val[2].path;
-        this.departmentName = val[1].path;
-        this.subcategoryName = val[3].path;
+        this.categoryID = val[2].path;
+        this.departmentID = val[1].path;
+        this.subcategoryID = val[3].path;
       }
     )
+
   }
+
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }
 
   submit(data){
     console.log(data);
+    let res: string;
+    for(var x in this.condition){
+      if(this.condition[x]['value']===data['Condition']){
+        res = this.condition[x]['label']
+      }
+    }
+    let postBody = {
+      description: data['Description'],
+      quantity: +data['Quantity'],
+      condition: res,
+      price: +data['Price'],
+      did: +this.departmentID,
+      cid: +this.categoryID,
+      scid: +this.subcategoryID,
+    };
+
+    console.log(postBody);
+
+    this.httpClientService.addItem(JSON.stringify(postBody)).subscribe(response => {
+      console.log(response);
+    })
+
 
     //TODO: Add item
-     this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+     //his.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }
 }

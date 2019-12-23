@@ -73,13 +73,11 @@ export class AddSubcategoryComponent implements OnInit {
   }
 
   submit(data) {
-    console.log(data);
     let postBody = {
       name : data['Name'],
       description: data['Description'],
       tag: data['UniqueTag'],
     };
-    console.log(JSON.stringify(postBody));
     this.httpClientService.addSubCategory(this.categoryID, JSON.stringify(postBody)).subscribe(response=>{
       console.log(response.body);
     });
