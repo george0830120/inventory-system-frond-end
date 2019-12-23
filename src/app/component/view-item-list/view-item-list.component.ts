@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Subcategory } from 'src/app/model/subcategory.model';
 import { Item } from 'src/app/model/item.model'
 import { LoginService } from '../../service/login.service';
+import {HttpClientService} from '../../service/http-client.service';
 
 @Component({
   selector: "app-view-item-list",
@@ -18,8 +19,12 @@ export class ViewItemListComponent implements OnInit {
   public subCategory: Subcategory;
   public items: Item[];
   public showItems: Item[];
+  public departmentID: string;
+  public categoryID: string;
+  public subCategoryID: string;
   public departmentName: string;
   public categoryName: string;
+  public subCategoryName: string;
   public IfSearch: boolean;
 
 
@@ -27,7 +32,8 @@ export class ViewItemListComponent implements OnInit {
     public route: ActivatedRoute,
     public service: InventoryService,
     public formBuilder: FormBuilder,
-    public loginService: LoginService
+    public loginService: LoginService,
+    public httpClientService: HttpClientService
   ) {
     this.checkSearchForm = this.formBuilder.group({
       itemname: '',
@@ -38,31 +44,46 @@ export class ViewItemListComponent implements OnInit {
 
   ngOnInit() {
     let currentUrl = this.route.url;
-    let subCategoryName: string;
+    let res: JSON;
+    let categoryLength: number;
     currentUrl.subscribe({
       next: val => {
         console.log(val);
         // this.breadcrumbArray.push(val[1].path);
-        this.departmentName = val[1].path;
-        this.categoryName = val[2].path;
-        subCategoryName = val[3].path;
+        this.departmentID = val[1].path;
+        this.categoryID = val[2].path;
+        this.subCategoryID = val[3].path;
       }
     });
-    this.addBreadcrumb(this.departmentName,this.categoryName,subCategoryName);
-    this.subCategory = this.service.getSubCategoryByName(this.departmentName,this.categoryName, subCategoryName);
-    console.log("subCategory");
-    console.log(this.subCategory);
-    this.items = this.subCategory.items;
-    this.IfSearch = false;
+    this.httpClientService.getSubCategoryItems(this.departmentID, this.categoryID, this.subCategoryID).subscribe(data => {
 
-    console.log(this.items);
+      res = data.body[0];
+      categoryLength = res["category"].split(',').length;
+      if(categoryLength===1){
+        this.categoryName = res["category"];
+        this.departmentName = res["department"];
+      }
+      else if(categoryLength===2){
+        this.categoryName = res["category"].split(',')[0];
+        this.subCategoryName = res["category"].split(',')[1];
+        this.departmentName = res["department"];
+      }
+      this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryName);
+    });
+    //this.addBreadcrumb(this.departmentID, this.categoryID, this.subCategoryID);
+    //this.subCategory = this.service.getSubCategoryByName(this.departmentID, this.categoryID, this.subCategoryID);
+    //this.items = this.subCategory.items;
+    //this.IfSearch = false;
+
+    //console.log(this.items);
   }
 
-  addBreadcrumb(departmentName:string,categoryName:string,subCategoryName:string) {
+  addBreadcrumb(departmentName:string,categoryName:string,subCategoryName:string, subCategoryID:string) {
     this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName,url:'/department/' + departmentName}); 
-    this.breadcrumbArray.push({label:categoryName,url: '/department/'+departmentName+'/'+categoryName});
-    this.breadcrumbArray.push({label:subCategoryName,url: '/department/'+departmentName+'/'+categoryName+'/'+subCategoryName});
+    this.breadcrumbArray.push({label:departmentName,url:'/department/' + this.departmentID});
+    this.breadcrumbArray.push({label:categoryName,url: '/department/'+this.departmentID+'/'+this.categoryID});
+    this.breadcrumbArray.push({label:subCategoryName,url: '/department/'+this.departmentID+'/'+this.categoryID+'/'+subCategoryID
+    });
   }
 
   search(info) {

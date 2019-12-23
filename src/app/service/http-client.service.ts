@@ -99,37 +99,37 @@ export class HttpClientService {
 
   // generic items
   getDepartementItems(departmentID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/leaf/' + departmentID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/leaf/' + departmentID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getDepartmentSubtrees(departmentID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/subtree/' + departmentID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/subtree/' + departmentID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getCategoryItems(departmentID: string, categoryID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/leaf/' + departmentID + '/' + categoryID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/leaf/' + departmentID + '/' + categoryID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getCategorySubtrees(departmentID: string, categoryID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/subtree/' + departmentID + '/' + categoryID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/subtree/' + departmentID + '/' + categoryID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getSubCategoryItems(departmentID: string, categoryID: string, subCategoryID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/leaf/' + departmentID + '/' + categoryID + '/' + subCategoryID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/leaf/' + departmentID + '/' + categoryID + '/' + subCategoryID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getSubCategorySubtrees(departmentID: string, categoryID: string, subCategoryID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/subtree/' + departmentID + '/' + categoryID + '/' + subCategoryID,
+    return this.httpClient.get('http://localhost:3000/items/hierarchy/subtree/' + departmentID + '/' + categoryID + '/' + subCategoryID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }

@@ -39,7 +39,6 @@ export class ViewSubcategoryComponent implements OnInit {
     this.httpClientService.getSubcategoriesbyCategoryID(categoryID).subscribe(
       response => {
         this.subcategories = []
-
         for(var x in response.body){
           this.subcategories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
         }
@@ -95,6 +94,7 @@ export class ViewSubcategoryComponent implements OnInit {
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentID});
     this.breadcrumbArray.push({label:categoryName, url: '/department/'+departmentID+'/'+categoryID});
+
   }
 
   getAllDepartment(id){

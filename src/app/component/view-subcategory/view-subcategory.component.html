@@ -6,22 +6,22 @@
             </div>
             <div *ngFor = "let department of departments">
                 <a
-                [routerLink] = "['/department', department.name] " 
-                routerLinkActive="on"  
+                [routerLink] = "['/department', department.name] "
+                routerLinkActive="on"
                 style="font-size: 16px"
                 >
                 {{department.name}}</a
                 >
-            </div> 
+            </div>
         </div>
         <div class="col-6">
             <div style="padding-bottom: 15px">
                 <p-breadcrumb [model]="breadcrumbArray"></p-breadcrumb>
             </div>
             <mat-grid-list cols="4" rowHeight="1:1">
-                <mat-grid-tile 
-                *ngFor = "let subcategory of subcategories" 
-                [routerLink] = "[subcategory.name]"
+                <mat-grid-tile
+                *ngFor = "let subcategory of subcategories"
+                [routerLink] = "[subcategory.id]"
                 [style.background]="'#BDBDBD'"
                 style="font-size: 18px"
                 >
@@ -47,7 +47,6 @@
         <ng-template #elseTemplate>
             <div class="col"></div>
         </ng-template>
-        
+
     </div>
 </div>
- 
