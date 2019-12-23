@@ -38,7 +38,7 @@ export class AddCategoryComponent implements OnInit {
   ngOnInit() {
     this.parseURL();
     this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
-      this.departmentName = response.body.name;
+      this.departmentName = response.body["name"];
       this.addBreadcrumb(this.departmentName);
     });
     //this.addBreadcrumb(this.departmentName);
@@ -72,7 +72,7 @@ export class AddCategoryComponent implements OnInit {
       sub: 0,
     };
     // this.httpService.addItem(this.departmentName,
-    this.httpClientService.addCategory(this.departmentID, postBody).subscribe(response=>{
+    this.httpClientService.addCategory(this.departmentID, JSON.stringify(postBody)).subscribe(response=>{
       console.log(response.body);
     });
 
