@@ -1,6 +1,7 @@
 export class Item {
     name: string;
-    //category: string;
+    department: string;
+    category: string;
     description: string;
     condition: number;
     id: string;

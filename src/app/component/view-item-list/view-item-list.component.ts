@@ -57,6 +57,8 @@ export class ViewItemListComponent implements OnInit {
     });
     this.httpClientService.getSubCategoryItems(this.departmentID, this.categoryID, this.subCategoryID).subscribe(data => {
 
+      this.items=[];
+
       res = data.body[0];
       categoryLength = res["category"].split(',').length;
       if(categoryLength===1){
@@ -69,6 +71,21 @@ export class ViewItemListComponent implements OnInit {
         this.departmentName = res["department"];
       }
       this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryName);
+
+      for(var x in data.body){
+        let item = new Item();
+        item.condition = data.body[x]["condition"];
+        item.description = data.body[x]["description"];
+        item.id = data.body[x]["id"];
+        item.name = data.body[x]["name"];
+        item.price = data.body[x]["price"];
+        item.quantity = data.body[x]["quantity"];
+        item.category = this.categoryName;
+        item.department = this.departmentName;
+        console.log(item);
+        this.items.push(item);
+      }
+
     });
     //this.addBreadcrumb(this.departmentID, this.categoryID, this.subCategoryID);
     //this.subCategory = this.service.getSubCategoryByName(this.departmentID, this.categoryID, this.subCategoryID);
@@ -111,6 +128,6 @@ export class ViewItemListComponent implements OnInit {
     console.log(this.showItems);
   }
   addItem() {
-    console.log("add item")
+    console.log("add item");
   }
 }
