@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
 import { HttpClientService } from '../../service/http-client.service';
 import { MenuItem } from 'primeng/api';
+import { Location } from '@angular/common';
 
  
 
@@ -29,6 +30,7 @@ export class AddCategoryComponent implements OnInit {
     public router: Router,
     public service: InventoryService,
     public httpService: HttpClientService,
+    public location: Location
     ) { 
 
   }
@@ -55,11 +57,12 @@ export class AddCategoryComponent implements OnInit {
     )
   }
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName);
+    // this.router.navigateByUrl('/department/'+this.departmentName);
+    this.location.back();
   }
 
   submit(data){
-    // console.log(data);
+    console.log(data);
     // this.httpService.addItem(this.departmentName,
 
 
@@ -68,7 +71,8 @@ export class AddCategoryComponent implements OnInit {
     //   data.UniqueTag
     // )
     //TODO: Add Category
-     this.router.navigateByUrl('/department/'+this.departmentName);
+    //  this.router.navigateByUrl('/department/'+this.departmentName);
+    // this.location.back();
   }
 
 }

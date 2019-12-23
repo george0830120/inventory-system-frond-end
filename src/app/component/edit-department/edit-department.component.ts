@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
 import { Category, Department } from 'src/app/model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-department',
@@ -27,7 +28,9 @@ export class EditDepartmentComponent implements OnInit {
 
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public service: InventoryService) { 
+    public service: InventoryService,
+    public location: Location 
+    ) { 
 
   }
 
@@ -59,14 +62,15 @@ export class EditDepartmentComponent implements OnInit {
   }
 
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName);
+    this.location.back();
+    // this.router.navigateByUrl('/department/'+this.departmentName);
   }
 
   submit(x:FormGroup){
     console.log(x);
     // TODO: update item
-
-    this.router.navigateByUrl('/department/'+this.departmentName);
+    // this.location.back();
+    // this.router.navigateByUrl('/department/'+this.departmentName);
   }
 
 }

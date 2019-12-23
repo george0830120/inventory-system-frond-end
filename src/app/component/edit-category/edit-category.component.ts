@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
 import { Item, Category } from 'src/app/model';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -15,7 +16,6 @@ import { Item, Category } from 'src/app/model';
 export class EditCategoryComponent implements OnInit {
 
   profileForm = new FormGroup({
-    uniqueTag: new FormControl(''),
     Name: new FormControl(''),
     Description: new FormControl(''),
   });
@@ -27,7 +27,9 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public service: InventoryService) { 
+    public service: InventoryService,
+    public location: Location
+    ) { 
 
   }
 
@@ -62,14 +64,16 @@ export class EditCategoryComponent implements OnInit {
   }
 
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
+    this.location.back();
+    // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
   }
 
   submit(x:FormGroup){
     console.log(x);
     // TODO: update item
 
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
+    // this.location.back();
+    // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
   }
 
 
