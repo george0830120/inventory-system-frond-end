@@ -17,11 +17,7 @@ export class HttpClientService {
     public httpClient: HttpClient
   ) {
   }
-  editCategory(categoryID: string, data: string) {
-    return this.httpClient.patch('http://localhost:3000/hierarchy/categories/' + categoryID, data,
-      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
-    );
-  }
+
   getSpecificCategory(categoryID:string){
     return this.httpClient.get('http://localhost:3000/hierarchy/categories/'+categoryID,
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }

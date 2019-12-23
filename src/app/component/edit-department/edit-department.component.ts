@@ -101,9 +101,10 @@ export class EditDepartmentComponent implements OnInit {
   }
 
   delete(){
-    this.httpService.deleteDepartment(this.departmentName
+    this.httpService.deleteDepartment(this.departmentID
       ).subscribe((res) => {
         console.log(res)
       })
+      this.router.navigateByUrl('/department')
   }
 }

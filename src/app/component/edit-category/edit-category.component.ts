@@ -115,6 +115,13 @@ export class EditCategoryComponent implements OnInit {
      this.router.navigateByUrl('/department/'+this.departmentID);
   }
   
+  delete(){
+    this.httpClientService.deleteCategory(this.categoryID
+      ).subscribe((res) => {
+        console.log(res)
+      })
+    this.router.navigateByUrl('/department/'+this.departmentID);
+  }
 
 
 }
