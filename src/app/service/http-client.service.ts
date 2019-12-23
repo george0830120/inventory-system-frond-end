@@ -170,6 +170,12 @@ export class HttpClientService {
     );
   }
 
+  getItemsUnderAcquisition(id:string){
+    return this.httpClient.get('http://localhost:3000/acquisitions/' + id + '/items',
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
+
   getSubcategoriesbyCategoryID(categoryID: string) {
     return this.httpClient.get('http://localhost:3000/hierarchy/categories/'+ categoryID+'/subcategories',
     { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }

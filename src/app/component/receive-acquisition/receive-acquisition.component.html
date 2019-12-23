@@ -52,7 +52,8 @@
     </div>
     <div class="row">
         <div class="col-3">
-            <label>Date: {{ acquisition.date.getDay() + '/' + acquisition.date.getMonth() + '/' +acquisition.date.getFullYear()}}</label>
+            <!-- <label>Date: {{ acquisition.date.getUTCDay() + '/' + acquisition.date.getUTCMonth() + '/' +acquisition.date.getUTCFullYear()}}</label> -->
+            <label>Date: {{ acquisition.date}}</label>
         </div>
         <div class="col-4">
         </div>
