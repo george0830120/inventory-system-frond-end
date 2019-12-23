@@ -113,20 +113,30 @@ export class UpdateItemComponent implements OnInit {
 
   submit(data:FormGroup){
     console.log(data);
+    var condition: string;
+    switch( data['Condition']){
+
+      case 0: condition = "Broken"; break;
+      case 1: condition = "Bad"; break;
+      case 2: condition = "Average"; break;
+      case 3: condition = "Good"; break;
+      case 4: condition = "New"; break;
+    }
     // TODO: update item
     let postBody = {
       
       description: data['Description'],
       quantity : data['Quantity'],
       price : data['Price'],
-      condition : data['Condition'],
+
+      condition : condition,
       // department : this.departmentID,
       // category : this.categoryID,
-      category : this.subcategoryID,
+     // id : this.itemId,
     };
     console.log(postBody);
     // this.httpService.addItem(this.departmentName,
-    this.httpClientService.addItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
+    this.httpClientService.editItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
       console.log(response.body);
     });
 

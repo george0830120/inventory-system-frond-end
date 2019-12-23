@@ -151,8 +151,9 @@ export class HttpClientService {
     );
   }
 
-  editItem(id: string){
+  editItem(id: string, data:string){
     return this.httpClient.patch('http://localhost:3000/items/' + id,
+       data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }

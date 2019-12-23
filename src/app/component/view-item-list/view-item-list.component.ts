@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { NavigationEnd, ActivatedRoute, Router } from "@angular/router";
 import { InventoryService } from "../../service/inventory.service";
 import { MenuItem } from "primeng/api";
 import { FormBuilder } from '@angular/forms';
 import { Subcategory } from 'src/app/model/subcategory.model';
 import { Item } from 'src/app/model/item.model'
 import { LoginService } from '../../service/login.service';
-import {HttpClientService} from '../../service/http-client.service';
+import { HttpClientService}  from '../../service/http-client.service';
 
 @Component({
   selector: "app-view-item-list",
@@ -26,10 +26,11 @@ export class ViewItemListComponent implements OnInit {
   public categoryName: string;
   public subCategoryName: string;
   public IfSearch: boolean;
-
+  public navigationSubscription;
 
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     public service: InventoryService,
     public formBuilder: FormBuilder,
     public loginService: LoginService,
@@ -39,6 +40,12 @@ export class ViewItemListComponent implements OnInit {
       itemname: '',
       keyword:'',
     }) ;
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
 
   }
 
