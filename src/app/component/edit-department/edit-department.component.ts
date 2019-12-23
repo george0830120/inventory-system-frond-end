@@ -16,7 +16,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class EditDepartmentComponent implements OnInit {
 
-  profileForm = new FormGroup({
+  editForm = new FormGroup({
     UniqueTag: new FormControl(''),
     Name: new FormControl(''),
     Description: new FormControl(''),
@@ -25,9 +25,9 @@ export class EditDepartmentComponent implements OnInit {
 
   public breadcrumbArray: MenuItem[];
   public department: Department;
-  public departmentName: string;
+  public departmentID: string;
   public categoryName: string;
-  private editForm: any;
+
 
   constructor(public route: ActivatedRoute,
     public router: Router,
@@ -42,8 +42,9 @@ export class EditDepartmentComponent implements OnInit {
   ngOnInit() {
     this.parseURL();
     this.department = new Department();
-    this.httpService.getDepartment(this.departmentName).subscribe((res) => {
+    this.httpService.getDepartment(this.departmentID).subscribe((res) => {
       this.department.POSDepartmentCode = res.body["code"];
+      console.log(res.body)
       this.department.description = res.body["description"];
       this.department.name = res.body["name"];
       this.department.uniqueTag = res.body["tag"];
@@ -53,15 +54,15 @@ export class EditDepartmentComponent implements OnInit {
         Description: this.department.description,
         POSDepartmentCode: this.department.POSDepartmentCode
       })
-      this.addBreadcrumb(this.departmentName, this.categoryName);
+      this.addBreadcrumb(this.department.name);
     })
 
     // this.department = this.service.getDepartmentByName(this.departmentName);
-    this.profileForm.patchValue({UniqueTag: this.department.uniqueTag});
+
     
   }
 
-  addBreadcrumb(departmentName:string, categoryName:string){
+  addBreadcrumb(departmentName:string){
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({label:this.department.name, url: '/department/'+departmentName});
   }
@@ -72,7 +73,7 @@ export class EditDepartmentComponent implements OnInit {
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        this.departmentName = val[1].path; 
+        this.departmentID = val[1].path; 
       } 
     )
   }
@@ -89,14 +90,14 @@ export class EditDepartmentComponent implements OnInit {
       "code": data["POSDepartmentCode"],
       "tag": data["UniqueTag"]
     }
-    this.httpService.editDepartment(this.departmentName,
+    this.httpService.editDepartment(this.departmentID,
       JSON.stringify(postData)
       ).subscribe((res) => {
         console.log(res)
       })
     // TODO: update item
     // this.location.back();
-    // this.router.navigateByUrl('/department/'+this.departmentName);
+     this.router.navigateByUrl('/department/'+this.departmentID);
   }
 
 }
