@@ -12,7 +12,7 @@ export interface IDepartment {
 
 export class HttpClientService {
 
-  option = { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response' }
+  option = { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response' ,withCredentials: true }
   constructor(
     public httpClient: HttpClient
   ) {
