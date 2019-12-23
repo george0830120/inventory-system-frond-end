@@ -21,39 +21,48 @@ export class AddSubcategoryComponent implements OnInit {
   public breadcrumbArray: MenuItem[];
   public departmentName: string;
   public categoryName: string;
+  public departmentID: string;
+  public categoryID: string;
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
     public httpService: HttpClientService,
-    public location: Location
+    public location: Location,
+    public httpClientService: HttpClientService,
   ) {}
 
   ngOnInit() {
     this.parseURL();
+    this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
+      this.departmentName = response.body.name;
+    })
 
-    this.addBreadcrumb(this.departmentName, this.categoryName);
+    this.httpClientService.getCategory(this.categoryID).subscribe(response=>{
+      this.categoryName = response.body["name"];
+      this.addBreadcrumb(this.departmentName, this.categoryName);
+    })
+
   }
 
   addBreadcrumb(departmentName: string, categoryName: string) {
     this.breadcrumbArray = [];
     this.breadcrumbArray.push({
       label: departmentName,
-      url: "/department/" + departmentName
+      url: "/department/" + this.departmentID
     });
     this.breadcrumbArray.push({
       label: categoryName,
-      url: "/department/" + departmentName + "/" + categoryName
+      url: "/department/" + this.departmentID + "/" + this.categoryID,
     });
   }
 
   parseURL() {
     var currentURL = this.route.url;
-    console.log(currentURL);
     const subscribe = currentURL.subscribe(val => {
-      this.categoryName = val[2].path;
-      this.departmentName = val[1].path;
+      this.categoryID = val[2].path;
+      this.departmentID = val[1].path;
     });
   }
   backToItemList() {
@@ -65,6 +74,17 @@ export class AddSubcategoryComponent implements OnInit {
 
   submit(data) {
     console.log(data);
+    let postBody = {
+      name : data['Name'],
+      description: data['Description'],
+      tag: data['UniqueTag'],
+    };
+    console.log(JSON.stringify(postBody));
+    this.httpClientService.addSubCategory(this.categoryID, JSON.stringify(postBody)).subscribe(response=>{
+      console.log(response.body);
+    });
+
+
     // this.httpService.addItem(this.departmentName,
     //   this.categoryName,
     //   data.Name,

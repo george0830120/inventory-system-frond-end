@@ -1,4 +1,4 @@
-<div class="container" style="text-align:center; width: 50%; margin-top: 10%; margin-bottom: 10%;" >  
+<div class="container" style="text-align:center; width: 50%; margin-top: 10%; margin-bottom: 10%;" >
     <div style=" border-radius: 20px; text-align:center; background-color:#bdbdbd; margin:auto; padding: 20px;">
         <div class="contact2-form-title">
             <label style="font-size: 28px;">Add Subcategory</label>
@@ -8,14 +8,14 @@
         </div>
         <form [formGroup]="profileForm" (ngSubmit)="submit(profileForm.value)">
 
-            <div> 
+            <div>
                 <input pInputText type="text" formControlName="Name" placeholder="Name">
             </div>
-            <div> 
+            <div>
                 <input pInputText type="text" formControlName="Description" placeholder="Description">
             </div>
             <div>
-                <input pInputText type="number" formControlName="UniqueTag" placeholder="UniqueTag">
+                <input pInputText type="text" formControlName="UniqueTag" placeholder="UniqueTag">
             </div>
 
             <div style="margin: 20px 0px 20px 0px;">

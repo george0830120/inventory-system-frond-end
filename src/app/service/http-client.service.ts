@@ -56,7 +56,7 @@ export class HttpClientService {
   }
 
   addCategory(departmentID: string, data: string) {
-    return this.httpClient.post('http://localhost:3000/hierarchy/departments/' + departmentID + '/categories/', data,
+    return this.httpClient.post('http://localhost:3000/hierarchy/departments/' + departmentID + 'categories/', data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
@@ -80,13 +80,13 @@ export class HttpClientService {
   }
 
   getSubCategories(categoryID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/categories/' + categoryID + 'subcategories',
+    return this.httpClient.get('http://localhost:3000/hierarchy/categories/' + categoryID + '/subcategories',
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
-  addSubCategory(categoryID: string, data: JSON) {
-    return this.httpClient.post('http://localhost:3000/hierarchy/categories/' + categoryID + 'subcategories', data,
+  addSubCategory(categoryID: string, data: string) {
+    return this.httpClient.post('http://localhost:3000/hierarchy/categories/' + categoryID + '/subcategories', data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
