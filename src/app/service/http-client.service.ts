@@ -38,25 +38,25 @@ export class HttpClientService {
   }
 
   editDepartment(departmentID: string, data: JSON) {
-    return this.httpClient.patch('http://localhost:3000/hierarchy/departments' + departmentID, data,
+    return this.httpClient.patch('http://localhost:3000/hierarchy/departments/' + departmentID, data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   deleteDepartment(departmentID: string) {
-    return this.httpClient.patch('http://localhost:3000/hierarchy/departments' + departmentID,
+    return this.httpClient.patch('http://localhost:3000/hierarchy/departments/' + departmentID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getCategories(departmentID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/departments/' + departmentID + 'categories',
+    return this.httpClient.get('http://localhost:3000/hierarchy/departments/' + departmentID + '/categories/',
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
-  addCategory(departmentID: string, data: JSON) {
-    return this.httpClient.post('http://localhost:3000/hierarchy/departments/' + departmentID + 'categories', data,
+  addCategory(departmentID: string, data: string) {
+    return this.httpClient.post('http://localhost:3000/hierarchy/departments/' + departmentID + '/categories/', data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
