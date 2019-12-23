@@ -5,13 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
 import { HttpClientService } from '../../service/http-client.service';
 import { MenuItem } from 'primeng/api';
- 
+
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.scss']
 })
-export class AddItemComponent implements OnInit { 
+export class AddItemComponent implements OnInit {
   profileForm = new FormGroup({
     Name: new FormControl(''),
     Description: new FormControl(''),
@@ -29,7 +29,7 @@ export class AddItemComponent implements OnInit {
     public router: Router,
     public service: InventoryService,
     public httpService: HttpClientService,
-    ) { 
+    ) {
     this.condition = [
       {label:'Condition', value:null},
       {label:"Broken", value: 0},
@@ -55,13 +55,13 @@ export class AddItemComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url;
-    console.log(currentURL); 
+    console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
         this.categoryName = val[2].path;
-        this.departmentName = val[1].path; 
+        this.departmentName = val[1].path;
         this.subcategoryName = val[3].path;
-      } 
+      }
     )
   }
   backToItemList(){
@@ -70,15 +70,7 @@ export class AddItemComponent implements OnInit {
 
   submit(data){
     console.log(data);
-    this.httpService.addItem(this.departmentName,
-      this.categoryName,
-      this.subcategoryName,
-      data.Name,
-      data.Description,
-      data.Quantity,
-      data.Condition,
-      data.Price
-    )
+
     //TODO: Add item
      this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
   }

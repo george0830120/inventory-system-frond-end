@@ -141,7 +141,7 @@ export class HttpClientService {
   }
 
   addItem(data: JSON){
-    return this.httpClient.post('http://localhost:3000/items/', data
+    return this.httpClient.post('http://localhost:3000/items/', data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
@@ -158,7 +158,7 @@ export class HttpClientService {
   );
   }
 
-  getAcquisitions(id:string){
+  getAcquisition(id:string){
     return this.httpClient.post('http://localhost:3000/acquisitions/' + id,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
