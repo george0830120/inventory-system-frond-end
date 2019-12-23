@@ -6,6 +6,7 @@ import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
 import { Category, Department } from 'src/app/model';
 import { Location } from '@angular/common';
+import { HttpClientService } from '../../service/http-client.service';
 
 @Component({
   selector: 'app-edit-department',
@@ -29,14 +30,20 @@ export class EditDepartmentComponent implements OnInit {
   constructor(public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
-    public location: Location 
+    public location: Location ,
+    public httpService: HttpClientService
     ) { 
 
   }
 
   ngOnInit() {
     this.parseURL();
-    console.log(this.departmentName+this.categoryName);
+    console.log(this.departmentName);
+    console.log("sd")
+    this.httpService.getDepartment(this.departmentName).subscribe((res) => {
+      console.log(res)
+      // this.department.POSDepartmentCode = res.code;
+    })
 
     this.addBreadcrumb(this.departmentName, this.categoryName);
     this.department = this.service.getDepartmentByName(this.departmentName);

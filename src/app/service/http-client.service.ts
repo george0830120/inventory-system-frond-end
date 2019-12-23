@@ -25,14 +25,14 @@ export class HttpClientService {
     );
   }
 
-  addDepartment(data: JSON) {
+  addDepartment(data: string) {
     return this.httpClient.post('http://localhost:3000/hierarchy/departments', data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
 
   getDepartment(departmentID: string) {
-    return this.httpClient.get('http://localhost:3000/hierarchy/departments' + departmentID,
+    return this.httpClient.get('http://localhost:3000/hierarchy/departments' + '/' + departmentID,
       { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
     );
   }
