@@ -134,7 +134,35 @@ export class HttpClientService {
     );
   }
 
+  getItemByID(id: string){
+    return this.httpClient.get('http://localhost:3000/items/' + id,
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
 
+  addItem(data: JSON){
+    return this.httpClient.post('http://localhost:3000/items/', data
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
+
+  editItem(id: string){
+    return this.httpClient.patch('http://localhost:3000/items/' + id,
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
+
+  getAcquisitions(){
+    return this.httpClient.post('http://localhost:3000/acquisitions/',
+    { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+  );
+  }
+
+  getAcquisitions(id:string){
+    return this.httpClient.post('http://localhost:3000/acquisitions/' + id,
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
 
   getSubcategoriesbyCategoryID(categoryID: string) {
     return this.httpClient.get('http://localhost:3000/hierarchy/categories/'+ categoryID+'/subcategories',
@@ -151,32 +179,6 @@ export class HttpClientService {
   }
 
 
-
-
-
-  addItem(departmentname: string,
-      categoryName: string,
-      subCategoryName: string,
-      name: string,
-      description: string,
-      quantity: number,
-      condition: number,
-      price: number
-    ) {
-      let postBody = {
-        'departmentName' : departmentname,
-        'categoryName' : categoryName,
-        'subCategoryName' : subCategoryName,
-        'name' : name,
-        'description' : description,
-        'quantity' : quantity,
-        'condition' : condition,
-        'price' : price
-      }
-      console.log("postBody");
-      console.log(postBody);
-      // return this.httpClient.post('http://localhost:8080/addItem',postBody);
-  }
 
   auth(userName:string, password:string){
       let postBody = JSON.stringify({
