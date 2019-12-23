@@ -87,9 +87,21 @@ export class ViewAcquisitionComponent implements OnInit {
     //   this.acquisitions = acqs;
     //   // this.acquisitions.push(acq);
     // 
+    let temp;
     this.httpService.getAcquisitions().subscribe((acqs) => {
-      console.log(acqs);
+      console.log(acqs.body);
+      temp = acqs.body; 
+      console.log(temp.length)
+      // if(acqs.body != null) {
+      //   for(let index = 0;index < acqs.body.length;index++) {
+      //     this.acquisitions.push(acqs.body[index]);
+      //   }
+      // }
+      // temp = acqs; 
+      for(let index = 0;index < temp.length;index++) {
+        this.acquisitions.push(temp[index])
+      }
     })
-    console.log(this.acquisitions);
+    console.log(temp);
   }
 }
