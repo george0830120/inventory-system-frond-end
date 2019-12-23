@@ -71,7 +71,7 @@ export class EditCategoryComponent implements OnInit {
 
   addBreadcrumb(){
     this.breadcrumbArray = []
-    console.log("HelloHelloHello")
+
     console.log(this.category.name)
     this.breadcrumbArray.push({label:this.departmentName, url: '/department/'+this.departmentID});
     this.breadcrumbArray.push({label:this.category.name, url: '/department/'+this.departmentID+'/'+this.categoryID});
@@ -94,25 +94,26 @@ export class EditCategoryComponent implements OnInit {
     // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
   }
 
-  submit(x:FormGroup){
-    console.log(x);
+  submit(data:FormGroup){
+    console.log(data);
     // TODO: update item
 
     // this.location.back();
     // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
     let postData = {
-      "name": FormGroup["Name"],
-      "description": FormGroup["Description"],
-      "tag": FormGroup["UniqueTag"]
+      "name": data["Name"],
+      "description": data["Description"],
+      "tag": data["UniqueTag"],
+      "sub": this.sub
     }
-    this.httpClientService.editDepartment(this.departmentID,
+    console.log(postData)
+    this.httpClientService.editCategory(this.categoryID,
       JSON.stringify(postData)
       ).subscribe((res) => {
         console.log(res)
       })
-    // TODO: update item
-    // this.location.back();
-     this.router.navigateByUrl('/department/'+this.departmentID);
+
+     this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID);
   }
   
 

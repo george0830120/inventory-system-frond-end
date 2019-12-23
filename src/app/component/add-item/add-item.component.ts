@@ -121,6 +121,6 @@ export class AddItemComponent implements OnInit {
 
 
     //TODO: Add item
-     //his.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
+     this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }
 }

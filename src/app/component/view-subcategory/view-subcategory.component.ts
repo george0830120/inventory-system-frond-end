@@ -47,13 +47,11 @@ export class ViewSubcategoryComponent implements OnInit {
 
 
     this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
-
       response => {
         for(var x in response.body){
           if(response.body[x]["id"]==categoryID){
             categoryName = response.body[x]["name"];
           }
-
         }
       });
 
@@ -64,9 +62,18 @@ export class ViewSubcategoryComponent implements OnInit {
         if(response.body[x]["id"]==departmentID){
           console.log(response.body[x]["name"]);
           departmentName = response.body[x]["name"];
-          this.addBreadcrumb(departmentName, categoryName,departmentID, categoryID);
+          
         }
       }
+      this.httpClientService.getCategoriesbyDepartmentID(departmentID).subscribe(
+        response => {
+          for(var x in response.body){
+            if(response.body[x]["id"]==categoryID){
+              categoryName = response.body[x]["name"];
+            }
+          }
+          this.addBreadcrumb(departmentName, categoryName,departmentID, categoryID);
+        });
     });
 
     //this.getAllDepartment("1");

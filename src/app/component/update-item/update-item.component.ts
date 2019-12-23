@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service'
 import { MenuItem } from 'primeng/api';
 import { Item } from 'src/app/model';
+import { HttpClientService } from '../../service/http-client.service'
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-update-item',
@@ -13,7 +15,6 @@ import { Item } from 'src/app/model';
 })
 export class UpdateItemComponent implements OnInit {
   profileForm = new FormGroup({
-    ID: new FormControl(),
     Name: new FormControl(''),
     Description: new FormControl(''),
     Quantity: new FormControl(''),
@@ -23,13 +24,16 @@ export class UpdateItemComponent implements OnInit {
   condition: SelectItem[];
   public breadcrumbArray: MenuItem[];
   public item: Item;
-  public departmentName: string;
-  public categoryName: string;
-  public subcategoryName: string;
+  public itemId: string;
+  public departmentID: string;
+  public categoryID: string;
+  public subcategoryID: string;
 
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public service: InventoryService) { 
+    public service: InventoryService,
+    public httpClientService : HttpClientService, 
+    public formBuilder: FormBuilder) { 
     this.condition = [
       {label:'Condition', value:null},
       {label:"Broken", value: 0},
@@ -41,11 +45,44 @@ export class UpdateItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    var departmentName: string;
+    var categoryName: string;
+    var subcategoryName: string;
     this.parseURL();
-    console.log(this.departmentName+this.categoryName+this.subcategoryName);
-    this.profileForm.patchValue({ID: this.item.id})
-    this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
-    
+    this.item = new Item();
+    console.log(this.departmentID+this.categoryID+this.subcategoryID);
+    this.addBreadcrumb(this.departmentID, this.categoryID, this.subcategoryID);
+    this.httpClientService.getDepartment(this.departmentID).subscribe(
+      response =>{
+        departmentName = response.body["name"];
+        this.httpClientService.getSpecificCategory(this.categoryID).subscribe(
+          response => { 
+            categoryName = response.body["name"];
+            this.httpClientService.getSpecificCategory(this.subcategoryID).subscribe(
+              response =>{
+                subcategoryName = response.body["name"];
+                this.addBreadcrumb(departmentName, categoryName, subcategoryName)
+                this.httpClientService.getItemByID(this.itemId).subscribe(
+                  response => {
+                    this.item.id = response.body["id"]
+                    this.item.description = response.body["description"]
+                    this.item.quantity = response.body["quantity"]
+                    this.item.price = response.body["price"]
+                    this.item.condition = response.body["condition"]["id"]
+                    this.profileForm = this.formBuilder.group({
+
+                      Name: this.item.name,
+                      Description: this.item.description,
+
+                      Quantity:  this.item.quantity,
+                      Price: this.item.price,
+                      Condition:  this.item.condition
+                    })
+                  })
+              })   
+          })
+      })
+
   }
 
   addBreadcrumb(departmentName:string, categoryName:string, subcategoryName:string){
@@ -57,31 +94,44 @@ export class UpdateItemComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url;
-    var categoryName: string; 
-    var departmentName: string;
-    var subcategoryName: string
-    var itemId: string;
+     
     console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        this.categoryName = val[2].path;
-        this.departmentName = val[1].path; 
-        this.subcategoryName = val[3].path;
-        itemId = val[4].path;
+        this.categoryID = val[2].path;
+        this.departmentID = val[1].path; 
+        this.subcategoryID = val[3].path;
+        this.itemId = val[4].path;
       } 
     )
-    this.item = this.service.getSubCategoryByName(this.departmentName, this.categoryName, this.subcategoryName).items.find(i=>i.id===itemId);
+    
   }
 
   backToItemList(){
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }
 
-  submit(x:FormGroup){
-    console.log(x);
+  submit(data:FormGroup){
+    console.log(data);
     // TODO: update item
+    let postBody = {
+      
+      description: data['Description'],
+      quantity : data['Quantity'],
+      price : data['Price'],
+      condition : data['Condition'],
+      // department : this.departmentID,
+      // category : this.categoryID,
+      category : this.subcategoryID,
+    };
+    console.log(postBody);
+    // this.httpService.addItem(this.departmentName,
+    this.httpClientService.addItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
+      console.log(response.body);
+    });
 
-    this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName+'/'+this.subcategoryName);
+
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }
 
 }

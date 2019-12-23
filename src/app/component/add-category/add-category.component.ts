@@ -81,7 +81,7 @@ export class AddCategoryComponent implements OnInit {
     //   data.UniqueTag
     // )
     //TODO: Add Category
-    //  this.router.navigateByUrl('/department/'+this.departmentName);
+      this.router.navigateByUrl('/department/'+this.departmentID);
     // this.location.back();
   }
 
