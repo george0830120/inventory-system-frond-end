@@ -3,6 +3,7 @@ import { AcquisitionService } from '../../service/acquisition.service';
 import { ActivatedRoute } from '@angular/router';
 import { Acquisition } from '../../model/acquisition.model';
 import { HttpClientService } from '../../service/http-client.service';
+import { Item } from 'src/app/model';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ReceiveAcquisitionComponent implements OnInit {
   constructor(public route: ActivatedRoute,public service: AcquisitionService, public httpService: HttpClientService) { }
 
   ngOnInit() {
+    this.acquisition = new Acquisition();
     let currentUrl = this.route.url;
     currentUrl.subscribe({
       next: val => {
@@ -36,21 +38,21 @@ export class ReceiveAcquisitionComponent implements OnInit {
                           date:response.body["date"],
                           status:response.body["status"]["id"],
                           items:null});
+      this.httpService.getItemsUnderAcquisition(this.acquisitionId).subscribe(response => {
+        console.log(response.body);
+        this.acquisition.items = [];
+        for(var x in response.body){
+          this.acquisition.items.push({name:response.body[x]["description"],
+                                      department:"",
+                                      category:"",
+                                      description:"",
+                                      condition:response.body[x]["condition"],
+                                      id:response.body[x]["id"],
+                                      price:response.body[x]["price"],
+                                      quantity:response.body[x]["quantity"]});
+        }
+      });
     });
-
-    // this.httpService.getItemsUnderAcquisition(this.acquisitionId).subscribe(response => {
-    //   console.log(response.body);
-    //   for(var x in response.body){
-    //     this.acquisition.items.push({name:response.body[x]["name"], 
-    //                                 department:null,
-    //                                 category:response.body[x]["category"],
-    //                                 description:response.body[x]["description"],
-    //                                 condition:response.body[x]["condition"],
-    //                                 id:response.body[x]["id"],
-    //                                 price:response.body[x]["price"],
-    //                                 quantity:response.body[x]["quantity"]});
-    //   }
-    // });
   }
 
 }
