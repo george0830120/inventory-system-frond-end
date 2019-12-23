@@ -20,14 +20,17 @@ export class UpdateItemComponent implements OnInit {
     Quantity: new FormControl(''),
     Price: new FormControl(''),
     Condition: new FormControl(''),
+    Reason: new FormControl(''),
   });
   condition: SelectItem[];
+  reason:SelectItem[];
   public breadcrumbArray: MenuItem[];
   public item: Item;
   public itemId: string;
   public departmentID: string;
   public categoryID: string;
   public subcategoryID: string;
+  public qChanged: boolean;
 
   constructor(public route: ActivatedRoute,
     public router: Router,
@@ -42,6 +45,16 @@ export class UpdateItemComponent implements OnInit {
       {label:"Good",value: 3},
       {label:"New",value: 4}
     ];
+    this.reason = [
+      {label:"Reason", value:null},
+      {label:"Scraped", value:"Scraped"},
+      {label:"Given away", value: "Given away"},
+      {label:"Discarded",value: "Discarded"},
+      {label:"Broken",value: "Broken"},
+      {label:"Shrinkage",value: "Shrinkage"},
+      {label:"Correction",value: "Correction"},
+      {label:"Other",value: "Other"}
+    ];
   }
 
   ngOnInit() {
@@ -50,8 +63,9 @@ export class UpdateItemComponent implements OnInit {
     var subcategoryName: string;
     this.parseURL();
     this.item = new Item();
+    this.qChanged = false;
     console.log(this.departmentID+this.categoryID+this.subcategoryID);
-    this.addBreadcrumb(this.departmentID, this.categoryID, this.subcategoryID);
+    
     this.httpClientService.getDepartment(this.departmentID).subscribe(
       response =>{
         departmentName = response.body["name"];
@@ -70,13 +84,12 @@ export class UpdateItemComponent implements OnInit {
                     this.item.price = response.body["price"]
                     this.item.condition = response.body["condition"]["id"]
                     this.profileForm = this.formBuilder.group({
-
                       Name: this.item.name,
                       Description: this.item.description,
-
                       Quantity:  this.item.quantity,
                       Price: this.item.price,
-                      Condition:  this.item.condition
+                      Condition:  this.item.condition,
+                      Reason: null
                     })
                   })
               })   
@@ -104,7 +117,6 @@ export class UpdateItemComponent implements OnInit {
         this.itemId = val[4].path;
       } 
     )
-    
   }
 
   backToItemList(){
@@ -114,6 +126,7 @@ export class UpdateItemComponent implements OnInit {
   submit(data:FormGroup){
     console.log(data);
     var condition: string;
+    var postBody;
     switch( data['Condition']){
 
       case 0: condition = "Broken"; break;
@@ -122,19 +135,26 @@ export class UpdateItemComponent implements OnInit {
       case 3: condition = "Good"; break;
       case 4: condition = "New"; break;
     }
-    // TODO: update item
-    let postBody = {
-      
-      description: data['Description'],
-      quantity : data['Quantity'],
-      price : data['Price'],
+    if(this.qChanged){
+      postBody = {
+        description: data['Description'],
+        quantity : data['Quantity'],
+        price : data['Price'],
+        condition : condition,
+        reason: data['Reason']
+      };
+    }else{
+      postBody = {
+        description: data['Description'],
+        quantity : data['Quantity'],
+        price : data['Price'],
+        condition : condition
+    }
+  }
 
-      condition : condition,
-      // department : this.departmentID,
-      // category : this.categoryID,
-     // id : this.itemId,
-    };
-    console.log(postBody);
+    console.log( postBody);
+    console.log(data['Reason']);
+    console.log( JSON.stringify(postBody));
     // this.httpService.addItem(this.departmentName,
     this.httpClientService.editItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
       console.log(response.body);
@@ -142,6 +162,12 @@ export class UpdateItemComponent implements OnInit {
 
 
     this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
+  }
+
+  quantityChanged(){
+    this.qChanged = true;
+    
+
   }
 
 }
