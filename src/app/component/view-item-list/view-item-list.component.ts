@@ -105,11 +105,14 @@ export class ViewItemListComponent implements OnInit {
 
   search(info) {
     console.log("press search");
+    console.log(this.items);
     console.log(info);
     if(info.itemname!=""){
       console.log(info.itemname);
       this.showItems = [];
       this.showItems = this.items.filter(item=>item.id===info.itemname);
+      console.log("see");
+      console.log(this.showItems)
       this.IfSearch = true;
     }
     else if (info.keyword!=""){

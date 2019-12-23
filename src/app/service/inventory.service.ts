@@ -14,7 +14,7 @@ export class InventoryService {
     this.departments = new BehaviorSubject<Department[]>(null);
     var departmentsArray: Department[];
     departmentsArray = [];
-    (dummyTestData.Deaprtments).forEach(dep => departmentsArray.push(dep));
+    // (dummyTestData.Deaprtments).forEach(dep => departmentsArray.push(dep));
     this.departments.next(departmentsArray);
     console.log(this.departments) 
   }
