@@ -7,7 +7,7 @@ import { HttpClientService } from '../../service/http-client.service';
 import { MenuItem } from 'primeng/api';
 import { Location } from '@angular/common';
 
- 
+
 
 @Component({
   selector: 'app-add-category',
@@ -23,37 +23,39 @@ export class AddCategoryComponent implements OnInit {
   });
   condition: SelectItem[];
   public breadcrumbArray: MenuItem[];
+  public departmentID: string;
   public departmentName: string;
-
-
   constructor(public route: ActivatedRoute,
     public router: Router,
     public service: InventoryService,
-    public httpService: HttpClientService,
-    public location: Location
-    ) { 
+    public httpClientService: HttpClientService,
+    public location: Location,
+
+    ) {
 
   }
 
   ngOnInit() {
     this.parseURL();
-
-    this.addBreadcrumb(this.departmentName);
+    this.httpClientService.getDepartment(this.departmentID).subscribe(response=>{
+      this.departmentName = response.body.name;
+      this.addBreadcrumb(this.departmentName);
+    });
+    //this.addBreadcrumb(this.departmentName);
   }
 
   addBreadcrumb(departmentName:string){
     this.breadcrumbArray = [];
-    this.breadcrumbArray.push({label:departmentName, url: '/department/'+departmentName});
+    this.breadcrumbArray.push({label:departmentName, url: '/department/'+ this.departmentID});
 
   }
 
   parseURL(){
     var currentURL = this.route.url;
-    console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
-        this.departmentName = val[1].path; 
-      } 
+        this.departmentID = val[1].path;
+      }
     )
   }
   backToItemList(){
@@ -63,8 +65,16 @@ export class AddCategoryComponent implements OnInit {
 
   submit(data){
     console.log(data);
+    let postBody = {
+      name : data['Name'],
+      description: data['Description'],
+      tag: data['UniqueTag'],
+      sub: 0,
+    };
     // this.httpService.addItem(this.departmentName,
-
+    this.httpClientService.addCategory(this.departmentID, postBody).subscribe(response=>{
+      console.log(response.body);
+    });
 
     //   data.Name,
     //   data.Description,

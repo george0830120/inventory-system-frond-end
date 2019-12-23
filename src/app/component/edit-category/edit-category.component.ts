@@ -29,7 +29,7 @@ export class EditCategoryComponent implements OnInit {
     public router: Router,
     public service: InventoryService,
     public location: Location
-    ) { 
+    ) {
 
   }
 
@@ -41,8 +41,8 @@ export class EditCategoryComponent implements OnInit {
     this.category = this.service.getCategoryByName(this.departmentName, this.categoryName);
     this.profileForm.patchValue({uniqueTag: this.category.uniqueTag});
     console.log(this.category.uniqueTag)
-    console.log(this.category)
-    
+    console.log(this.category);
+
   }
 
   addBreadcrumb(departmentName:string, categoryName:string){
@@ -54,12 +54,12 @@ export class EditCategoryComponent implements OnInit {
   parseURL(){
     var currentURL = this.route.url;
 
-    console.log(currentURL); 
+    console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
         this.categoryName = val[2].path;
-        this.departmentName = val[1].path; 
-      } 
+        this.departmentName = val[1].path;
+      }
     )
   }
 
