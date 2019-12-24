@@ -31,9 +31,8 @@ const routes: Routes = [
   { path: 'department/addDepartment', component: AddDepartmentComponent },
   { path: 'department/:id/:id/:id/addItem', component: AddItemComponent },
   { path: 'department/:id/:id/:id/:id/splitItem', component: SplitItemComponent},
-  { path: 'department/:id/:id/:id', component: ViewItemListComponent },
   { path: 'department/:id/:id/:id/:id', component: UpdateItemComponent},
-
+  { path: 'department/:id/:id/:id', component: ViewItemListComponent },
  // { path: 'department/:id/viewCategory/:id/itemList', component: ViewItemListComponent },
   { path: 'department/:id/:id', component: ViewSubcategoryComponent },
   { path: 'department/:id', component: ViewCategoryComponent },
@@ -57,7 +56,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

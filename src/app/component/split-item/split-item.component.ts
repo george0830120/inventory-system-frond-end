@@ -143,7 +143,7 @@ export class SplitItemComponent implements OnInit {
       }
 
     }
-    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID+'/');
+    this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID+'/'+this.itemId);
   }
 
   private conditionNumberToString(conditionNumber: number){

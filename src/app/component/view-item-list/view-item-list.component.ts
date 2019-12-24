@@ -100,6 +100,7 @@ export class ViewItemListComponent implements OnInit {
     //this.IfSearch = false;
 
     //console.log(this.items);
+    console.log("initEnd");
   }
 
   addBreadcrumb(departmentName:string,categoryName:string,subCategoryName:string, subCategoryID:string) {
