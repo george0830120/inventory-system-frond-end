@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, SystemJsNgModuleLoader } from "@angular/core";
 import { SelectItem } from "primeng/api";
 import { FormBuilder } from "@angular/forms";
 import { Acquisition } from "../../model/acquisition.model";
@@ -19,6 +19,7 @@ export class ViewAcquisitionComponent implements OnInit {
   public acquisitions: Acquisition[];
   public showAcquisitions: Acquisition[];
   public isSearch: boolean;
+  public time:number;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -78,6 +79,27 @@ export class ViewAcquisitionComponent implements OnInit {
 
   addAcquisition() {
     console.log("add Acquisition");
+    this.time = 0;
+    //polling once in 1 sec for 20 times
+    let intervalID = setInterval(()=>{
+      this.time += 1;
+      let temp;
+      console.log(this.time);
+      this.httpService.getAcquisitions().subscribe((acqs) => {
+        temp = acqs.body;
+        console.log(temp.length);
+        if(temp.length > this.acquisitions.length) {
+          this.acquisitions = [];
+          for(let index = 0;index < temp.length;index++) {
+            this.acquisitions.push(temp[index])
+          }
+        }
+      })
+      if(this.time > 45) {
+        clearInterval(intervalID);
+      }
+
+    },1000)
     window.open('http://localhost/CRM/Main.php','_blank');
   }
 
