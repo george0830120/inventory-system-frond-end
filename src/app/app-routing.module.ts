@@ -20,6 +20,7 @@ import { AuthGuard }                from './service/auth-gaurd.service';
 import { EditDepartmentComponent } from './component/edit-department/edit-department.component'
 import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component'
 import { SplitItemComponent } from './component/split-item/split-item.component';
+import { ViewReportComponent } from './component/view-report/view-report.component';
 
 const routes: Routes = [
   { path: 'department/:id/addCategory', component: AddCategoryComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'department/:id', component: ViewCategoryComponent },
   { path: 'department', component: ViewDepartmentComponent },
   { path: 'acquisition', component: ViewAcquisitionComponent },
+  { path: 'report', component: ViewReportComponent },
   { path: 'home', component: HomePageComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'acquisition/:id', component: ReceiveAcquisitionComponent},
@@ -56,7 +58,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ enableTracing: true })],
+  imports: [RouterModule.forRoot(routes,{ enableTracing: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

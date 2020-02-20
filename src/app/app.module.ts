@@ -54,6 +54,7 @@ import { AddCategoryComponent } from './component/add-category/add-category.comp
 import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component';
 import { SplitItemComponent } from './component/split-item/split-item.component'
 import { MatSelectModule } from '@angular/material/select';
+import { ViewReportComponent } from './component/view-report/view-report.component';
 
 
 
@@ -78,7 +79,8 @@ import { MatSelectModule } from '@angular/material/select';
     EditDepartmentComponent,
     AddCategoryComponent,
     AddSubcategoryComponent,
-    SplitItemComponent
+    SplitItemComponent,
+    ViewReportComponent
   ],
   imports: [
     BrowserModule,

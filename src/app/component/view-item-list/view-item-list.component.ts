@@ -62,36 +62,37 @@ export class ViewItemListComponent implements OnInit {
         this.subCategoryID = val[3].path;
       }
     });
-    this.httpClientService.getSubCategoryItems(this.departmentID, this.categoryID, this.subCategoryID).subscribe(data => {
+    this.httpClientService.getSubCategoryItems(this.departmentID, this.categoryID, this.subCategoryID).subscribe(
+      data => {
 
-      this.items=[];
+        this.items=[];
 
-      res = data.body[0];
-      categoryLength = res["category"].split(',').length;
-      if(categoryLength===1){
-        this.categoryName = res["category"];
-        this.departmentName = res["department"];
-      }
-      else if(categoryLength===2){
-        this.categoryName = res["category"].split(',')[0];
-        this.subCategoryName = res["category"].split(',')[1];
-        this.departmentName = res["department"];
-      }
-      this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryID);
+        res = data.body[0];
+        categoryLength = res["category"].split(',').length;
+        if(categoryLength===1){
+          this.categoryName = res["category"];
+          this.departmentName = res["department"];
+        }
+        else if(categoryLength===2){
+          this.categoryName = res["category"].split(',')[0];
+          this.subCategoryName = res["category"].split(',')[1];
+          this.departmentName = res["department"];
+        }
+        this.addBreadcrumb(this.departmentName,this.categoryName,this.subCategoryName, this.subCategoryID);
 
-      for(var x in data.body){
-        let item = new Item();
-        item.condition = data.body[x]["condition"];
-        item.description = data.body[x]["description"];
-        item.id = data.body[x]["id"];
-        item.name = data.body[x]["name"];
-        item.price = data.body[x]["price"];
-        item.quantity = data.body[x]["quantity"];
-        item.category = this.categoryName;
-        item.department = this.departmentName;
+        for(var x in data.body){
+          let item = new Item();
+          item.condition = data.body[x]["condition"];
+          item.description = data.body[x]["description"];
+          item.id = data.body[x]["id"];
+          item.name = data.body[x]["name"];
+          item.price = data.body[x]["price"];
+          item.quantity = data.body[x]["quantity"];
+          item.category = this.categoryName;
+          item.department = this.departmentName;
 
-        this.items.push(item);
-      }
+          this.items.push(item);
+        }
 
     });
     //this.addBreadcrumb(this.departmentID, this.categoryID, this.subCategoryID);

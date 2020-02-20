@@ -1,7 +1,7 @@
 import { Category } from './category.model';
 
 export class Department {
-    //id: string;
+    id: string;
     name: string;
     description: string;
     categories: Category[];

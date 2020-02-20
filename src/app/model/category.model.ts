@@ -7,4 +7,6 @@ export class Category {
     subcategories: Subcategory[];
     description: string;
     uniqueTag: string;
+    hasSub:string;
+    id:number;
 }

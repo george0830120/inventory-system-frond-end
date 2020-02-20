@@ -190,6 +190,12 @@ export class HttpClientService {
     return this.httpClient.get('http://localhost:8080/department/' + subcategory  , {responseType: 'json'} );
   }
 
+  getReportInfo(){
+    return this.httpClient.get('http://localhost:3000/report',
+      { headers: new HttpHeaders().set('Content-Type', 'application/json'), observe: 'response', withCredentials:true }
+    );
+  }
+
 
 
   auth(userName:string, password:string){

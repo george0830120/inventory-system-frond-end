@@ -46,6 +46,7 @@ export class ViewCategoryComponent implements OnInit {
           this.categories.push({name: response.body[x]["name"], id:response.body[x]["id"]});
 
         }
+        
       }
     );
     this.getAllDepartment(departmentID);
