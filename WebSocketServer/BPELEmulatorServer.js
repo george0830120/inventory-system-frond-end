@@ -11,6 +11,11 @@ const wss = new SocketServer({ server })
 wss.on('connection', ws => {
 
     console.log('Client connected')
+    notifyMessage = {
+        "cid" : 1,
+        "notification" : "CONNECTIONREADY"
+    }
+    ws.send(JSON.stringify(notifyMessage))
     
     // when server recive message from client
     ws.on('message', data => {
@@ -20,7 +25,10 @@ wss.on('connection', ws => {
             }));
         }
         else {
+            console.log("recive data from client")
+            console.log(data)
             ws.send(JSON.stringify({
+                "cid" : 1,
                 "notification": "CONNECTIONREADY",
                 "data": data
             }))

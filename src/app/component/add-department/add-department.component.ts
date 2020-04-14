@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { InventoryService } from '../../service/inventory.service';
 import { Location } from '@angular/common';
 import {HttpClientService} from '../../service/http-client.service';
+import { WebSocketService } from '../../service/web-socket.service';
 
 @Component({
   selector: 'app-add-department',
@@ -15,7 +16,8 @@ export class AddDepartmentComponent implements OnInit {
     public formBuilder: FormBuilder,
     public service: InventoryService,
     public location: Location,
-    public httpClientService: HttpClientService
+    public httpClientService: HttpClientService,
+    public webSocketService: WebSocketService
   ) {
     this.addDepartmentForm = this.formBuilder.group({
       name: '',
@@ -33,9 +35,10 @@ export class AddDepartmentComponent implements OnInit {
       code: data['posDepartmentCode'],
       tag: data['uniqueTag']
     }
-    this.httpClientService.addDepartment(JSON.stringify(postBody)).subscribe((res)=> {
-      console.log(res);
-    })
+    // this.httpClientService.addDepartment(JSON.stringify(postBody)).subscribe((res)=> {
+    //   console.log(res);
+    // })
+    this.webSocketService.sendMessage(postBody)
     // this.httpClientService.addDepartment(data).subscribe(response => this.handle(response));
   }
 
