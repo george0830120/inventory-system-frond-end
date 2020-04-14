@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+	xmlns:tns="./testdata/addItem.bpel"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlbpel="http://schemas.xmlsoap.org/wsdl/bpel/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="./testdata/viewDepartment.bpel">
+
+    <message name="displayDepartmentsResponse">
+        <part name="department" type="string" maxOccurs="100"/>
+    </message>
+
+    <portType name="tns:navigationPort">
+        <opeartion name="displayDepartments">
+            <output message="displayDepartmentsResponse"/>
+        </opeartion>
+    </portType>
+    <portType name="tns:navigationPort">
+        <operation name="addDepartment"></operation>
+    </portType>
+
+</definitions>

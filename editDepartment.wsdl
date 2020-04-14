@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+	xmlns:tns="./testdata/addItem.bpel"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlbpel="http://schemas.xmlsoap.org/wsdl/bpel/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="./testdata/addItem.bpel">
+
+    <message name="displayResponse">
+        <part name="currentname" type="xsd:string"/>
+    </message>
+
+    <message name="saveRequest">
+        <part name="uniqueTag" type="xsd:string"/>
+        <part name="name" type="xsd:string"/>
+        <part name="description" type="xsd:string"/>
+        <part name="posCode" type="xsd:string"/>
+    </message>
+
+    <portType name="displayPort">
+        <opeartion name="display">
+            <output message="tns:displayResponse" name="out"/>
+        </opeartion>
+    </portType>
+
+    <portType name="navigationPort">
+        <operation name="save">
+            <input message="tns:saveRequest" name="in"/>
+        </operation>
+        <opeartion name="cancel">
+        </opeartion>
+    </portType>
+</definitions>
