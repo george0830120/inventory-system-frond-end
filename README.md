@@ -1,27 +1,91 @@
-# InventoryAppV2
+# Inventory System
+![](./resources/Diagram1.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+### 1. Fake BPEL Engine讓我們可以簡單做測試(Message Passing的部份)
+* 目前用 Port 3000做Demo
+* 開Server 
+  * `node ./WebSockerServer/BPELEmulatorServer.js`
+* 開Client
+  *  `http://localhost:4200/department` 目前只做好viewDepartment
+### 2. Message Passing Sequence Diagram
 
-## Development server
+![](./resources/MessagePassingSequenceDiagram.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### 3. Message format sent to BPEL
+```=javascript
+const notificationData = {
+    "notification":"CONNECTIONREADY",
+    "cid":0
+}
 
-## Code scaffolding
+const startInteractionData = {
+    "notification":"READY",
+    "portType": {
+        "namespace":"testdata/GetDepartments.bpel",
+        "local_name":"startInteractionPort"
+    },
+    "partnerLink":"Main",
+    "pid":0,
+    "operation":"start"
+}
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+const unReadyStartInteractionData = {
+    "notification":"UNREADY",
+    "portType": {
+        "namespace":"testdata/GetDepartments.bpel",
+        "local_name":"startInteractionPort"
+    },
+    "partnerLink":"Main",
+    "pid":0,
+    "operation":"start"
+}
 
-## Build
+const pageInteractionData = {
+    "notification":"READY",
+    "portType": {
+        "namespace":"testdata/GetDepartments.bpel",
+        "local_name":"pageInteractionPort"
+    },
+    "partnerLink":"Main",
+    "pid":0,
+    "operation":"viewDepartmentList"
+}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+const outputData = {
+    "portType": {
+        "namespace":"testdata/GetDepartments.bpel",
+        "local_name":"outputPort"
+    },
+    "partnerLink":"Client",
+    "pid":0,
+    "type":{
+        "namespace":"testdata/GetDepartments.bpel",
+        "local_name":"outputPort.output"
+    },
+    "operation":"output",
+    "content":"\n Vehecle<Voutput>\n<VMain.reply>\n"
+}
+```
 
-## Running unit tests
+### 4. Message format receive from BPEL
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```javascript=
+const clientDataStart = {
+    "bpelPath" : "",
+    "wsdlPath" : ""
+}
 
-## Running end-to-end tests
+const clientData = {
+    "pid" : "",
+    "partnerLink" : "",
+    "operation": "",
+    "portType": {
+        "namespace": "",
+        "local_name": ""
+    },
+    "content": ""
+}
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### 5. File Structure of a web application
+* Note : Inventory System has multiple web application (multiple Page)

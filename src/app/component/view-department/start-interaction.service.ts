@@ -1,7 +1,8 @@
+// portType : startInteractionPort
 import { Injectable } from "@angular/core";
 import { WebSocketService } from "../../service/web-socket.service";
 import { BPEL_WSDL_INFO } from "./wsdlbpelPath";
-import * as globalParams from "../../global.params";
+import * as globalParams from "./global.params";
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,7 @@ export class StartInteractionService {
             data => {
                 if (data.hasOwnProperty("portType") && this._portType["local_name"].indexOf(data['portType']["local_name"]) > -1) {
                     if (data.hasOwnProperty("notification") && data["notification"] === "READY") {
+                        // startPage() will send these message to BPEL
                         globalParams.routingInvoker[data["operation"]] = data;
                     }
                 }

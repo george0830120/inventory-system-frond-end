@@ -33,7 +33,7 @@ wss.on('connection', ws => {
             // operation under StartInteractionPort
             if (receivedMessage["portType"]["local_name"] == "startInteractionPort") {
                 ws.send(JSON.stringify(unReadyStartInteractionData));
-                ws.send(JSON.stringify(pafeInteractionData));
+                ws.send(JSON.stringify(pageInteractionData));
             }
 
             // operation under PageInteractionPort
