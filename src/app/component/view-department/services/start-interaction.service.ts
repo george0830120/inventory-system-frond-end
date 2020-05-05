@@ -1,8 +1,8 @@
 // portType : startInteractionPort
 import { Injectable } from "@angular/core";
-import { WebSocketService } from "../../service/web-socket.service";
-import { BPEL_WSDL_INFO } from "./wsdlbpelPath";
-import * as globalParams from "./global.params";
+import { WebSocketService } from "../../../service/web-socket.service";
+import { BPEL_WSDL_INFO } from "../resources/wsdlbpelPath";
+import * as globalParams from "../resources/global.params";
 
 @Injectable({
     providedIn: 'root'

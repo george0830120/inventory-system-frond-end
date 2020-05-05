@@ -1,8 +1,8 @@
 // portType : pageInteraction
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { WebSocketService } from "../../service/web-socket.service";
-import * as globalParams from "./global.params";
+import { WebSocketService } from "../../../service/web-socket.service";
+import * as globalParams from "../resources/global.params";
 
 @Injectable({
     providedIn: 'root'

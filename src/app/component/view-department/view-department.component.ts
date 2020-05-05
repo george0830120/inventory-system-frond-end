@@ -3,9 +3,9 @@ import { Component, OnInit } from "@angular/core";
 // /user:id/Department -> user id for identifying privilege
 import { ActivatedRoute } from "@angular/router";
 import { WebSocketService } from "../../service/web-socket.service";
-import { StartInteractionService } from "./start-interaction.service";
-import { ViewDepartmentService } from "./view-department.service";
-import { ViewDepartmentOutputService } from "./view-department-output.service";
+import { StartInteractionService } from "./services/start-interaction.service";
+import { ViewDepartmentService } from "./services/view-department.service";
+import { ViewDepartmentOutputService } from "./services/view-department-output.service";
 
 export class IDepartment {
   constructor(public name: string) { }

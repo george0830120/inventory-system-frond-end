@@ -1,7 +1,7 @@
 // outputport
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
-import { WebSocketService } from "../../service/web-socket.service";
+import { WebSocketService } from "../../../service/web-socket.service";
 
 @Injectable({
     providedIn: 'root'
