@@ -89,3 +89,5 @@ const clientData = {
 
 ### 5. File Structure of a web application
 * Note : Inventory System has multiple web application (multiple Page)
+
+![](resources/fileStructure.png)
