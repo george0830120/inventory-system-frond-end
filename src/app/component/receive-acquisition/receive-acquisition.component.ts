@@ -22,14 +22,11 @@ export class ReceiveAcquisitionComponent implements OnInit {
     let currentUrl = this.route.url;
     currentUrl.subscribe({
       next: val => {
-        console.log(val);
         this.acquisitionId = val[1].path;
       }
     })
-    console.log(this.acquisitionId);
-    // this.acquisition = this.service.getAcqusitionById(this.acquisitionId);
+
     this.httpService.getAcquisition(this.acquisitionId).subscribe(response => {
-      console.log(response.body);
       this.acquisition = ({id:response.body["id"], 
                           type:response.body["type"]["id"],
                           donor:response.body["donor"],
@@ -39,7 +36,6 @@ export class ReceiveAcquisitionComponent implements OnInit {
                           status:response.body["status"]["id"],
                           items:null});
       this.httpService.getItemsUnderAcquisition(this.acquisitionId).subscribe(response => {
-        console.log(response.body);
         this.acquisition.items = [];
         for(var x in response.body){
           this.acquisition.items.push({name:response.body[x]["description"],

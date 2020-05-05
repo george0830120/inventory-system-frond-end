@@ -4,11 +4,8 @@
     <div class="row">
         <div class="col-8">
             <mat-grid-list cols="4">
-                <mat-grid-tile
-                    class="mat-grid"
-                    *ngFor = "let department of departments"
-                    routerLink = "{{department.id}}">
-                  {{department["name"]}}
+                <mat-grid-tile class="mat-grid" *ngFor="let department of departments" routerLink="{{department.id}}">
+                    {{department["name"]}}
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
@@ -18,11 +15,8 @@
     <div class="row">
         <div class="col-8"></div>
         <div class="col-4">
-            <p-button
-                label="Add Department" 
-                styleClass="ui-button-info"
-                routerLink="/department/addDepartment"
-                ></p-button>
+            <p-button label="Add Department" styleClass="ui-button-info" routerLink="/department/addDepartment">
+            </p-button>
         </div>
     </div>
 </div>

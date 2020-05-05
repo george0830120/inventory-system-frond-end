@@ -1,5 +1,9 @@
 const express = require('express')
 const SocketServer = require('ws').Server
+const startInteractionData = require("./fakeBPELData").startInteractionData
+const unReadyStartInteractionData = require("./fakeBPELData").unReadyStartInteractionData
+const pageInteractionData = require("./fakeBPELData").pageInteractionData
+const notificationData = require("./fakeBPELData").notificationData
 
 const PORT = 3000
 
@@ -11,29 +15,33 @@ const wss = new SocketServer({ server })
 wss.on('connection', ws => {
 
     console.log('Client connected')
-    notifyMessage = {
-        "cid" : 1,
-        "notification" : "CONNECTIONREADY"
-    }
-    ws.send(JSON.stringify(notifyMessage))
-    
+    ws.send(JSON.stringify(notificationData))
+
     // when server recive message from client
     ws.on('message', data => {
-        if (data === 'testing') {
-            ws.send(JSON.stringify({
-                "test":'Testintg'
-            }));
-        }
-        else {
-            console.log("recive data from client")
-            console.log(data)
-            ws.send(JSON.stringify({
-                "cid" : 1,
-                "notification": "CONNECTIONREADY",
-                "data": data
-            }))
+        console.log("Receive Data: ");
+        console.log(data);
+
+        let receivedMessage = JSON.parse(data);
+        // startInteractionPort : BPEL Engine receive wsdl and bpel file path
+        if (receivedMessage.hasOwnProperty("bpelPath") && receivedMessage.hasOwnProperty("wsdlPath")) {
+            ws.send(JSON.stringify(startInteractionData));
         }
 
+        // startOperation From frontend
+        if (receivedMessage.hasOwnProperty("pid") && receivedMessage.hasOwnProperty("portType")) {
+            // operation under StartInteractionPort
+            if (receivedMessage["portType"]["local_name"] == "startInteractionPort") {
+                ws.send(JSON.stringify(unReadyStartInteractionData));
+                ws.send(JSON.stringify(pafeInteractionData));
+            }
+
+            // operation under PageInteractionPort
+            // find data and passing to OutputPortType
+            if (receivedMessage["portType"]["local_name"] == "pageInteractionPort") {
+
+            }
+        }
     })
 
     // close conntection between server and client

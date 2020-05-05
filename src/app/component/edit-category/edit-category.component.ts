@@ -43,12 +43,10 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.parseURL();
-    console.log(this.departmentID+this.categoryID);
     this.category = new Category();
 
       this.httpClientService.getDepartment(this.departmentID).subscribe(
         response => {
-          console.log(response.body)
           this.departmentName  = response.body["name"];
           this.httpClientService.getSpecificCategory(this.categoryID).subscribe(
             response => {
@@ -71,16 +69,12 @@ export class EditCategoryComponent implements OnInit {
 
   addBreadcrumb(){
     this.breadcrumbArray = []
-
-    console.log(this.category.name)
     this.breadcrumbArray.push({label:this.departmentName, url: '/department/'+this.departmentID});
     this.breadcrumbArray.push({label:this.category.name, url: '/department/'+this.departmentID+'/'+this.categoryID});
   }
 
   parseURL(){
     var currentURL = this.route.url;
-
-    console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
         this.categoryID = val[2].path;
@@ -95,18 +89,13 @@ export class EditCategoryComponent implements OnInit {
   }
 
   submit(data:FormGroup){
-    console.log(data);
-    // TODO: update item
-
-    // this.location.back();
-    // this.router.navigateByUrl('/department/'+this.departmentName+'/'+this.categoryName);
     let postData = {
       "name": data["Name"],
       "description": data["Description"],
       "tag": data["UniqueTag"],
       "sub": this.sub
     }
-    console.log(postData)
+
     this.httpClientService.editCategory(this.categoryID,
       JSON.stringify(postData)
       ).subscribe((res) => {

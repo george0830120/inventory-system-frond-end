@@ -28,18 +28,13 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   save(data) {
-    console.log(data);
     let postBody = {
       name : data['name'],
       description: data['description'],
       code: data['posDepartmentCode'],
       tag: data['uniqueTag']
     }
-    // this.httpClientService.addDepartment(JSON.stringify(postBody)).subscribe((res)=> {
-    //   console.log(res);
-    // })
     this.webSocketService.sendMessage(postBody)
-    // this.httpClientService.addDepartment(data).subscribe(response => this.handle(response));
   }
 
   handle(response){

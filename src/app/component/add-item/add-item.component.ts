@@ -62,7 +62,6 @@ export class AddItemComponent implements OnInit {
               this.subcategoryName = response.body[x]["name"];
             }
           }
-    
           this.addBreadcrumb(this.departmentName, this.categoryName, this.subcategoryName);
         });
       });
@@ -82,7 +81,6 @@ export class AddItemComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url;
-    console.log(currentURL);
     const subscribe = currentURL.subscribe(
       val => {
         this.categoryID = val[2].path;
@@ -115,12 +113,9 @@ export class AddItemComponent implements OnInit {
       scid: +this.subcategoryID,
     };
 
-    console.log(postBody);
-
     this.httpClientService.addItem(JSON.stringify(postBody)).subscribe(response => {
       console.log(response);
     })
-
 
     //TODO: Add item
      this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);

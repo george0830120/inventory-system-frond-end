@@ -41,7 +41,6 @@ export class AddCategoryComponent implements OnInit {
       this.departmentName = response.body["name"];
       this.addBreadcrumb(this.departmentName);
     });
-    //this.addBreadcrumb(this.departmentName);
   }
 
   addBreadcrumb(departmentName:string){
@@ -59,12 +58,10 @@ export class AddCategoryComponent implements OnInit {
     )
   }
   backToItemList(){
-    // this.router.navigateByUrl('/department/'+this.departmentName);
     this.location.back();
   }
 
   submit(data){
-    console.log(data);
     let postBody = {
       name : data['Name'],
       description: data['Description'],
@@ -76,13 +73,8 @@ export class AddCategoryComponent implements OnInit {
       console.log(response.body);
     });
 
-    //   data.Name,
-    //   data.Description,
-    //   data.UniqueTag
-    // )
     //TODO: Add Category
-      this.router.navigateByUrl('/department/'+this.departmentID);
-    // this.location.back();
+    this.router.navigateByUrl('/department/'+this.departmentID);
   }
 
 }

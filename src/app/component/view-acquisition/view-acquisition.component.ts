@@ -47,22 +47,10 @@ export class ViewAcquisitionComponent implements OnInit {
       status: 0
     });
     this.isSearch = false;
-    // this.service.getAcquisitionFromCRM().subscribe(acq => {
-    //   console.log("component get from service");
-    //   console.log(acq);
-    //   if(acq) {
-    //     setTimeout(() => {
-    //       this.acquisitions.push(acq);
-    //     },5000)
-    //   }
-    // })
   }
 
   search(data) {
-    console.log(data);
-    console.log(JSON.stringify(data))
     if(data.acquisitionID != "" || data.name != "" || data.phone != "") {
-      console.log("success");
       this.showAcquisitions = [];
       this.acquisitions.filter(acquisition => acquisition.id === data.acquisitionID 
         || acquisition.donor === data.name 
@@ -78,7 +66,6 @@ export class ViewAcquisitionComponent implements OnInit {
   }
 
   addAcquisition() {
-    console.log("add Acquisition");
     this.time = 0;
     //polling once in 1 sec for 20 times
     let intervalID = setInterval(()=>{
@@ -105,25 +92,14 @@ export class ViewAcquisitionComponent implements OnInit {
 
   ngOnInit() {
     this.acquisitions = [];
-    // this.service.getAcquisitions().subscribe( (acqs) => {
-    //   this.acquisitions = acqs;
-    //   // this.acquisitions.push(acq);
-    // 
+
     let temp;
     this.httpService.getAcquisitions().subscribe((acqs) => {
-      console.log(acqs.body);
       temp = acqs.body; 
-      console.log(temp.length)
-      // if(acqs.body != null) {
-      //   for(let index = 0;index < acqs.body.length;index++) {
-      //     this.acquisitions.push(acqs.body[index]);
-      //   }
-      // }
-      // temp = acqs; 
+ 
       for(let index = 0;index < temp.length;index++) {
         this.acquisitions.push(temp[index])
       }
     })
-    console.log(temp);
   }
 }

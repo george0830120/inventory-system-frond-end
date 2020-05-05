@@ -63,7 +63,6 @@ export class SplitItemComponent implements OnInit {
                     this.categoryPath = departmentName +' > '+categoryName+' > '+subcategoryName;
                     this.items = []
                     this.items.push(this.item)
-                    console.log(this.item)
                   })
               })   
           })
@@ -73,7 +72,6 @@ export class SplitItemComponent implements OnInit {
 
   parseURL(){
     var currentURL = this.route.url;
-    console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
         this.categoryID = val[2].path;
@@ -85,8 +83,7 @@ export class SplitItemComponent implements OnInit {
 
   cloneItem(i){
     if(this.items[i].quantity > 1){
-
-      var newItem = Object.assign({},this.items[i]);
+      let newItem = Object.assign({},this.items[i]);
       newItem.quantity = 1;
       this.items.push(newItem);
       this.items[i].quantity -= newItem.quantity;
@@ -96,8 +93,6 @@ export class SplitItemComponent implements OnInit {
     
     if((Number(this.items[i-1].quantity) + Number(this.items[i].quantity) - newQuantity > 0)&& i!=0){
       this.items[i-1].quantity = Number(this.items[i-1].quantity) + Number(this.items[i].quantity) - newQuantity;
-      console.log(this.items[i-1].quantity)
-      console.log("end")
       this.items[i].quantity = newQuantity;
     }
   }
@@ -118,10 +113,6 @@ export class SplitItemComponent implements OnInit {
           reason: "Other",
         //  comment: "Split Item"
         };
-        console.log(this.items[i].condition)
-        console.log(this.conditionNumberToString(Number(this.items[i].condition)))
-        console.log("postBody")
-        console.log(postBody)
         this.httpClientService.editItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
           console.log(response.body);
         });
@@ -136,7 +127,6 @@ export class SplitItemComponent implements OnInit {
           scid: this.subcategoryID,
         };
     
-        console.log(postBody);
         this.httpClientService.addItem(JSON.stringify(postBody)).subscribe(response => {
           console.log(response);
         })
@@ -147,8 +137,7 @@ export class SplitItemComponent implements OnInit {
   }
 
   private conditionNumberToString(conditionNumber: number){
-    var temp:string
-    console.log(conditionNumber)
+    let temp : string;
     switch(conditionNumber){
       case 0: temp = "Broken"; break;
       case 1: temp = "Bad"; break;
@@ -156,7 +145,6 @@ export class SplitItemComponent implements OnInit {
       case 3: temp = "Good"; break;
       case 4: temp = "New"; break;
     }
-    console.log(temp)
     return temp
   }
    

@@ -13,23 +13,20 @@ export class WebSocketService {
   cid: number = null;
 
   constructor() {
+    // this.ws = new WebSocket("ws://localhost:8090/bpel");
     this.ws = new WebSocket("ws://localhost:3000");
+    console.log("Conntect to BPEL WebSocket");
     this.observable = this.createObservableSocket();
     this.subject = new Subject<any>();
     this.observable.subscribe(this.subject);
-    console.log("HIHIHIHIHIIHIHIIIHI")
   }
 
   private createObservableSocket(): Observable<any> {
-    // console.log("createObservableSocket");
     return new Observable(
       observer => {
         this.ws.onmessage = (event) => {
           console.log("[WebSocketService] Received:", event.data);
           var jsonObj = JSON.parse(event.data);
-
-          // When conntect to Server , the first response will includes 
-          // notification : CONNECTIONREADY , after we get this message we can start communication with BPEL
           if (jsonObj.hasOwnProperty("notification") && jsonObj["notification"] === "CONNECTIONREADY") {
             this.cid = jsonObj["cid"];
           } else {

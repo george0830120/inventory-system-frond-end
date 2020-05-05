@@ -44,7 +44,6 @@ export class EditDepartmentComponent implements OnInit {
     this.department = new Department();
     this.httpService.getDepartment(this.departmentID).subscribe((res) => {
       this.department.POSDepartmentCode = res.body["code"];
-      console.log(res.body)
       this.department.description = res.body["description"];
       this.department.name = res.body["name"];
       this.department.uniqueTag = res.body["tag"];
@@ -70,7 +69,6 @@ export class EditDepartmentComponent implements OnInit {
   parseURL(){
     var currentURL = this.route.url;
 
-    console.log(currentURL); 
     const subscribe = currentURL.subscribe(
       val => {
         this.departmentID = val[1].path; 
@@ -80,7 +78,6 @@ export class EditDepartmentComponent implements OnInit {
 
   backToItemList(){
     this.location.back();
-    // this.router.navigateByUrl('/department/'+this.departmentName);
   }
 
   submit(data){
@@ -96,7 +93,6 @@ export class EditDepartmentComponent implements OnInit {
         console.log(res)
       })
     // TODO: update item
-    // this.location.back();
      this.router.navigateByUrl('/department/'+this.departmentID);
   }
 
@@ -105,6 +101,6 @@ export class EditDepartmentComponent implements OnInit {
       ).subscribe((res) => {
         console.log(res)
       })
-      this.router.navigateByUrl('/department')
+    this.router.navigateByUrl('/department')
   }
 }

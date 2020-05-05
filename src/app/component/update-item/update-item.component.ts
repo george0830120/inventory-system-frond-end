@@ -64,7 +64,6 @@ export class UpdateItemComponent implements OnInit {
     this.parseURL();
     this.item = new Item();
     this.qChanged = false;
-    console.log(this.departmentID+this.categoryID+this.subcategoryID);
     
     this.httpClientService.getDepartment(this.departmentID).subscribe(
       response =>{
@@ -152,14 +151,9 @@ export class UpdateItemComponent implements OnInit {
     }
   }
 
-    console.log( postBody);
-    console.log(data['Reason']);
-    console.log( JSON.stringify(postBody));
-    // this.httpService.addItem(this.departmentName,
     this.httpClientService.editItem(this.itemId, JSON.stringify(postBody)).subscribe(response=>{
       console.log(response.body);
     });
-
 
     this.router.navigateByUrl('/department/'+this.departmentID+'/'+this.categoryID+'/'+this.subcategoryID);
   }

@@ -55,8 +55,6 @@ export class ViewItemListComponent implements OnInit {
     let categoryLength: number;
     currentUrl.subscribe({
       next: val => {
-        console.log(val);
-        // this.breadcrumbArray.push(val[1].path);
         this.departmentID = val[1].path;
         this.categoryID = val[2].path;
         this.subCategoryID = val[3].path;
@@ -95,13 +93,6 @@ export class ViewItemListComponent implements OnInit {
         }
 
     });
-    //this.addBreadcrumb(this.departmentID, this.categoryID, this.subCategoryID);
-    //this.subCategory = this.service.getSubCategoryByName(this.departmentID, this.categoryID, this.subCategoryID);
-    //this.items = this.subCategory.items;
-    //this.IfSearch = false;
-
-    //console.log(this.items);
-    console.log("initEnd");
   }
 
   addBreadcrumb(departmentName:string,categoryName:string,subCategoryName:string, subCategoryID:string) {
@@ -112,17 +103,12 @@ export class ViewItemListComponent implements OnInit {
   }
 
   search(info) {
-    console.log("press search");
-    console.log(this.items);
-    console.log(info);
     if(info.itemname!=""){
-      console.log(info.itemname);
       this.showItems = [];
       this.showItems = this.items.filter(item=>item.id.toString()==info.itemname);
       this.IfSearch = true;
     }
     else if (info.keyword!=""){
-      console.log(info.keyword);
       this.showItems = [];
       this.items.filter(item=>item.department.includes(info.keyword)).forEach(val => this.showItems.push(val))
       this.items.filter(item=>item.category==info.keyword).forEach(val => this.showItems.push(val))
@@ -134,8 +120,6 @@ export class ViewItemListComponent implements OnInit {
     }else{
       this.IfSearch = false;
     }
-    console.log(this.IfSearch);
-    console.log(this.showItems);
   }
   addItem() {
     console.log("add item");
