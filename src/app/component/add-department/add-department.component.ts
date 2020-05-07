@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { InventoryService } from '../../service/inventory.service';
 import { Location } from '@angular/common';
-import {HttpClientService} from '../../service/http-client.service';
 import { WebSocketService } from '../../service/web-socket.service';
+import { AddDepartmentService } from './services/add-department.service';
+import { AddDepartmentOutputService } from './services/add-department-output.service';
+import { StartInteractionService } from './services/start-interaction.service';
 
 @Component({
   selector: 'app-add-department',
@@ -14,10 +15,11 @@ export class AddDepartmentComponent implements OnInit {
   public addDepartmentForm: any;
   constructor(
     public formBuilder: FormBuilder,
-    public service: InventoryService,
     public location: Location,
-    public httpClientService: HttpClientService,
-    public webSocketService: WebSocketService
+    public webSocketService: WebSocketService,
+    public startInteractionService: StartInteractionService, // portType: startInteraction
+    public addDepartmentService: AddDepartmentService, // portType: pageIneraction
+    public addDepartmentOutputService: AddDepartmentOutputService // portType: output
   ) {
     this.addDepartmentForm = this.formBuilder.group({
       name: '',
@@ -34,17 +36,15 @@ export class AddDepartmentComponent implements OnInit {
       code: data['posDepartmentCode'],
       tag: data['uniqueTag']
     }
-    this.webSocketService.sendMessage(postBody)
+    this.addDepartmentService.sendMessage(postBody)
   }
 
-  handle(response){
-    console.log("start to add departments...");
-  }
   cancel() {
     this.location.back();
   }
 
   ngOnInit() {
+    // this.webSocketService.reconnection();
   }
 
 }

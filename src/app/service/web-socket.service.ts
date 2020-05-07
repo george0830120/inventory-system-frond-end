@@ -13,9 +13,10 @@ export class WebSocketService {
   cid: number = null;
 
   constructor() {
+    console.log("WebSocketService Constructor");
     // this.ws = new WebSocket("ws://localhost:8090/bpel");
     this.ws = new WebSocket("ws://localhost:3000");
-    console.log("Conntect to BPEL WebSocket");
+    console.log("Connect to BPEL WebSocket");
     this.observable = this.createObservableSocket();
     this.subject = new Subject<any>();
     this.observable.subscribe(this.subject);
@@ -59,5 +60,16 @@ export class WebSocketService {
 
     this.ws.send(message);
     console.log("[WebSocketService] Sent:", message);
+  }
+
+  reconnection() {
+    if(this.ws.OPEN) {
+      this.ws.close();
+      console.log("ReConnect to BPEL WebSocket");
+      this.ws = new WebSocket("ws://localhost:3000");
+      this.observable = this.createObservableSocket();
+      this.subject = new Subject<any>();
+      this.observable.subscribe(this.subject)
+    }
   }
 }
