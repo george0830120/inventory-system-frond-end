@@ -16,7 +16,7 @@ export class IDepartment {
   templateUrl: "./view-department.component.html",
   styleUrls: ["./view-department.component.scss"]
 })
-export class ViewDepartmentComponent implements OnInit {
+export class MainComponent implements OnInit {
   // public departments: JSON;
   public departments: { name: string, id: string }[];
   public i = 0;

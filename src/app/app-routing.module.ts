@@ -21,8 +21,10 @@ import { EditDepartmentComponent } from './component/edit-department/edit-depart
 import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component'
 import { SplitItemComponent } from './component/split-item/split-item.component';
 import { ViewReportComponent } from './component/view-report/view-report.component';
+import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
+  { path: 'main', component: MainComponent },
   { path: 'department/:id/addCategory', component: AddCategoryComponent },
   { path: 'department/:id/:id/moveCategory', component: MoveCategoryComponent },
   { path: 'department/:id/:id/editCategory', component: EditCategoryComponent },

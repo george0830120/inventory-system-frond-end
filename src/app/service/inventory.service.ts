@@ -1,9 +1,6 @@
-import { Department, Category, Subcategory, Item } from "../model/index";
-import { dummyTestData } from "../testData-Inventory";
-import { of, from, Observable, pipe } from "rxjs";
-import { filter } from "rxjs/operators";
+import { Department, Category, Subcategory } from "../model/index";
 import { Injectable } from "@angular/core";
-import { Subject, BehaviorSubject } from "rxjs"; 
+import { BehaviorSubject } from "rxjs"; 
  
 @Injectable({
   providedIn: "root"

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, from, of, BehaviorSubject } from "rxjs";
 import { Subject } from "rxjs/Subject";
 import { filter, first } from "rxjs/operators";
-import { fakeUsers } from "../fakeUserData";
+import { fakeUsers } from "../../../temp/fakeUserData";
 import { User } from "../model/user.model";
 import { HttpClientService } from './http-client.service'
 
