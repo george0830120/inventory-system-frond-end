@@ -27,7 +27,7 @@
     "@coreui/coreui-pro": "^2.0.20",
     "@coreui/icons": "0.3.0",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "date-fns": "^1.29.0",
     "express": "^4.17.1",
     "flag-icon-css": "3.2.1",
